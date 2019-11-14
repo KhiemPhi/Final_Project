@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import ItemsList from './ItemsList.js'
 import { firestoreConnect } from 'react-redux-firebase';
-import ItemCard from './ItemCard.js';
+import ItemCard from './ItemCard.js'; //
 
 class ListScreen extends Component {
     state = {
