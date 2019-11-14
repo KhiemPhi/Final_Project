@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firebaseConnect } from 'react-redux-firebase';
-
+import './css/fonts/Lexend Exa/css.css';
 import Navbar from './components/navbar/Navbar.js';
 import RegisterScreen from './components/register_screen/RegisterScreen.js';
 import LoginScreen from './components/login_screen/LoginScreen.js';
@@ -20,7 +20,7 @@ class App extends Component {
     if (auth.isLoaded) {
       return (
         <BrowserRouter>
-          <div className="App">
+          <div className="App grey lighten-2">
             <Navbar />
             <Switch>
               <Route exact path="/" component={HomeScreen} />

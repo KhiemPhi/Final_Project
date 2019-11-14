@@ -13,25 +13,35 @@ class HomeScreen extends Component {
         }
 
         return (
-            <div className="dashboard container">
-                <div className="row">
-                    <div className="col s12 m4">
-                        <TodoListLinks />
+            <div id="todo_home">
+                
+                   
+                    <div className= "home_your_lists_container" >
+                       
+                            <h3 id="home_your_lists_heading" >Your Lists</h3>
+                            <TodoListLinks  />
+                        
+                       
                     </div>
 
-                    <div className="col s8">
-                        <div className="banner">
+                    <div id="home_banner_container">
                             @todo<br />
                             List Maker
-                        </div>
-                        
-                        <div className="home_new_list_container">
-                                <button className="home_new_list_button" onClick={this.handleNewList}>
-                                    Create a New To Do List
-                                </button>
-                        </div>
                     </div>
-                </div>
+
+                    <div className= "home_new_list_container">
+                        
+                        
+                        <button 
+                             
+                            className="home_new_list_button grey lighten-3 "
+                            onClick = {this.handleNewList}>
+                            Create a New To Do List
+                        </button>
+                      
+                        
+                    </div>
+                
             </div>
         );
     }

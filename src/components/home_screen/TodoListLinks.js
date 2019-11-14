@@ -9,7 +9,7 @@ class TodoListLinks extends React.Component {
         const todoLists = this.props.todoLists;
         console.log(todoLists);
         return (
-            <div className="todo-lists section">
+            <div className= "todo-lists section" >
                 {todoLists && todoLists.map(todoList => (
                     <Link to={'/todoList/' + todoList.id} key={todoList.id}>
                         <TodoListCard todoList={todoList} />
