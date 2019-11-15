@@ -4,13 +4,20 @@ import { compose } from 'redux';
 import { NavLink, Redirect } from 'react-router-dom';
 import { firestoreConnect } from 'react-redux-firebase';
 import TodoListLinks from './TodoListLinks'
+import { getFirestore } from 'redux-firestore';
 
 class HomeScreen extends Component {
+    
 
     render() {
         if (!this.props.auth.uid) {
             return <Redirect to="/login" />;
         }
+
+        const fireStore = getFirestore;
+        fireStore.collection('todoLists').add({
+            
+        })
 
         return (
             <div id="todo_home">

@@ -1,22 +1,21 @@
-import React from 'react';
+import React from "react";
+import { Button, Modal, Icon } from "react-materialize";
+import ListTrash from "./ListTrash";
+import "materialize-css/dist/css/materialize.min.css";
 
 class ItemCard extends React.Component {
-    render() {
-        const { item } = this.props;  
-        return (
-        <div
-        className="card list_item_card"
+  render() {
+    const { item } = this.props;
+    return (
+      <div
+        className="list_item_card"
         onClick={() => this.props.goEdit(item, false)}
       >
-        <div className="list_item_card_description">
-          {item.description}
-        </div>
+        <div className="list_item_card_description">{item.description}</div>
         <div className="list_item_card_assigned_to">
           Assigned To: <strong>{item.assigned_to}</strong>
         </div>
-        <div className="list_item_card_due_date">
-          {item.due_date}
-        </div>
+        <div className="list_item_card_due_date">{item.due_date}</div>
         <div
           className={
             item.completed
@@ -27,45 +26,23 @@ class ItemCard extends React.Component {
           {item.completed ? "Completed" : "Pending"}
         </div>
         <div id="list_item_card_toolbar" className="list_item_card_toolbar">
-          <span
-            className={
+          <Button floating fab={{ direction: "left" }} className="red" small>
+            <Button floating icon={<Icon children = "arrow_upward" />} className={
               this.props.todoList.items.indexOf(item) === 0
-                ? "list_item_card_button_disable"
-                : "list_item_card_button"
-            }
-            onClick={
-              this.props.todoList.items.indexOf(item) === 0
-                ? this.stopMove
-                : this.moveItemUp
-            }
-          >
-            {" "}
-            &#x21e7;{" "}
-          </span>
-          <span
-            className={
-              this.props.todoList.items.indexOf(item) ===
-              this.props.todoList.items.length - 1
-                ? "list_item_card_button_disable"
-                : "list_item_card_button"
-            }
-            onClick={
-              this.props.todoList.items.indexOf(item) ===
-              this.props.todoList.items.length - 1
-                ? this.stopMove
-                : this.moveItemDown
-            }
-          >
-            {" "}
-            &#x21e9;{" "}
-          </span>
-          <span className="list_item_card_button" onClick={e=>{this.deleteItem(e)}}>
-            {" "}
-            &#10005;{" "}
-          </span>
+                ? "grey"
+                : "green"
+            } small />
+            <Button floating icon={<Icon children = "arrow_downward" />} className={
+              this.props.todoList.items.indexOf(item) === this.props.todoList.items.length - 1
+                ? "grey"
+                : "green"
+            } small />
+            <Button floating icon={<Icon children = "close" />} className="red" small />
+            
+          </Button>
         </div>
       </div>
-        );
-    }
+    );
+  }
 }
 export default ItemCard;

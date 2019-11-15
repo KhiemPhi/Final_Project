@@ -148,7 +148,7 @@ body {
   left: 70%;
   width: 15%;
   text-align: right;
-  top: 12%;
+  top: 8%;
 }
 #list_details_container {
   padding-left: 2%;
@@ -201,9 +201,9 @@ body {
 }
 .list_item_card_toolbar {
   position: absolute;
-  left: 85%;
+  left: 98%;
   width: 15%;
-  top: 5%;
+  top: 55%;
   height: 90%;
   display: grid;
   grid-template-columns: 33% 33% 33%;
@@ -247,4 +247,19 @@ body {
 }
 .item_input {
   grid-column: 2 / 4;
+}
+
+#title{
+  padding-bottom: 15px;
+}
+
+.list_item_card_action_button {
+  text-align: center;
+  border-radius: 5px;
+  margin: 1%;
+}
+
+.fixed-action-btn.direction-left, .fixed-action-btn.direction-right {
+ 
+  position: relative;
 }
