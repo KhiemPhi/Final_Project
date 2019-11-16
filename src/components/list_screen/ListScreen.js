@@ -13,8 +13,25 @@ import { getFirestore } from "redux-firestore";
 class ListScreen extends Component {
   state = {
     name: "",
-    owner: ""
+    owner: "",
+    taskOrder: true,
+    dateOrder: true,
+    statusOrder: true,
+    unSorted: true
   };
+
+  sortItemsByTask  = () => {
+    console.log("Sorting By Tasks")
+    if (this.state.taskOrder || this.state.unSorted){
+     
+    
+    }else{
+      
+    }
+    this.setState({taskOrder: !this.state.taskOrder});  
+    this.setState({unSorted: false});  
+    
+  }
 
   handleChange = e => {
     const { target } = e;
@@ -36,22 +53,27 @@ class ListScreen extends Component {
   render() {
     const auth = this.props.auth;
     const todoList = this.props.todoList;
+    const fireStore = getFirestore();
     if (!auth.uid) {
       return <Redirect to="/" />;
     }
 
     if (!todoList) return <React.Fragment />;
 
+    fireStore.collection('todoLists').doc(this.props.todoList.id).update({      
+      createdAt: new Date()
+    })
+
     return (
       <div className="container transparent">
         <div className="row"></div>
-        <h5 className="grey-text text-darken-3" id = "title" >Todo List</h5>
+        
         
         
 
-    <Modal header="Delete List?" trigger={<div className = "transparent" id= "list_trash">                
+    <Modal header="Delete List?" trigger={<h5 className = "transparent" id = "list_trash" >                
                 &#128465;
-        </div>}  actions= {<React.Fragment><Button>Yes</Button> <Button   modal="close">No</Button></React.Fragment> } >
+        </h5>}  actions= {<React.Fragment><Button>Yes</Button> <Button   modal="close">No</Button></React.Fragment> } >
         <section className="dialog_content">
               <p>
                 <strong>Are you sure you want to delete this list?</strong>
@@ -93,14 +115,15 @@ class ListScreen extends Component {
 
         <div id="card list_item_container">
           <div id="list_item_header" className="list_item_header_card">
-            <div className="list_item_task_header">Task</div>
-
+            <div className="list_item_task_header"
+                 onClick={this.sortItemsByTask.bind(this)} >Task</div>
+              
             <div className="list_item_due_date_header">Due Date</div>
 
             <div className="list_item_status_header">Status</div>
           </div>
         </div>
-        <ItemsList todoList={todoList} />
+        <ItemsList todoList={todoList}  />
 
         <div className="list_item_add_card">&#x2b;</div>
     </div>

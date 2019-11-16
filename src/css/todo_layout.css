@@ -144,11 +144,11 @@ body {
 /* LIST SCREEN CONTROLS */
 #list_heading {}
 #list_trash {
-  position: absolute;
-  left: 70%;
-  width: 15%;
+  position: relative;  
+  
+  
   text-align: right;
-  top: 8%;
+  bottom: 5%;
 }
 #list_details_container {
   padding-left: 2%;
@@ -201,7 +201,7 @@ body {
 }
 .list_item_card_toolbar {
   position: absolute;
-  left: 98%;
+  left: 96%;
   width: 15%;
   top: 55%;
   height: 90%;
@@ -250,7 +250,7 @@ body {
 }
 
 #title{
-  padding-bottom: 15px;
+  
 }
 
 .list_item_card_action_button {

@@ -24,13 +24,27 @@ class DatabaseTester extends React.Component {
             fireStore.collection('todoLists').add({
                     name: todoListJson.name,
                     owner: todoListJson.owner,
-                    items: todoListJson.items,                    
+                    items: todoListJson.items,
+                    createdAt: todoListJson.createdAt              
                 }).then(() => {
                     console.log("DATABASE RESET");
                 }).catch((err) => {
                     console.log(err);
                 });
         });
+        
+        fireStore.collection('todoLists').get().then(function(querySnapshot){
+            querySnapshot.forEach(function(doc) {
+                console.log("deleting " + doc.id);
+                fireStore.collection('todoLists').doc(doc.id).update({                    
+                    createdAt : new Date()
+                });
+            })
+        });
+
+       
+
+       
     }
 
     render() {

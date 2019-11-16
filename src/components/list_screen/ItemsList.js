@@ -6,15 +6,14 @@ import { firestoreConnect } from 'react-redux-firebase';
 
 class ItemsList extends React.Component {
     render() {
-        const todoList = this.props.todoList;
-        const items = todoList.items;
-        console.log("ItemsList: todoList.id " + todoList.id);
+        const todoList = this.props.todoList;        
+        const items = todoList.items;        
         return (
             <div className="todo-lists section">                
                 {items && items.map(function(item) {
                     item.id = item.key;
                     return (
-                        <ItemCard todoList={todoList} item={item} />
+                        <ItemCard todoList={todoList} item={item}  />
                         
                         
                     );})
