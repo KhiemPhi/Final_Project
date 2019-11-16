@@ -17,6 +17,8 @@ class App extends Component {
 
     // if auth is loaded then we render App.
     // But if not then we doesn't render the one.
+    // Item Screen Route Before ListScren Route
+
     if (auth.isLoaded) {
       return (
         <BrowserRouter>
@@ -27,6 +29,7 @@ class App extends Component {
               <Route path="/databaseTester" component={DatabaseTester} />
               <Route path="/register" component={RegisterScreen} />
               <Route path="/login" component={LoginScreen} />
+               
               <Route path="/todoList/:id" component={ListScreen} />
               <Route path="/:any" component={HomeScreen} />
             </Switch>
