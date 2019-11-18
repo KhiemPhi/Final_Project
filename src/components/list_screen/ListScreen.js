@@ -56,7 +56,7 @@ class ListScreen extends Component {
         });
     }
     this.setState({ dateOrder: !this.state.dateOrder });
-    this.setState({ currentSortCriteria: (!this.state.dateOrder).toString() + " date" });
+    this.setState({ currentSortCriteria: (!this.state.dateOrder).toString() + " due_date" });
     this.setState({ unSorted: false });
   };
 
@@ -95,7 +95,7 @@ class ListScreen extends Component {
         });
     }
     this.setState({ taskOrder: !this.state.taskOrder });
-    this.setState({ currentSortCriteria: (!this.state.taskOrder).toString() + " task" });
+    this.setState({ currentSortCriteria: (!this.state.taskOrder).toString() + " description" });
     this.setState({ unSorted: false });
   };
 
@@ -134,7 +134,7 @@ class ListScreen extends Component {
         });
     }
     this.setState({ statusOrder: !this.state.statusOrder });
-    this.setState({ currentSortCriteria: (!this.state.dateOrder).toString() + " status" });
+    this.setState({ currentSortCriteria: (!this.state.dateOrder).toString() + " completed" });
     this.setState({ unSorted: false });
   };
 
@@ -171,8 +171,10 @@ class ListScreen extends Component {
       .collection("todoLists")
       .doc(this.props.todoList.id)
       .update({
-        createdAt: new Date()
+        createdAt: new Date(),
+        currentSortingCriteria: this.state.currentSortCriteria
       });
+
   };
 
   goHome = () => {

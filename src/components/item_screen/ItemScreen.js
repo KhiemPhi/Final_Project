@@ -34,16 +34,47 @@ export class ItemScreen extends Component {
             "item_description_textfield"
           ).value;
           let due_date = document.getElementById("item_due_date_picker").value;
-          let assigned_to = document.getElementById("item_assigned_to_textfield").value;
-          let completed =  document.getElementById("checkbox").checked         
+          let assigned_to = document.getElementById(
+            "item_assigned_to_textfield"
+          ).value;
+          let completed = document.getElementById("checkbox").checked;
+
           list.push({
             key: this.props.todoList.items.length,
-            description:description ,
-            due_date: due_date ,
-            assigned_to: assigned_to ,
+            description: description,
+            due_date: due_date,
+            assigned_to: assigned_to,
             completed: completed
-          })
-          console.log (list)
+          });
+          if (this.props.todoList.currentSortingCriteria != null) {
+            let criteriaArray = this.props.todoList.currentSortingCriteria
+              .trim()
+              .split(" ");
+            let sortBoolean = criteriaArray[0] === "true";
+            let sortCriteria = criteriaArray[1];
+            if (sortBoolean) {
+              if (sortCriteria === "due_date") {
+                list.sort((itemA, itemB) => itemA.due_date < itemB.due_date);
+              } else if (sortCriteria === "completed") {
+                list.sort((itemA, itemB) => itemA.completed < itemB.completed);
+              } else if (sortCriteria === "description") {
+                list.sort(
+                  (itemA, itemB) => itemA.description < itemB.description
+                );
+              }
+            } else if (sortBoolean === false) {
+              if (sortCriteria === "due_date") {
+                list.sort((itemA, itemB) => itemA.due_date > itemB.due_date);
+              } else if (sortCriteria === "completed") {
+                list.sort((itemA, itemB) => itemA.completed > itemB.completed);
+              } else if (sortCriteria === "description") {
+                list.sort(
+                  (itemA, itemB) => itemA.description > itemB.description
+                );
+              }
+            }
+          }
+
           fireStore
             .collection("todoLists")
             .doc(this.props.todoList.id)
@@ -72,7 +103,39 @@ export class ItemScreen extends Component {
           list[itemIndex].due_date = document.getElementById(
             "item_due_date_picker"
           ).value;
-          list[itemIndex].completed = document.getElementById("checkbox").checked  
+          list[itemIndex].completed = document.getElementById(
+            "checkbox"
+          ).checked;
+
+          if (this.props.todoList.currentSortingCriteria != null) {
+            let criteriaArray = this.props.todoList.currentSortingCriteria
+              .trim()
+              .split(" ");
+            let sortBoolean = criteriaArray[0] === "true";
+            let sortCriteria = criteriaArray[1];
+
+            if (sortBoolean) {
+              if (sortCriteria === "due_date") {
+                list.sort((itemA, itemB) => itemA.due_date < itemB.due_date);
+              } else if (sortCriteria === "completed") {
+                list.sort((itemA, itemB) => itemA.completed < itemB.completed);
+              } else if (sortCriteria === "description") {
+                list.sort(
+                  (itemA, itemB) => itemA.description < itemB.description
+                );
+              }
+            } else if (sortBoolean === false) {
+              if (sortCriteria === "due_date") {
+                list.sort((itemA, itemB) => itemA.due_date > itemB.due_date);
+              } else if (sortCriteria === "completed") {
+                list.sort((itemA, itemB) => itemA.completed > itemB.completed);
+              } else if (sortCriteria === "description") {
+                list.sort(
+                  (itemA, itemB) => itemA.description > itemB.description
+                );
+              }
+            }
+          }
 
           fireStore
             .collection("todoLists")
@@ -156,7 +219,7 @@ export class ItemScreen extends Component {
         <div className="row">
           <div className="col s3 item_prompt">Completed:</div>
           <div className="col s9">
-            <Checkbox id="checkbox" value = "Red" />
+            <Checkbox id="checkbox" value="Red" />
           </div>
         </div>
 

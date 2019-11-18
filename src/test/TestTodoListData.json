@@ -5,6 +5,7 @@
             "name": "Things I am Never Gonna Do",
             "owner": "Rick Astley",
             "createdAt": "1",
+            "currentSortingCriteria" : "1",
             "items": [
                 {
                     "key": 0,
@@ -34,6 +35,7 @@
             "name": "House Repairs",
             "owner": "Bob Vila",
             "createdAt": "1",
+            "currentSortingCriteria" : "1",
             "items": [
                 {
                     "key": 0,
@@ -77,6 +79,7 @@
             "name": "Courses to Take",
             "owner": "Joe Student",
             "createdAt": "1",
+            "currentSortingCriteria" : "1",
             "items": [
                 {
                     "key": 0,
