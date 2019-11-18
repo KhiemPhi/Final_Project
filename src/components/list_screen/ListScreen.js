@@ -7,7 +7,7 @@ import { firestoreConnect } from "react-redux-firebase";
 import { Button, Modal} from "react-materialize";
 import "materialize-css/dist/css/materialize.min.css";
 import { getFirestore } from "redux-firestore";
-import { Link} from "react-router-dom";
+import { Link} from "react-router-dom"; //
 
 class ListScreen extends Component {
   state = {
