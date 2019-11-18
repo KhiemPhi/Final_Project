@@ -9,6 +9,7 @@ import { createDeflate } from "zlib";
 import { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } from "constants";
 import { emptyStatement } from "@babel/types";
 import { useHistory } from "react-router-dom";
+import {Button, Icon} from "react-materialize"
 
 class HomeScreen extends Component {
   state = {
@@ -17,7 +18,7 @@ class HomeScreen extends Component {
 
   handleNewList = () => {
     const fireStore = getFirestore();
-   
+
     fireStore
       .collection("todoLists")
       .add({
@@ -29,8 +30,8 @@ class HomeScreen extends Component {
       .then(docRef => {
         console.log("Document written with ID: ", docRef.id);
         this.setState({ mostRecentList: docRef.id });
-        let a = "/todoList/" + docRef.id
-        this.props.history.push(a)
+        let a = "/todoList/" + docRef.id;
+        this.props.history.push(a);
       })
       .catch(err => {
         console.log(err);
@@ -41,8 +42,6 @@ class HomeScreen extends Component {
     if (!this.props.auth.uid) {
       return <Redirect to="/login" />;
     }
-
-    
 
     return (
       <div id="todo_home">
@@ -65,6 +64,7 @@ class HomeScreen extends Component {
             Create a New To Do List
           </button>
         </div>
+      
       </div>
     );
   }

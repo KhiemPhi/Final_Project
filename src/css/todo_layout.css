@@ -226,7 +226,9 @@ body {
 }
 
 /* ITEM SCREEN CONTROLS */
-#item_heading {}
+#item_heading {
+  padding-bottom: 2%
+}
 #item_form_container {
   display: grid;
 }
