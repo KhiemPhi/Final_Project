@@ -126,7 +126,8 @@ class ItemCard extends React.Component {
         <div id="list_item_card_toolbar" className="list_item_card_toolbar">
           <Button
             floating
-            fab={{ direction: "left", hoverEnabled: false }}
+            fab={{ direction: "left"}}
+           
             onClick = {this.stopMove}
             className="red active"
             small
@@ -143,6 +144,8 @@ class ItemCard extends React.Component {
                   ? this.stopMove
                   : this.moveItemUp
               }
+              style = {{left: "100%"}}
+              
             />
             <Button
               floating
@@ -159,6 +162,7 @@ class ItemCard extends React.Component {
                   : this.moveItemDown
               }
               small
+              style = {{left: "100%"}}
             />
             <Button
               floating
@@ -166,6 +170,7 @@ class ItemCard extends React.Component {
               className="red"
               onClick={this.handleDeleteItem}
               small
+              style = {{left: "100%"}}
             />
           </Button>
         </div>

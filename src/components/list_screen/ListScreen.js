@@ -167,7 +167,8 @@ class ListScreen extends Component {
 
   componentWillUnmount = () => {
     const fireStore = getFirestore();
-    fireStore
+    if (this.props.todoList != null){
+      fireStore
       .collection("todoLists")
       .doc(this.props.todoList.id)
       .update({
@@ -175,6 +176,8 @@ class ListScreen extends Component {
         currentSortingCriteria: this.state.currentSortCriteria
       });
 
+    }
+    
   };
 
   goHome = () => {
