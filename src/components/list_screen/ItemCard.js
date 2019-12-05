@@ -1,15 +1,13 @@
 import React from "react";
-import { Button,  Icon } from "react-materialize";
+import { Button, Icon } from "react-materialize";
 import "materialize-css/dist/css/materialize.min.css";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { firestoreConnect} from "react-redux-firebase";
+import { firestoreConnect } from "react-redux-firebase";
 import { getFirestore } from "redux-firestore";
 
-
 class ItemCard extends React.Component {
-
-  itemSwap = (index1, index2, list) => {    
+  itemSwap = (index1, index2, list) => {
     let temp = list[index1];
     list[index1] = list[index2];
     list[index2] = temp;
@@ -20,22 +18,21 @@ class ItemCard extends React.Component {
     const fireStore = getFirestore();
     e.stopPropagation();
     let itemIndex = this.props.todoList.items.indexOf(item);
-    if (0 < itemIndex && itemIndex < this.props.todoList.items.length) {      
+    if (0 < itemIndex && itemIndex < this.props.todoList.items.length) {
       fireStore
-      .collection("todoLists")
-      .doc(this.props.todoList.id)
-      .get()
-      .then(doc => {
-        let list = doc.data().items;
-        this.itemSwap(itemIndex, itemIndex-1, list)
-        fireStore
-          .collection("todoLists")
-          .doc(this.props.todoList.id)
-          .update({
-            items: list
-          });
-      });
-
+        .collection("todoLists")
+        .doc(this.props.todoList.id)
+        .get()
+        .then(doc => {
+          let list = doc.data().items;
+          this.itemSwap(itemIndex, itemIndex - 1, list);
+          fireStore
+            .collection("todoLists")
+            .doc(this.props.todoList.id)
+            .update({
+              items: list
+            });
+        });
     }
   };
 
@@ -44,22 +41,21 @@ class ItemCard extends React.Component {
     const fireStore = getFirestore();
     e.stopPropagation();
     let itemIndex = this.props.todoList.items.indexOf(item);
-    if (0 <= itemIndex && itemIndex < this.props.todoList.items.length) {      
+    if (0 <= itemIndex && itemIndex < this.props.todoList.items.length) {
       fireStore
-      .collection("todoLists")
-      .doc(this.props.todoList.id)
-      .get()
-      .then(doc => {
-        let list = doc.data().items;
-        this.itemSwap(itemIndex, itemIndex+1, list)
-        fireStore
-          .collection("todoLists")
-          .doc(this.props.todoList.id)
-          .update({
-            items: list
-          });
-      });
-
+        .collection("todoLists")
+        .doc(this.props.todoList.id)
+        .get()
+        .then(doc => {
+          let list = doc.data().items;
+          this.itemSwap(itemIndex, itemIndex + 1, list);
+          fireStore
+            .collection("todoLists")
+            .doc(this.props.todoList.id)
+            .update({
+              items: list
+            });
+        });
     }
   };
 
@@ -67,7 +63,6 @@ class ItemCard extends React.Component {
     e.stopPropagation();
     const { item } = this.props;
     const fireStore = getFirestore();
-    
 
     let index = this.props.todoList.items.indexOf(item);
 
@@ -93,10 +88,10 @@ class ItemCard extends React.Component {
 
   goEdit = () => {
     const { item } = this.props;
-    
-    let indexString = this.props.todoList.items.indexOf(item).toString()
-    let link = "/edit/" + this.props.todoList.id + "/" + indexString
-    
+
+    let indexString = this.props.todoList.items.indexOf(item).toString();
+    let link = "/edit/" + this.props.todoList.id + "/" + indexString;
+
     this.props.history.push(link);
   };
 
@@ -105,10 +100,9 @@ class ItemCard extends React.Component {
     return (
       <div
         className="list_item_card"
-        id = {this.props.todoList.items.indexOf(item).toString()}
+        id={this.props.todoList.items.indexOf(item).toString()}
         onClick={() => this.goEdit()}
       >
-        
         <div className="list_item_card_description">{item.description}</div>
         <div className="list_item_card_assigned_to">
           Assigned To: <strong>{item.assigned_to}</strong>
@@ -123,65 +117,62 @@ class ItemCard extends React.Component {
         >
           {item.completed ? "Completed" : "Pending"}
         </div>
-        <div id="list_item_card_toolbar" className="list_item_card_toolbar">
+
+        <Button
+          floating
+          fab={{ direction: "left" }}
+          onClick={this.stopMove}
+          className="red active list_item_card_toolbar"
+          small
+        >
           <Button
             floating
-            fab={{ direction: "left"}}
-           
-            onClick = {this.stopMove}
-            className="red active"
+            icon={<Icon children="arrow_upward" />}
+            className={
+              this.props.todoList.items.indexOf(item) === 0 ? "grey" : "green"
+            }
             small
-          >
-            <Button
-              floating
-              icon={<Icon children="arrow_upward" />}
-              className={
-                this.props.todoList.items.indexOf(item) === 0 ? "grey" : "green"
-              }
-              small
-              onClick={
-                this.props.todoList.items.indexOf(item) === 0
-                  ? this.stopMove
-                  : this.moveItemUp
-              }
-              style = {{left: "100%"}}
-              
-            />
-            <Button
-              floating
-              icon={<Icon children="arrow_downward" />}
-              className={
-                this.props.todoList.items.indexOf(item) ===
-                this.props.todoList.items.length - 1
-                  ? "grey"
-                  : "green"
-              }
-              onClick={
-                this.props.todoList.items.indexOf(item) === this.props.todoList.items.length - 1
-                  ? this.stopMove
-                  : this.moveItemDown
-              }
-              small
-              style = {{left: "100%"}}
-            />
-            <Button
-              floating
-              icon={<Icon children="close" />}
-              className="red"
-              onClick={this.handleDeleteItem}
-              small
-              style = {{left: "100%"}}
-            />
-          </Button>
-        </div>
+            onClick={
+              this.props.todoList.items.indexOf(item) === 0
+                ? this.stopMove
+                : this.moveItemUp
+            }
+            style={{ left: "100%" }}
+          />
+          <Button
+            floating
+            icon={<Icon children="arrow_downward" />}
+            className={
+              this.props.todoList.items.indexOf(item) ===
+              this.props.todoList.items.length - 1
+                ? "grey"
+                : "green"
+            }
+            onClick={
+              this.props.todoList.items.indexOf(item) ===
+              this.props.todoList.items.length - 1
+                ? this.stopMove
+                : this.moveItemDown
+            }
+            small
+            style={{ left: "100%" }}
+          />
+          <Button
+            floating
+            icon={<Icon children="close" />}
+            className="red"
+            onClick={this.handleDeleteItem}
+            small
+            style={{ left: "100%" }}
+          />
+        </Button>
       </div>
-      
     );
   }
 }
 const mapStateToProps = (state, ownProps) => {
   const todoList = ownProps.todoList;
-  const currentEditItem = ownProps.currentEditItem
+  const currentEditItem = ownProps.currentEditItem;
   return {
     todoList,
     currentEditItem,

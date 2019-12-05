@@ -21,8 +21,7 @@ class ListScreen extends Component {
     currentSortCriteria: null,
   };
 
-  sortItemsByDueDate = () => {
-    console.log("Sorting By Tasks");
+  sortItemsByDueDate = () => {   
     const fireStore = getFirestore();
     if (this.state.dateOrder || this.state.unSorted) {
       fireStore
@@ -60,8 +59,7 @@ class ListScreen extends Component {
     this.setState({ unSorted: false });
   };
 
-  sortItemsByTask = () => {
-    console.log("Sorting By Tasks");
+  sortItemsByTask = () => {    
     const fireStore = getFirestore();
     if (this.state.taskOrder || this.state.unSorted) {
       fireStore
@@ -99,8 +97,7 @@ class ListScreen extends Component {
     this.setState({ unSorted: false });
   };
 
-  sortItemsByStatus = () => {
-    console.log("Sorting By Tasks");
+  sortItemsByStatus = () => {    
     const fireStore = getFirestore();
     if (this.state.statusOrder || this.state.unSorted) {
       fireStore

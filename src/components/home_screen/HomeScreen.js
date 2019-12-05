@@ -9,7 +9,7 @@ import { createDeflate } from "zlib";
 import { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } from "constants";
 import { emptyStatement } from "@babel/types";
 import { useHistory } from "react-router-dom";
-import {Button, Icon} from "react-materialize"
+import { Button, Icon } from "react-materialize";
 
 class HomeScreen extends Component {
   state = {
@@ -17,18 +17,17 @@ class HomeScreen extends Component {
   };
 
   handleNewList = () => {
-    const fireStore = getFirestore();
+    const fireStore = getFirestore();   
 
     fireStore
       .collection("todoLists")
       .add({
         name: "New List",
-        owner: "",
+        owner: this.props.profile.firstName + " " + this.props.profile.lastName ,
         items: [],
         createdAt: new Date()
       })
-      .then(docRef => {
-        console.log("Document written with ID: ", docRef.id);
+      .then(docRef => {       
         this.setState({ mostRecentList: docRef.id });
         let a = "/todoList/" + docRef.id;
         this.props.history.push(a);
@@ -46,14 +45,14 @@ class HomeScreen extends Component {
     return (
       <div id="todo_home">
         <div className="home_your_lists_container">
-          <h3 id="home_your_lists_heading">Your Lists</h3>
+          <h3 id="home_your_lists_heading">Your WireFrames</h3>
           <TodoListLinks />
         </div>
 
         <div id="home_banner_container">
-          @todo
+          @WireFramer
           <br />
-          List Maker
+          Application
         </div>
 
         <div className="home_new_list_container">
@@ -61,10 +60,9 @@ class HomeScreen extends Component {
             className="home_new_list_button grey lighten-3 "
             onClick={this.handleNewList}
           >
-            Create a New To Do List
+            Create a New WireFrame Diagram
           </button>
         </div>
-      
       </div>
     );
   }
@@ -72,7 +70,8 @@ class HomeScreen extends Component {
 
 const mapStateToProps = state => {
   return {
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    profile: state.firebase.profile
   };
 };
 

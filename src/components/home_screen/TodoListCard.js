@@ -6,10 +6,10 @@ class TodoListCard extends React.Component {
         const { todoList } = this.props;        
         return (
             <a 
-            className='todo_list_link text'
+            className='todo_list_link'
            
         >
-            {todoList.name} <br />
+        {todoList.name} <br />
         </a>
            
         );
