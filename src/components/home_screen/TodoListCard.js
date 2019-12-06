@@ -16,6 +16,4 @@ class TodoListCard extends React.Component {
     );
   }
 }
-export default compose(firestoreConnect([{ collection: "todoLists" }]))(
-  TodoListCard
-);
+export default TodoListCard;

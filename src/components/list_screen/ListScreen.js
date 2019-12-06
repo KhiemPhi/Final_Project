@@ -199,7 +199,7 @@ class ListScreen extends Component {
 
     return (
       <div className="container transparent">
-        <div className="row"></div>
+        
 
         <Modal
           header="Delete List?"
@@ -218,7 +218,7 @@ class ListScreen extends Component {
         >
           <section className="dialog_content">
             <p>
-              <strong>Are you sure you want to delete this list?</strong>
+              <strong>Are you sure you want to delete this list? </strong>
             </p>
           </section>
 
