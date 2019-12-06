@@ -8,6 +8,7 @@ import { Button, Icon, TextInput } from "react-materialize";
 import "materialize-css/dist/css/materialize.min.css";
 import { getFirestore } from "redux-firestore";
 import { Link } from "react-router-dom"; //
+import ControllerAdder from "./ControllerAdder.js";
 
 class ListScreen extends Component {
   state = {
@@ -107,104 +108,11 @@ class ListScreen extends Component {
             defaultValue={todoList.owner}
           />
         </div>
-        <div className="row" style={{display: "flex"}}>
+        <div className="row" style={{display: "flex"}}> 
+          <ControllerAdder/>    
+          <div className="white control_container_only_top col s8"></div>   
           <div className="control_container col s2">
-            <div className="row control_container_only_bottom" >
-              <div className="col s3 pull-s1">
-                <Button
-                  flat
-                  icon={<Icon children="zoom_in" />}
-                  className="transparent"
-                  large
-                ></Button>
-              </div>
-              <div className="col s3 pull-s2">
-                <Button
-                  flat
-                  icon={<Icon children="zoom_out" />}
-                  className="transparent"
-                  large
-                ></Button>
-              </div>
-              <div className="col s3 pull-s3">
-                <Button flat className="transparent" large>
-                  Save
-                </Button>
-              </div>
-              <div className="col s3 pull-s3">
-                <Button flat className="transparent" large>
-                  Close
-                </Button>
-              </div>
-            </div>
-
-            <Button
-              flat
-              className="white container_button"
-              id="container_button"
-              style={{
-                border: "1px solid black",
-                height: "70px",
-                width: "70%",
-                margin: " 0% 0% 0% 15%"
-              }}
-            ></Button>
-
-            <div className="container_label">Container</div>
-
-            <Button
-              flat
-              className="transparent label_component"
-              id="label_button"
-              style={{
-                height: "30px",
-                width: "100%",
-                margin: " 0% 0% 0% 2%"
-              }}
-            >
-              Prompt For Input:
-            </Button>
-            <div className="container_label">Label</div>
-
-            <Button
-              flat
-              className="grey lighten-1 button_component"
-              id="button_creator"
-              style={{
-                height: "30px",
-                width: "80%",
-                margin: " 0% 0% 0% 10%",
-                border: "1px solid black"
-              }}
-            >
-              Submit
-            </Button>
-            <div className="container_label">Button</div>
-
-            <Button
-              flat
-              className="white button_component"
-              id="label_button"
-              style={{
-                height: "30px",
-                width: "100%",
-                margin: " 0% 0% 0% 2%",
-                border: "1px solid black",
-                color: "gray",
-                textAlign: "left"
-              }}
-            >
-              Input
-            </Button>
-            <div className="container_label_padding">Textfield</div>
-          </div>
-          <div className="white control_container_only_top col s8">
-             
-
-          </div>
-          <div className="control_container col s2">
-            <div style ={{paddingTop: "15%", marginLeft: "20%"}} > Properties </div>
-            <div id="item_text">
+            <div style ={{paddingTop: "15%", marginLeft: "20%"}} > Properties </div>            
               <TextInput id = "text_input" />
               <div className = "row" style ={{paddingTop: "5%"}}>
                 <div className = "col s8" style={{marginTop: "25px", fontSize: "12px"}}>Font Size:</div>
@@ -230,13 +138,8 @@ class ListScreen extends Component {
                 <div className = "col s9" style={{marginTop: "25px", fontSize: "12px", paddingBottom: "100%"}}>Border Radius:</div>
                 <div className = "col s3 ">
                   <input id = "border_radius_input"></input>
-                </div>
-                
-              </div>
-            </div>
-            <div className row>
-              <div className="col s6"></div>
-            </div>
+                </div>                
+             </div>   
           </div>
         </div>
       </div>
