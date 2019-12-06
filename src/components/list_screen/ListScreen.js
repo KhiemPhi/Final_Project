@@ -12,9 +12,13 @@ import { Link} from "react-router-dom"; //
 class ListScreen extends Component {
   state = {
     name: "",
-    owner: "",  
+    owner: "",
+    taskOrder: true,
+    dateOrder: true,
+    statusOrder: true,
+    unSorted: true,
     currentEditItem: null,
-   
+    currentSortCriteria: null,
   };
   
   handleChange = e => {
@@ -140,21 +144,21 @@ class ListScreen extends Component {
           <div id="list_item_header" className="list_item_header_card">
             <div
               className="list_item_task_header"
-              onClick={this.sortItemsByTask.bind(this)}
+              
             >
               Task
             </div>
 
             <div
               className="list_item_due_date_header"
-              onClick={this.sortItemsByDueDate.bind(this)}
+              
             >
               Due Date
             </div>
 
             <div
               className="list_item_status_header"
-              onClick={this.sortItemsByStatus.bind(this)}
+              
             >
               Status
             </div>
