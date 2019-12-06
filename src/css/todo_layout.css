@@ -269,10 +269,16 @@ body {
 .container_label{
   text-align: center;
   vertical-align: middle;
-  padding-bottom: 25%;
+  padding-bottom: 15%;
 }
 
 .container_button{
   width: 100%;
   height: 10000px;
+}
+
+.label_label{
+  position: absolute;
+  left: 6.5%;
+  bottom: 5%;
 }

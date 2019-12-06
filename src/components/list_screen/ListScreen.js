@@ -109,7 +109,7 @@ class ListScreen extends Component {
         </div>
         <div className="row">
           <div className="control_container col s2">
-            <div className="row control_container_only_bottom" >
+            <div className="row control_container_only_bottom">
               <div className="col s1 pull-s1">
                 <Button
                   flat
@@ -139,32 +139,34 @@ class ListScreen extends Component {
             </div>
 
             <div>
-            <Button
-              flat
-              className="white container_button"
-              style={{
-                border: "1px solid black",
-                height: "70px",
-                width: "70%",
-                margin: " 0% 0% 0% 15%"
-              }}
-            ></Button>
-
-            </div>        
+              <Button
+                flat
+                className="white container_button"
+                id="container_button"
+                style={{
+                  border: "1px solid black",
+                  height: "70px",
+                  width: "70%",
+                  margin: " 0% 0% 0% 15%"
+                }}
+              ></Button>
+            </div>
             <div className="container_label">Container</div>
-            <Button
-              flat
-              className="white container_button"
-              style={{
-                border: "1px solid black",
-                height: "70px",
-                width: "70%",
-                margin: " 0% 0% 0% 15%"
-              }}
-            ></Button>
-
-
-
+            <div>
+              <Button
+                flat
+                className="transparent label_button"
+                id="label_button"
+                style={{
+                  height: "70px",
+                  margin: " 0% 0% 5% 6%"
+                }}
+              >
+                Prompt For Input
+              </Button>
+              
+            </div>
+            <div className="label_label">Label</div>
           </div>
           <div className=" control_container_only_top col s8">
             <div className="row">
