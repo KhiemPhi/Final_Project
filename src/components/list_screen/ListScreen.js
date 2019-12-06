@@ -4,10 +4,10 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import ItemsList from "./ItemsList.js";
 import { firestoreConnect } from "react-redux-firebase";
-import { Button, Modal} from "react-materialize";
+import { Button, Icon } from "react-materialize";
 import "materialize-css/dist/css/materialize.min.css";
 import { getFirestore } from "redux-firestore";
-import { Link} from "react-router-dom"; //
+import { Link } from "react-router-dom"; //
 
 class ListScreen extends Component {
   state = {
@@ -18,9 +18,9 @@ class ListScreen extends Component {
     statusOrder: true,
     unSorted: true,
     currentEditItem: null,
-    currentSortCriteria: null,
+    currentSortCriteria: null
   };
-  
+
   handleChange = e => {
     const { target } = e;
 
@@ -50,17 +50,15 @@ class ListScreen extends Component {
 
   componentWillUnmount = () => {
     const fireStore = getFirestore();
-    if (this.props.todoList != null){
+    if (this.props.todoList != null) {
       fireStore
-      .collection("todoLists")
-      .doc(this.props.todoList.id)
-      .update({
-        createdAt: new Date(),
-        currentSortingCriteria: this.state.currentSortCriteria
-      });
-
+        .collection("todoLists")
+        .doc(this.props.todoList.id)
+        .update({
+          createdAt: new Date(),
+          currentSortingCriteria: this.state.currentSortCriteria
+        });
     }
-    
   };
 
   goHome = () => {
@@ -70,8 +68,6 @@ class ListScreen extends Component {
   goEdit = () => {
     this.props.history.push("/edit/:id");
   };
-
- 
 
   render() {
     const auth = this.props.auth;
@@ -84,35 +80,7 @@ class ListScreen extends Component {
     if (!todoList) return <React.Fragment />;
 
     return (
-      <div className="container transparent">
-        
-
-        <Modal
-          header="Delete List?"
-          
-          trigger={
-            <h5 className="transparent" id="list_trash">
-              &#128465;
-            </h5>
-          }
-          actions={
-            <React.Fragment>
-              <Button onClick={this.handleDelete}>Yes</Button>{" "}
-              <Button modal="close">No</Button>
-            </React.Fragment>
-          }
-        >
-          <section className="dialog_content">
-            <p>
-              <strong>Are you sure you want to delete this list? </strong>
-            </p>
-          </section>
-
-          <footer className="dialog_footer">
-            The list will not be retreivable.
-          </footer>
-        </Modal>
-
+      <div>
         <div className="input-field">
           <label htmlFor="email" className="active">
             Name
@@ -139,35 +107,127 @@ class ListScreen extends Component {
             defaultValue={todoList.owner}
           />
         </div>
-
-        <div id="card list_item_container">
-          <div id="list_item_header" className="list_item_header_card">
-            <div
-              className="list_item_task_header"
-              
-            >
-              Task
+        <div className="row">
+          <div className="control_container col s2">
+            <div className="row control_container_only_bottom" >
+              <div className="col s1 pull-s1">
+                <Button
+                  flat
+                  icon={<Icon children="zoom_in" />}
+                  className="transparent"
+                  large
+                ></Button>
+              </div>
+              <div className="col s2">
+                <Button
+                  flat
+                  icon={<Icon children="zoom_out" />}
+                  className="transparent"
+                  large
+                ></Button>
+              </div>
+              <div className="col s3">
+                <Button flat className="transparent" large>
+                  Save
+                </Button>
+              </div>
+              <div className="col s3">
+                <Button flat className="transparent" large>
+                  Close
+                </Button>
+              </div>
             </div>
 
-            <div
-              className="list_item_due_date_header"
-              
-            >
-              Due Date
-            </div>
+            <div>
+            <Button
+              flat
+              className="white container_button"
+              style={{
+                border: "1px solid black",
+                height: "70px",
+                width: "70%",
+                margin: " 0% 0% 0% 15%"
+              }}
+            ></Button>
 
-            <div
-              className="list_item_status_header"
-              
-            >
-              Status
-            </div>
+            </div>        
+            <div className="container_label">Container</div>
+            <Button
+              flat
+              className="white container_button"
+              style={{
+                border: "1px solid black",
+                height: "70px",
+                width: "70%",
+                margin: " 0% 0% 0% 15%"
+              }}
+            ></Button>
+
+
+
           </div>
-        </div>
-        <ItemsList todoList={todoList} history = {this.props.history} currentEditItem = {this.state.currentEditItem} />
-            
-        <div className="list_item_add_card">
-            <Link style={{ color: "black" }}  to={'/edit/' + todoList.id + "/-1"} key={todoList.id} currentEditItem= {this.state.currentEditItem}>&#x2b;</Link>          
+          <div className=" control_container_only_top col s8">
+            <div className="row">
+              <div className="col s2">
+                <Button
+                  flat
+                  icon={<Icon children="zoom_in" />}
+                  className="transparent"
+                  small
+                ></Button>
+              </div>
+              <div className="col s2">
+                <Button
+                  flat
+                  icon={<Icon children="zoom_in" />}
+                  className="transparent"
+                  small
+                ></Button>
+              </div>
+              <div className="col s2">
+                <Button flat className="transparent" small>
+                  Save
+                </Button>
+              </div>
+              <div className="col s2">
+                <Button flat className="transparent" small>
+                  Close
+                </Button>
+              </div>
+            </div>
+            <div>Second Screen</div>
+          </div>
+          <div className=" control_container col s2">
+            <div className="row">
+              <div className="col s2">
+                <Button
+                  flat
+                  icon={<Icon children="zoom_in" />}
+                  className="transparent"
+                  small
+                ></Button>
+              </div>
+              <div className="col s2">
+                <Button
+                  flat
+                  icon={<Icon children="zoom_in" />}
+                  className="transparent"
+                  small
+                ></Button>
+              </div>
+              <div className="col s2">
+                <Button flat className="transparent" small>
+                  Save
+                </Button>
+              </div>
+              <div className="col s2">
+                <Button flat className="transparent" small>
+                  Close
+                </Button>
+              </div>
+            </div>
+            <div>Second Screen</div>
+          </div>
         </div>
       </div>
     );
@@ -179,10 +239,10 @@ const mapStateToProps = (state, ownProps) => {
   const { todoLists } = state.firestore.data;
   const todoList = todoLists ? todoLists[id] : null;
   if (todoList) todoList.id = id;
-  const currentEditItem = ownProps.currentEditItem
-  const currentSortCriteria = ownProps.currentSortCriteria
+  const currentEditItem = ownProps.currentEditItem;
+  const currentSortCriteria = ownProps.currentSortCriteria;
   return {
-    todoList,    
+    todoList,
     currentSortCriteria,
     currentEditItem,
     auth: state.firebase.auth

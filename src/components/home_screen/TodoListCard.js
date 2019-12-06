@@ -9,8 +9,8 @@ class TodoListCard extends React.Component {
   render() {
     const { todoList } = this.props;
     return (
-      <div className = "col s6">
-        <div className="todo_list_link">{todoList.name}</div>
+      <div className = "col s6" >
+        <div className="todo_list_link" >{todoList.name}</div>
        
       </div>
     );

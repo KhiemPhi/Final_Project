@@ -43,6 +43,7 @@ div.banner {
 .todo_list_link {
   color: var(--swatch_contrast);
   text-decoration: none;
+  
 }
 .todo_list_link:hover {
   color: var(--swatch-accent);
@@ -354,6 +355,37 @@ body {
 
 .modal p + p {
   margin-top: 1rem;
+}
+
+.control_container{
+  border: 1px solid black;
+ 
+}
+
+.default_container{
+  height: 50px;
+  width: 100%;  
+  border: 1px solid black;
+  padding-bottom: 50px;
+}
+
+.control_container_no_right{
+  border: 1px solid black;
+  border-right: none;
+}
+
+.control_container_only_bottom{
+  border: 1px solid black;
+  border-right: none;
+  border-left: none;
+  border-top: none;
+}
+
+.control_container_only_top{
+  border: 1px solid black;
+  border-right: none;
+  border-left: none;
+  border-bottom: none;
 }
 
 /* ANIMATIONS
