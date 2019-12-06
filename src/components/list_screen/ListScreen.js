@@ -107,10 +107,10 @@ class ListScreen extends Component {
             defaultValue={todoList.owner}
           />
         </div>
-        <div className="row">
+        <div className="row" style={{display: "flex"}}>
           <div className="control_container col s2">
-            <div className="row control_container_only_bottom">
-              <div className="col s1 pull-s1">
+            <div className="row control_container_only_bottom" >
+              <div className="col s3 pull-s1">
                 <Button
                   flat
                   icon={<Icon children="zoom_in" />}
@@ -118,7 +118,7 @@ class ListScreen extends Component {
                   large
                 ></Button>
               </div>
-              <div className="col s2">
+              <div className="col s3 pull-s2">
                 <Button
                   flat
                   icon={<Icon children="zoom_out" />}
@@ -126,12 +126,12 @@ class ListScreen extends Component {
                   large
                 ></Button>
               </div>
-              <div className="col s3">
+              <div className="col s3 pull-s3">
                 <Button flat className="transparent" large>
                   Save
                 </Button>
               </div>
-              <div className="col s3">
+              <div className="col s3 pull-s3">
                 <Button flat className="transparent" large>
                   Close
                 </Button>
@@ -198,37 +198,38 @@ class ListScreen extends Component {
             </Button>
             <div className="container_label_padding">Textfield</div>
           </div>
-          <div className="control_container_only_top white col s8">
-            <div></div>
+          <div className="white control_container_only_top col s8">
+             
+
           </div>
           <div className="control_container col s2">
             <div style ={{paddingTop: "15%", marginLeft: "20%"}} > Properties </div>
             <div id="item_text">
               <TextInput id = "text_input" />
               <div className = "row" style ={{paddingTop: "5%"}}>
-                <div className = "col s8" style={{marginTop: "25px"}}>Font Size</div>
+                <div className = "col s8" style={{marginTop: "25px", fontSize: "12px"}}>Font Size:</div>
                 <div className = "col s4">
                   <input id = "font_size_input"></input>
                 </div>
-                <div className = "col s8" style={{marginTop: "25px"}}>Background</div>
+                <div className = "col s8" style={{marginTop: "25px", fontSize: "12px"}}>Background:</div>
                 <div className = "col s1">
                   <div className = "background_color"></div>
                 </div>
-                <div className = "col s8" style={{marginTop: "25px"}}>Border Color</div>
+                <div className = "col s8" style={{marginTop: "25px", fontSize: "12px"}}>Border Color:</div>
                 <div className = "col s1">
                   <div className = "border_color"></div>
                 </div>
-                <div className = "col s8" style={{marginTop: "25px"}}>Text Color</div>
+                <div className = "col s8" style={{marginTop: "25px", fontSize: "12px" }}>Text Color:</div>
                 <div className = "col s1">
                   <div className = "text_color"></div>
                 </div>
-                <div className = "col s9" style={{marginTop: "25px", fontSize: "12px"}}>Border Thickness</div>
+                <div className = "col s9" style={{marginTop: "25px", fontSize: "12px"}}>Border Thickness:</div>
                 <div className = "col s3 ">
-                  <input id = "font_size_input"></input>
+                  <input id = "border_thickness_input"></input>
                 </div>
-                <div className = "col s9" style={{marginTop: "25px", fontSize: "12px", paddingBottom: "100%"}}>Border Radius</div>
+                <div className = "col s9" style={{marginTop: "25px", fontSize: "12px", paddingBottom: "100%"}}>Border Radius:</div>
                 <div className = "col s3 ">
-                  <input id = "font_size_input"></input>
+                  <input id = "border_radius_input"></input>
                 </div>
                 
               </div>
