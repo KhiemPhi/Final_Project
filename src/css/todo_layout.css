@@ -272,13 +272,14 @@ body {
   padding-bottom: 15%;
 }
 
-.container_button{
-  width: 100%;
-  height: 10000px;
+.container_label_padding{
+  text-align: center;
+  vertical-align: middle;
+  padding-bottom: 165%;
 }
 
-.label_label{
-  position: absolute;
-  left: 6.5%;
-  bottom: 5%;
+.container_button{
+  width: 100%;
+ 
 }
+
