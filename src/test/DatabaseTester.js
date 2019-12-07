@@ -25,8 +25,7 @@ class DatabaseTester extends React.Component {
                     name: todoListJson.name,
                     owner: todoListJson.owner,
                     items: todoListJson.items,
-                    createdAt: todoListJson.createdAt,
-                    currentSortingCriteria : todoListJson.currentSortingCriteria              
+                    createdAt: todoListJson.createdAt,                            
                 }).then(() => {
                     console.log("DATABASE RESET");
                 }).catch((err) => {
@@ -39,7 +38,7 @@ class DatabaseTester extends React.Component {
                 console.log("deleting " + doc.id);
                 fireStore.collection('todoLists').doc(doc.id).update({                    
                     createdAt : new Date(),
-                    currentSortingCriteria : null
+                     
                 });
             })
         });

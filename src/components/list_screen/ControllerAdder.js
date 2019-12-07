@@ -35,7 +35,7 @@ class ControllerAdder extends Component {
               </Button>
             </div>
             <div className="col s3 pull-s3">
-              <Button flat className="transparent" large>
+              <Button flat className="transparent" onClick = {this.props.goHome} large>
                 Close
               </Button>
             </div>
@@ -49,8 +49,9 @@ class ControllerAdder extends Component {
               border: "1px solid black",
               height: "70px",
               width: "70%",
-              margin: " 0% 0% 0% 15%"
+              margin: " 0% 0% 0% 15%",
             }}
+            onClick = {this.props.addContainer}
           ></Button>
 
           <div className="container_label">Container</div>
@@ -62,7 +63,8 @@ class ControllerAdder extends Component {
             style={{
               height: "30px",
               width: "100%",
-              margin: " 0% 0% 0% 2%"
+              margin: " 0% 0% 0% 2%",
+              fontSize: "13px"
             }}
           >
             Prompt For Input:

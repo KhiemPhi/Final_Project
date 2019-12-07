@@ -28,11 +28,9 @@ class ItemsList extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const todoList = ownProps.todoList;
-    const currentEditItem = ownProps.currentEditItem;
+    const todoList = ownProps.todoList;    
     return {
-        todoList,
-        currentEditItem,
+        todoList,        
         auth: state.firebase.auth,
     };
 };

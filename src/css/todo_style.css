@@ -44,6 +44,7 @@ div.banner {
   color: var(--swatch_contrast);
   text-decoration: none;
   
+  
 }
 .todo_list_link:hover {
   color: var(--swatch-accent);
@@ -401,6 +402,13 @@ body {
   margin-top: 10px;
   margin-bottom: 10px;
   cursor: pointer;
+}
+
+.new_container{
+  height: 80px;
+  width: "120px";
+  background-color: white;
+  border: 1 px solid black;
 }
 
 

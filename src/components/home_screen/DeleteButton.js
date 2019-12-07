@@ -15,7 +15,7 @@ export class DeleteButton extends Component {
     
   render() {
     return (
-      <div className = "col s6">       
+      <div className = "col s2 pull-s1">       
         <Button
           floating
           icon={<Icon children="close" />}
