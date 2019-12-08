@@ -136,6 +136,15 @@ class ListScreen extends Component {
     console.log("zoom-out")
   }
 
+  changeWireFrameHeight = (value) => {
+    var edit_area = document.getElementById("edit_area");
+    edit_area.style.height = value + "px"
+  }
+
+  changeWireFrameWidth = () => {
+    
+  }
+
   render() {
     const auth = this.props.auth;
     const todoList = this.props.todoList;
@@ -174,18 +183,20 @@ class ListScreen extends Component {
             defaultValue={todoList.owner}
           />
         </div>
-        <div className="row" style={{ display: "flex" }}>
+        <div className="row" style={{display:"flex"}}  >
           <ControllerAdder
             goHome={this.goHome.bind(this)}
             zoomIn = {this.zoomIn.bind(this)}
             addContainer={this.addContainer.bind(this)}
             zoomOut = {this.zoomOut.bind(this)}
+            changeWireFrameHeight = {this.changeWireFrameHeight.bind(this)}
+            changeWireFrameWidth = {this.changeWireFrameWidth.bind(this)}
           />
           <div
-            className="gray control_container_only_top_and_bottom col s8"
+            className="white control_container_only_top_and_bottom col s8"
             id="edit_area"
-            style={{ zIndex: "1" }}
-           
+            style={{ zIndex: "1"}}
+
           ></div>
           <ControllerModifier />
         </div>

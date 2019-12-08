@@ -13,7 +13,7 @@ class DimensionsToolbar extends Component {
     return (
           <div className="row control_container_only_top">
             <div className = "row">
-                <div className = "col s12 push-s2   " style={{marginTop: "25px"}}>Wireframe Dimesions</div>
+                <div className = "col s12 push-s2" style={{marginTop: "25px"}}>Wireframe Dimesions</div>
                 <div className = "col s8 push-s1" style={{marginTop: "25px"}}>Height:</div>
                 <div className = "col s4 pull-s2">
                   <input id = "font_size_input"></input>

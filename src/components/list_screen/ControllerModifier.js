@@ -11,7 +11,7 @@ import { Link } from "react-router-dom"; //
 class ControllerModifier extends Component {
   render() {   
     return (      
-        <div className="control_container col s2">
+        <div className="control_container col s3">
             <div style ={{paddingTop: "15%", marginLeft: "20%"}} > Properties </div>            
               <TextInput id = "text_input" />
               <div className = "row" style ={{paddingTop: "5%"}}>
