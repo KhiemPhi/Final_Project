@@ -12,7 +12,7 @@ import Toolbar from "./Toolbar.js"
 class ControllerAdder extends Component {
   render() {   
     return (      
-        <div className="control_container col s3">  
+        <div className="control_container col s3" >  
           <Toolbar goHome = {this.props.goHome} zoomIn = {this.props.zoomIn} zoomOut = {this.props.zoomOut}/>  
           <Button
             flat
@@ -21,8 +21,8 @@ class ControllerAdder extends Component {
             style={{
               border: "1px solid black",
               height: "70px",
-              width: "70%",
-              margin: " 0% 0% 0% 15%",
+              width: "50%",
+              margin: " 0% 0% 0% 25%",
             }}
             onClick = {this.props.addContainer}
           ></Button>
@@ -50,8 +50,8 @@ class ControllerAdder extends Component {
             id="button_creator"
             style={{
               height: "30px",
-              width: "80%",
-              margin: " 0% 0% 0% 10%",
+              width: "50%",
+              margin: " 0% 0% 0% 25%",
               border: "1px solid black"
             }}
           >
@@ -62,11 +62,11 @@ class ControllerAdder extends Component {
           <Button
             flat
             className="white button_component"
-            id="label_button"
+            id="textfield_button"
             style={{
               height: "30px",
-              width: "100%",
-              margin: " 0% 0% 0% 2%",
+              width: "80%",
+              margin: " 0% 0% 0% 10%",
               border: "1px solid black",
               color: "gray",
               textAlign: "left"
@@ -75,6 +75,7 @@ class ControllerAdder extends Component {
             Input
           </Button>
           <div className="container_label_padding">Textfield</div>
+          
         </div>
       
     );
