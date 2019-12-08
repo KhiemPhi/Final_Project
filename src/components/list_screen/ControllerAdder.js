@@ -6,41 +6,14 @@ import { firestoreConnect } from "react-redux-firebase";
 import { Button, Icon } from "react-materialize";
 import "materialize-css/dist/css/materialize.min.css";
 import { getFirestore } from "redux-firestore";
-import { Link } from "react-router-dom"; //
+import { Link } from "react-router-dom"; 
+import Toolbar from "./Toolbar.js"
 
 class ControllerAdder extends Component {
   render() {   
     return (      
-        <div className="control_container col s2">
-          <div className="row control_container_only_bottom">
-            <div className="col s3 pull-s1">
-              <Button
-                flat
-                icon={<Icon children="zoom_in" />}
-                className="transparent"
-                large
-              ></Button>
-            </div>
-            <div className="col s3 pull-s2">
-              <Button
-                flat
-                icon={<Icon children="zoom_out" />}
-                className="transparent"
-                large
-              ></Button>
-            </div>
-            <div className="col s3 pull-s3">
-              <Button flat className="transparent" large>
-                Save
-              </Button>
-            </div>
-            <div className="col s3 pull-s3">
-              <Button flat className="transparent" onClick = {this.props.goHome} large>
-                Close
-              </Button>
-            </div>
-          </div>
-
+        <div className="control_container col s3">  
+          <Toolbar goHome = {this.props.goHome} zoomIn = {this.props.zoomIn} zoomOut = {this.props.zoomOut}/>  
           <Button
             flat
             className="white container_button"

@@ -15,7 +15,8 @@ class ListScreen extends Component {
   state = {
     name: "",
     owner: "",
-    containerCounter: 0
+    containerCounter: 0,
+    defaultZoom: 1
   };
 
   handleChange = e => {
@@ -102,6 +103,15 @@ class ListScreen extends Component {
     }
   };
 
+  focus = () => {
+    console.log("focus")
+
+  }
+
+  focus1 = () => {
+    console.log("focus1")
+  }
+
   addContainer = () => {
     var div = document.createElement("div");
     var counter = this.state.containerCounter;
@@ -112,9 +122,19 @@ class ListScreen extends Component {
     div.setAttribute("id", id);
     document.getElementById("edit_area").appendChild(div);
     this.dragElement(document.getElementById(id));
-
+    div.setAttribute("onClick", this.focus )
     this.setState({ containerCounter: counter });
   };
+
+  zoomIn = () => {
+    
+    console.log("zoom-in")
+  }
+
+  zoomOut = () => {
+    
+    console.log("zoom-out")
+  }
 
   render() {
     const auth = this.props.auth;
@@ -157,12 +177,15 @@ class ListScreen extends Component {
         <div className="row" style={{ display: "flex" }}>
           <ControllerAdder
             goHome={this.goHome.bind(this)}
+            zoomIn = {this.zoomIn.bind(this)}
             addContainer={this.addContainer.bind(this)}
+            zoomOut = {this.zoomOut.bind(this)}
           />
           <div
-            className="white control_container_only_top col s8"
+            className="gray control_container_only_top col s8"
             id="edit_area"
             style={{ zIndex: "1" }}
+           
           ></div>
           <ControllerModifier />
         </div>
