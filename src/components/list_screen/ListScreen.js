@@ -52,8 +52,11 @@ class ListScreen extends Component {
     this.props.history.push("/");
   };
 
-  dragElement = (elmnt) => {
-    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  dragElement = elmnt => {
+    var pos1 = 0,
+      pos2 = 0,
+      pos3 = 0,
+      pos4 = 0;
     if (document.getElementById(elmnt.id + "header")) {
       /* if present, the header is where you move the DIV from:*/
       document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
@@ -61,8 +64,8 @@ class ListScreen extends Component {
       /* otherwise, move the DIV from anywhere inside the DIV:*/
       elmnt.onmousedown = dragMouseDown;
     }
-  
-    function dragMouseDown(e) {	
+
+    function dragMouseDown(e) {
       e = e || window.event;
       e.preventDefault();
       // get the mouse cursor position at startup:
@@ -72,7 +75,7 @@ class ListScreen extends Component {
       // call a function whenever the cursor moves:
       document.onmousemove = elementDrag;
     }
-  
+
     function elementDrag(e) {
       e = e || window.event;
       e.preventDefault();
@@ -82,23 +85,22 @@ class ListScreen extends Component {
       pos3 = e.clientX;
       pos4 = e.clientY;
       //prevent further movement, out of bounds on canvas
-      if (elmnt.offsetLeft - pos1 <= 185){
-        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px"
+      if (elmnt.offsetTop - pos2 > 220 && elmnt.offsetTop - pos2 < 855) {
+        // set the element's new position:
+        elmnt.style.top = elmnt.offsetTop - pos2 + "px";
       }
-
-      // set the element's new position:
-      elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-      elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+      if (elmnt.offsetLeft - pos1 > 205 && elmnt.offsetLeft - pos1 < 892) {
+        // set the element's new position:
+        elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
+      }
     }
-  
+
     function closeDragElement() {
       /* stop moving when mouse button is released:*/
       document.onmouseup = null;
       document.onmousemove = null;
     }
-  }
-
- 
+  };
 
   addContainer = () => {
     var div = document.createElement("div");
@@ -108,8 +110,8 @@ class ListScreen extends Component {
     // Setting The New ID For The New COntainer
     div.setAttribute("class", "new_container");
     div.setAttribute("id", id);
-    document.getElementById("edit_area").appendChild(div);  
-    this.dragElement(document.getElementById(id))  
+    document.getElementById("edit_area").appendChild(div);
+    this.dragElement(document.getElementById(id));
 
     this.setState({ containerCounter: counter });
   };
