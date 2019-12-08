@@ -120,7 +120,36 @@ class ListScreen extends Component {
     // Setting The New ID For The New COntainer
     div.setAttribute("class", "new_container");
     div.setAttribute("id", id);
+
+    // Adding Resizer CSS Elements
+    var resizers = document.createElement("div")
+    resizers.setAttribute("class", "resizers")
+
+    var resizers1 = document.createElement("div")
+    resizers1.setAttribute("class", "resizer top-left")
+
+    var resizers2 = document.createElement("div")
+    resizers2.setAttribute("class", "resizer top-right")
+
+    var resizers3 = document.createElement("div")
+    resizers3.setAttribute("class", "resizer bottom-left")
+
+    var resizers4 = document.createElement("div")
+    resizers4.setAttribute("class", "resizer bottom-right")
+
+
+
+    resizers.appendChild(resizers1)
+    resizers.appendChild(resizers2)
+    resizers.appendChild(resizers3)
+    resizers.appendChild(resizers4)
+    div.appendChild(resizers)
+
     document.getElementById("edit_area").appendChild(div);
+    
+   
+
+    
     this.dragElement(document.getElementById(id));
     div.setAttribute("onClick", this.focus )
     this.setState({ containerCounter: counter });
@@ -143,6 +172,21 @@ class ListScreen extends Component {
 
   changeWireFrameWidth = () => {
     
+  }
+
+  makeResizableDiv = (div) => {
+    const element = document.querySelector(div);
+    const resizers = document.querySelectorAll(div + ' .resizer')
+    const minimum_size = 20;
+    let original_width = 0;
+    let original_height = 0;
+    let original_x = 0;
+    let original_y = 0;
+    let original_mouse_x = 0;
+    let original_mouse_y = 0;
+
+    
+
   }
 
   render() {
