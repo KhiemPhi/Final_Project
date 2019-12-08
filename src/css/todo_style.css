@@ -386,6 +386,14 @@ body {
   border: 1px solid black;
   border-right: none;
   border-left: none;
+  border-bottom: none;
+  
+}
+
+.control_container_only_top_and_bottom{
+  border: 1px solid black;
+  border-right: none;
+  border-left: none;
   
 }
 

@@ -10,8 +10,7 @@ import { Link } from "react-router-dom"; //
 
 class Toolbar extends Component {
   render() {   
-    return (      
-       
+    return (
           <div className="row control_container_only_bottom">
             <div className="col s3 pull-s1 ">
               <Button

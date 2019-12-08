@@ -182,7 +182,7 @@ class ListScreen extends Component {
             zoomOut = {this.zoomOut.bind(this)}
           />
           <div
-            className="gray control_container_only_top col s8"
+            className="gray control_container_only_top_and_bottom col s8"
             id="edit_area"
             style={{ zIndex: "1" }}
            

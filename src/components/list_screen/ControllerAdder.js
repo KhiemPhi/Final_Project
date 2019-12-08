@@ -8,6 +8,7 @@ import "materialize-css/dist/css/materialize.min.css";
 import { getFirestore } from "redux-firestore";
 import { Link } from "react-router-dom"; 
 import Toolbar from "./Toolbar.js"
+import DimesionsToolbar from "./DimesionsToolbar.js";
 
 class ControllerAdder extends Component {
   render() {   
@@ -75,7 +76,7 @@ class ControllerAdder extends Component {
             Input
           </Button>
           <div className="container_label_padding">Textfield</div>
-          
+          <DimesionsToolbar/>
         </div>
       
     );
