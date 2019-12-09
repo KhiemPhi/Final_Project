@@ -61,8 +61,8 @@ class NewContainer extends Component {
             width: 120,
             height: 80
           }} //another comment
-          // yet another comment
-          
+          // Fixing Commiting Issues Not Visible
+
           
           onClick= {this.setFocus}
         >
