@@ -48,11 +48,12 @@ class NewContainer extends Component {
 
   setFocus = () => {
     this.setState({ hasFocus: true });
+    
   }
 
   render() {
     return (
-      <div ref={this.setWrapperRef} id={this.props.class + this.props.containerCounter}>
+      <div ref={this.setWrapperRef} id={this.props.id}>
         <Rnd
           className={this.state.hasFocus ? this.props.class : this.props.class + "_out_focus"}
           default={{
@@ -60,10 +61,8 @@ class NewContainer extends Component {
             y: 0,
             width: 120,
             height: 80
-          }} //another comment
-          // Fixing Commiting Issues Not Visible
-
-          
+          }} 
+               
           onClick= {this.setFocus}
         >
           {this.state.hasFocus && (

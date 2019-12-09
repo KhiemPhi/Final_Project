@@ -59,18 +59,19 @@ class ListScreen extends Component {
     this.props.history.push("/");
   };
  
-  addContainer = () => {
-    //var div = document.createElement("div");
+  addContainer = () => {    
     var counter = this.state.containerCounter;
-   
-    counter = counter + 1;
-    var id = "new_container" + (counter - 1).toString();
-    var className = "new_container";
+    counter = counter + 1; 
+    var id = "new_container" + counter.toString();
+          
     const { elements } = this.state;
-    this.setState({ elements: elements.concat(className) });
-    
+    this.setState({ elements: elements.concat(id) });    
     this.setState({ containerCounter: counter });
   };
+
+  setFocusedElement = (id) => {
+    this.setState({focusedElement : id})
+  }
 
   zoomIn = () => {
     console.log("zoom-in");
@@ -141,15 +142,17 @@ class ListScreen extends Component {
             id="edit_area"
             style={{ zIndex: "1" }}
           >
-            {" "}
+            
             {this.state.elements.map(x => (
-              <NewContainer class={x} containerCounter = {this.state.containerCounter.toString()}  />
+              <NewContainer class={"new_container"} id={x} containerCounter = {this.state.containerCounter.toString()} setFocusedElement = {this.setFocusedElement.bind(this)}  />
             ))}
+            {/* Add Map Components from Database here   */}  
           </div>
           <ControllerModifier />
         </div>
+        
       </div>
-    );
+    )
   }
 }
 
@@ -159,7 +162,7 @@ const mapStateToProps = (state, ownProps) => {
   const todoList = todoLists ? todoLists[id] : null;
   if (todoList) todoList.id = id;
   return {
-    todoList,
+    todoList, // Mark Elements Here in The TodoList to Map Onto Edit Area Later
     auth: state.firebase.auth
   };
 };
