@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useRef } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -9,7 +9,9 @@ import { getFirestore } from "redux-firestore";
 import { Link } from "react-router-dom"; 
 import ControllerAdder from "./ControllerAdder.js";
 import ControllerModifier from "./ControllerModifier.js";
-import { Rnd } from "react-rnd";
+import NewContainer from "./NewContainer.js";
+
+
 
 class ListScreen extends Component {
   state = {
@@ -18,7 +20,8 @@ class ListScreen extends Component {
     containerCounter: 0,
     defaultZoom: 1,
     focusedElement: null,
-    elements: []
+    elements: [],
+    
   };
 
   handleChange = e => {
@@ -146,6 +149,8 @@ class ListScreen extends Component {
 
     if (!todoList) return <React.Fragment />;
 
+    
+
     return (
       <div>
         <div className="input-field">
@@ -190,23 +195,7 @@ class ListScreen extends Component {
           >
             {" "}
             {this.state.elements.map(x => (
-              <Rnd
-                className={x}
-                default={{
-                  x: 0,
-                  y: 0,
-                  width: 120,
-                  height: 80
-                }}
-                id={x + this.state.containerCounter.toString()}
-              > 
-              <div class='resizers'>
-                <div class='resizer top-left'></div>
-                <div class='resizer top-right'></div>
-                <div class='resizer bottom-left'></div>
-                <div class='resizer bottom-right'></div>
-              </div>
-            </Rnd>
+              <NewContainer class={x} containerCounter = {this.state.containerCounter.toString()}  />
             ))}
           </div>
           <ControllerModifier />
