@@ -416,7 +416,7 @@ body {
   height: 80px;
   width: 120px;
   background-color: white; 
-  border: 1px solid black;
+  border: 3px solid #4286f4;
   position: absolute;
   z-index:  2;
 }

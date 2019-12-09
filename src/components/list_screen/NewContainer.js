@@ -52,24 +52,26 @@ class NewContainer extends Component {
 
   render() {
     return (
-      <div ref={this.setWrapperRef}>
+      <div ref={this.setWrapperRef} id={this.props.class + this.props.containerCounter}>
         <Rnd
-          className={this.props.class}
+          className={this.state.hasFocus ? this.props.class : this.props.class + "_out_focus"}
           default={{
             x: 0,
             y: 0,
             width: 120,
             height: 80
-          }}
-          id={this.props.class + this.props.containerCounter}
+          }} //another comment
+          // yet another comment
+          
+          
           onClick= {this.setFocus}
         >
           {this.state.hasFocus && (
-            <div class="resizers">
-              <div class="resizer top-left"></div>
-              <div class="resizer top-right"></div>
-              <div class="resizer bottom-left"></div>
-              <div class="resizer bottom-right"></div>
+            <div className="resizers">
+              <div className="resizer top-left"></div>
+              <div className="resizer top-right"></div>
+              <div className="resizer bottom-left"></div>
+              <div className="resizer bottom-right"></div>
             </div>
           )}
         </Rnd>
