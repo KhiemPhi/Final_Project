@@ -2,21 +2,23 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import ItemsList from "./ItemsList.js";
 import { firestoreConnect } from "react-redux-firebase";
 import { Button, Icon, TextInput } from "react-materialize";
 import "materialize-css/dist/css/materialize.min.css";
 import { getFirestore } from "redux-firestore";
-import { Link } from "react-router-dom"; //
+import { Link } from "react-router-dom"; 
 import ControllerAdder from "./ControllerAdder.js";
 import ControllerModifier from "./ControllerModifier.js";
+import { Rnd } from "react-rnd";
 
 class ListScreen extends Component {
   state = {
     name: "",
     owner: "",
     containerCounter: 0,
-    defaultZoom: 1
+    defaultZoom: 1,
+    focusedElement: null,
+    elements: []
   };
 
   handleChange = e => {
@@ -103,91 +105,36 @@ class ListScreen extends Component {
     }
   };
 
-  focus = () => {
-    console.log("focus")
-
-  }
-
-  focus1 = () => {
-    console.log("focus1")
-  }
+  checkFocus = () => {
+    console.log("focus");
+  };
 
   addContainer = () => {
-    var div = document.createElement("div");
+    //var div = document.createElement("div");
     var counter = this.state.containerCounter;
     counter = counter + 1;
-    var id = "new_container" + counter.toString();
-    // Setting The New ID For The New COntainer
-    div.setAttribute("class", "new_container");
-    div.setAttribute("id", id);
+    var id = "new_container" + (counter - 1).toString();
+    var className = "new_container";
+    const { elements } = this.state;
+    this.setState({ elements: elements.concat(className) });
 
-    // Adding Resizer CSS Elements
-    var resizers = document.createElement("div")
-    resizers.setAttribute("class", "resizers")
-
-    var resizers1 = document.createElement("div")
-    resizers1.setAttribute("class", "resizer top-left")
-
-    var resizers2 = document.createElement("div")
-    resizers2.setAttribute("class", "resizer top-right")
-
-    var resizers3 = document.createElement("div")
-    resizers3.setAttribute("class", "resizer bottom-left")
-
-    var resizers4 = document.createElement("div")
-    resizers4.setAttribute("class", "resizer bottom-right")
-
-
-
-    resizers.appendChild(resizers1)
-    resizers.appendChild(resizers2)
-    resizers.appendChild(resizers3)
-    resizers.appendChild(resizers4)
-    div.appendChild(resizers)
-
-    document.getElementById("edit_area").appendChild(div);
-    
-   
-
-    
-    this.dragElement(document.getElementById(id));
-    div.setAttribute("onClick", this.focus )
     this.setState({ containerCounter: counter });
   };
 
   zoomIn = () => {
-    
-    console.log("zoom-in")
-  }
+    console.log("zoom-in");
+  };
 
   zoomOut = () => {
-    
-    console.log("zoom-out")
-  }
+    console.log("zoom-out");
+  };
 
-  changeWireFrameHeight = (value) => {
+  changeWireFrameHeight = value => {
     var edit_area = document.getElementById("edit_area");
-    edit_area.style.height = value + "px"
-  }
+    edit_area.style.height = value + "px";
+  };
 
-  changeWireFrameWidth = () => {
-    
-  }
-
-  makeResizableDiv = (div) => {
-    const element = document.querySelector(div);
-    const resizers = document.querySelectorAll(div + ' .resizer')
-    const minimum_size = 20;
-    let original_width = 0;
-    let original_height = 0;
-    let original_x = 0;
-    let original_y = 0;
-    let original_mouse_x = 0;
-    let original_mouse_y = 0;
-
-    
-
-  }
+  changeWireFrameWidth = () => {};
 
   render() {
     const auth = this.props.auth;
@@ -227,21 +174,41 @@ class ListScreen extends Component {
             defaultValue={todoList.owner}
           />
         </div>
-        <div className="row" style={{display:"flex"}}  >
+        <div className="row" style={{ display: "flex" }}>
           <ControllerAdder
             goHome={this.goHome.bind(this)}
-            zoomIn = {this.zoomIn.bind(this)}
+            zoomIn={this.zoomIn.bind(this)}
             addContainer={this.addContainer.bind(this)}
-            zoomOut = {this.zoomOut.bind(this)}
-            changeWireFrameHeight = {this.changeWireFrameHeight.bind(this)}
-            changeWireFrameWidth = {this.changeWireFrameWidth.bind(this)}
+            zoomOut={this.zoomOut.bind(this)}
+            changeWireFrameHeight={this.changeWireFrameHeight.bind(this)}
+            changeWireFrameWidth={this.changeWireFrameWidth.bind(this)}
           />
           <div
             className="white control_container_only_top_and_bottom col s8"
             id="edit_area"
-            style={{ zIndex: "1"}}
-
-          ></div>
+            style={{ zIndex: "1" }}
+          >
+            {" "}
+            {this.state.elements.map(x => (
+              <Rnd
+                className={x}
+                default={{
+                  x: 0,
+                  y: 0,
+                  width: 120,
+                  height: 80
+                }}
+                id={x + this.state.containerCounter.toString()}
+              > 
+              <div class='resizers'>
+                <div class='resizer top-left'></div>
+                <div class='resizer top-right'></div>
+                <div class='resizer bottom-left'></div>
+                <div class='resizer bottom-right'></div>
+              </div>
+            </Rnd>
+            ))}
+          </div>
           <ControllerModifier />
         </div>
       </div>

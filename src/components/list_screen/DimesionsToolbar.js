@@ -22,7 +22,6 @@ class DimensionsToolbar extends Component {
                 <div className = "col s4 pull-s2">
                   <input id = "font_size_input"></input>
                 </div>
-
             </div>
           </div>
 
