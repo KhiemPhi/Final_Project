@@ -63,7 +63,7 @@ class ListScreen extends Component {
     var counter = this.state.containerCounter;
     counter = counter + 1; 
     var id = "new_container" + counter.toString();
-    this.setFocusedElement(id)      
+    //this.setFocusedElement(id)      
     const { containers } = this.state;
     this.setState({ containers: containers.concat(id) });    
     this.setState({ containerCounter: counter });
@@ -137,10 +137,11 @@ class ListScreen extends Component {
             changeWireFrameHeight={this.changeWireFrameHeight.bind(this)}
             changeWireFrameWidth={this.changeWireFrameWidth.bind(this)}
           />
+         
           <div
             className="white control_container_only_top_and_bottom col s8"
             id="edit_area"
-            style={{ zIndex: "1" }}
+            style={{ zIndex: "1" , position: "relative" }}
           >
             
             {this.state.containers.map(x => (
@@ -151,7 +152,7 @@ class ListScreen extends Component {
 
             {/* Add Map Components from Database here   */}  
           </div>
-          <ControllerModifier />
+          <ControllerModifier focusedElement = {this.state.focusedElement} />
         </div>
         
       </div>

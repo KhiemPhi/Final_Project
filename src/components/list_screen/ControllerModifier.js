@@ -9,11 +9,35 @@ import { getFirestore } from "redux-firestore";
 import { Link } from "react-router-dom"; //
 
 class ControllerModifier extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+        updatable: false,
+        innerText: props.focusedElement,
+        status: props.status
+    };
+    
+  }
+
+  onMakeInnerTextChange(value){
+    this.setState({
+         innerText: value
+    });
+    
+}
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return {
+      innerText: nextProps.focusedElement ? nextProps.focusedElement : "",
+    };
+  }
+  
   render() {   
-    return (      
-        <div className="control_container col s3">
+    return (
+            
+        <div className="control_container col s3" id = "modifier_area">
             <div style ={{paddingTop: "15%", marginLeft: "20%"}} > Properties </div>            
-              <TextInput id = "text_input" />
+              <TextInput id = "text_input" value = {this.state.innerText} onChange={e => this.onMakeInnerTextChange(e.target.value)}    />
               <div className = "row" style ={{paddingTop: "5%"}}>
                 <div className = "col s8" style={{marginTop: "25px", fontSize: "12px"}}>Font Size:</div>
                 <div className = "col s4">
@@ -21,15 +45,15 @@ class ControllerModifier extends Component {
                 </div>
                 <div className = "col s8" style={{marginTop: "25px", fontSize: "12px"}}>Background:</div>
                 <div className = "col s1">
-                  <div className = "background_color"></div>
+                  <div className = "background_color" id = "background_color_input"></div>
                 </div>
                 <div className = "col s8" style={{marginTop: "25px", fontSize: "12px"}}>Border Color:</div>
                 <div className = "col s1">
-                  <div className = "border_color"></div>
+                  <div className = "border_color" id = "border_color_input"></div>
                 </div>
                 <div className = "col s8" style={{marginTop: "25px", fontSize: "12px" }}>Text Color:</div>
                 <div className = "col s1">
-                  <div className = "text_color"></div>
+                  <div className = "text_color" id = "text_color_input" ></div>
                 </div>
                 <div className = "col s9" style={{marginTop: "25px", fontSize: "12px"}}>Border Thickness:</div>
                 <div className = "col s3 ">

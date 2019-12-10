@@ -10,10 +10,12 @@ import { Link } from "react-router-dom";
 import Toolbar from "./Toolbar.js";
 import DimesionsToolbar from "./DimesionsToolbar.js";
 import { Rnd } from "react-rnd";
+import Divider from "react-materialize/lib/Divider";
 
 class NewContainer extends Component {
   state = {
-      hasFocus: true
+      hasFocus: false,
+      disableDragging: false
   }
 
   constructor(props) {
@@ -41,8 +43,11 @@ class NewContainer extends Component {
    * Alert if clicked on outside of element
    */
   handleClickOutside(event) {
-    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-        this.setState({ hasFocus: false });
+    console.log(event.target)
+    var container = document.getElementById("modifier_area")    
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target) && !container.contains(event.target) ) {
+          this.setState({ hasFocus: false });           
+          this.props.setFocusedElement(null); //No More Focused Element
     }
   }
 
@@ -53,21 +58,33 @@ class NewContainer extends Component {
     //Changing Colors
     var div = document.getElementById(this.props.id)
     div.style.backgroundColor = "red";
+    
+    this.setState({disableDragging : false})
+    
+  }
+
+  disableDragging = () => {
+    var div = document.getElementById(this.props.id)
+    this.setState({disableDragging : true})
   }
 
   render() {
+    // x = left , y = top value, width = widht, height = height
     return (
+      
       <div ref={this.setWrapperRef} >
         <Rnd
           className={this.state.hasFocus ? this.props.class : this.props.class + "_out_focus"}
           default={{
-            x: 0,
-            y: 0,
+            x: 0,  
+            y: 0, 
             width: 120,
             height: 80
           }} 
+          disableDragging = {this.state.disableDragging}
           id={this.props.id}
           onClick= {this.setFocus}
+          onMouseEnter =  {this.disableDragging}
         >
           {this.state.hasFocus && (
             <div className="resizers">
