@@ -34,14 +34,17 @@ class ControllerAdder extends Component {
             flat
             className="transparent label_component"
             id="label_button"
+            onClick = {this.props.addLabel}
             style={{
               height: "30px",
               width: "100%",
               margin: " 0% 0% 0% 2%",
               fontSize: "13px"
-            }}
+            }
+          }
           >
             Prompt For Input:
+            
           </Button>
           <div className="container_label">Label</div>
 

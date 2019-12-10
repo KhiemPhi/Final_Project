@@ -6,22 +6,25 @@ import { firestoreConnect } from "react-redux-firebase";
 import { Button, Icon, TextInput } from "react-materialize";
 import "materialize-css/dist/css/materialize.min.css";
 import { getFirestore } from "redux-firestore";
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 import ControllerAdder from "./ControllerAdder.js";
 import ControllerModifier from "./ControllerModifier.js";
 import NewContainer from "./NewContainer.js";
+import NewLabel from "./NewLabel.js";
 
 class ListScreen extends Component {
   state = {
     name: "",
     owner: "",
     containerCounter: 0,
+    labelCounter: 0,
     containerCounterArray: [],
     defaultZoom: 1,
     focusedElement: null,
     containers: [],
-    focusedElementText: null
-    
+    labels: [],
+    focusedElementTextContainer: [],
+    focusedElementTextLabel : ["Prompt For Input"]
   };
 
   handleChange = e => {
@@ -57,23 +60,28 @@ class ListScreen extends Component {
   goHome = () => {
     this.props.history.push("/");
   };
- 
-  addContainer = () => {    
-    var counter = this.state.containerCounter;
-    counter = counter + 1; 
-    var id = "new_container" + counter.toString();      
+
+  addContainer = () => {
+    var counter = this.state.labelCounter;
+    counter = counter + 1;
+    var id = "new_container" + counter.toString();
     const { containers } = this.state;
-    this.setState({ containers: containers.concat(id) });    
+    this.setState({ containers: containers.concat(id) });
     this.setState({ containerCounter: counter });
   };
 
-  setFocusedElement = (id) => {
-    this.setState({focusedElement : id})
-  }
+  addLabel = () => {    
+    var counter = this.state.containerCounter;
+    counter = counter + 1;
+    var id = "new_label" + counter.toString();
+    const { labels } = this.state;
+    this.setState({ labels: labels.concat(id) });
+    this.setState({ labelCounter: counter });
+  };
 
-  setFocusedElementText = (text) => {
-    this.setState({focusedElementText : text})
-  }
+  setFocusedElement = id => {
+    this.setState({ focusedElement: id });
+  };
 
   zoomIn = () => {
     console.log("zoom-in");
@@ -90,6 +98,41 @@ class ListScreen extends Component {
 
   changeWireFrameWidth = () => {};
 
+  createResizers = () => {
+    var div = document.createElement("div") 
+    var top_left = document.createElement("div") 
+    var top_right = document.createElement("div") 
+    var bottom_left = document.createElement("div") 
+    var bottom_right = document.createElement("div")
+    top_left.className = "resizer top-left"
+    top_right.className = "resizer top-right"
+    bottom_left.className = "resizer bottom-left"
+    bottom_right.className = "resizer bottom-right"
+    div.className = "resizers"
+    div.appendChild(top_left)
+    div.appendChild(top_right)
+    div.appendChild(bottom_left)
+    div.appendChild(bottom_right)
+    return div
+  }
+
+  editText = value => {    
+    var index =  this.state.focusedElement.slice(-1) - 1
+    var newTextArray = []
+    //perform Check To see what element is being focused
+    if (this.state.focusedElement.includes('container')){
+      newTextArray = this.state.focusedElementTextContainer
+      newTextArray[index] = value
+      this.setState({focusedElementTextContainer : newTextArray})
+    } else if (this.state.focusedElement.includes('label')){
+      newTextArray = this.state.focusedElementTextLabel
+      newTextArray[index] = value
+      this.setState({focusedElementTextLabel : newTextArray})
+    } 
+
+    
+  };
+
   render() {
     const auth = this.props.auth;
     const todoList = this.props.todoList;
@@ -99,8 +142,6 @@ class ListScreen extends Component {
     }
 
     if (!todoList) return <React.Fragment />;
-
-    
 
     return (
       <div>
@@ -135,34 +176,52 @@ class ListScreen extends Component {
             goHome={this.goHome.bind(this)}
             zoomIn={this.zoomIn.bind(this)}
             addContainer={this.addContainer.bind(this)}
+            addLabel = {this.addLabel.bind(this)}
             zoomOut={this.zoomOut.bind(this)}
             changeWireFrameHeight={this.changeWireFrameHeight.bind(this)}
             changeWireFrameWidth={this.changeWireFrameWidth.bind(this)}
           />
-         
+
           <div
             className="white control_container_only_top_and_bottom col s8"
             id="edit_area"
-            style={{ zIndex: "1" , position: "relative" }}
+            style={{ zIndex: "1", position: "relative" }}
           >
-            
             {this.state.containers.map(x => (
-              <NewContainer class={"new_container"} id={x} 
-              containerCounter = {this.state.containerCounter.toString()} 
-              setFocusedElement = {this.setFocusedElement.bind(this)} 
-              setFocusedElementText = {this.setFocusedElementText.bind(this)}
-              focusedElementText = {this.state.focusedElementText}  />
+              <NewContainer
+                class={"new_container"}
+                id={x}
+                containerCounter={this.state.containerCounter.toString()}
+                setFocusedElement={this.setFocusedElement.bind(this)}
+                myText={this.state.focusedElementTextContainer[Number(x.slice(-1)) - 1]}
+                focusedElement={this.state.focusedElement}
+                createResizers = {this.createResizers.bind(this)}
+              />
             ))}
 
+            {this.state.labels.map(x => (
+              <NewLabel
+                class={"new_container"}
+                id={x}
+                containerCounter={this.state.labelCounter.toString()}
+                setFocusedElement={this.setFocusedElement.bind(this)}
+                myText= {this.state.focusedElementTextLabel[0]}
+                focusedElement={this.state.focusedElement}
+                createResizers = {this.createResizers.bind(this)}
+              />
+            ))}
 
-
-            {/* Add Map Components from Database here   */}  
+            {/* Add Map Components from Database here   */}
           </div>
-          <ControllerModifier focusedElement = {this.state.focusedElement} focusedElementText = {this.state.focusedElementText} setFocusedElementText = {this.setFocusedElementText.bind(this)}/>
+          <ControllerModifier
+            editText={this.editText.bind(this)}
+            focusedElement={this.state.focusedElement}
+            focusedElementText={this.state.focusedElementText}
+            
+          />
         </div>
-        
       </div>
-    )
+    );
   }
 }
 

@@ -12,7 +12,7 @@ import DimesionsToolbar from "./DimesionsToolbar.js";
 import { Rnd } from "react-rnd";
 import Divider from "react-materialize/lib/Divider";
 
-class NewContainer extends Component {
+class NewLabel extends Component {
   state = {
     hasFocus: false,
     disableDragging: false
@@ -83,5 +83,5 @@ class NewContainer extends Component {
 }
 
 export default compose(firestoreConnect([{ collection: "todoLists" }]))(
-  NewContainer
+  NewLabel
 );
