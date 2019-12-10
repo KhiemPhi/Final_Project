@@ -11,8 +11,6 @@ import ControllerAdder from "./ControllerAdder.js";
 import ControllerModifier from "./ControllerModifier.js";
 import NewContainer from "./NewContainer.js";
 
-
-
 class ListScreen extends Component {
   state = {
     name: "",
@@ -22,6 +20,7 @@ class ListScreen extends Component {
     defaultZoom: 1,
     focusedElement: null,
     containers: [],
+    focusedElementText: null
     
   };
 
@@ -62,8 +61,7 @@ class ListScreen extends Component {
   addContainer = () => {    
     var counter = this.state.containerCounter;
     counter = counter + 1; 
-    var id = "new_container" + counter.toString();
-    //this.setFocusedElement(id)      
+    var id = "new_container" + counter.toString();      
     const { containers } = this.state;
     this.setState({ containers: containers.concat(id) });    
     this.setState({ containerCounter: counter });
@@ -71,6 +69,10 @@ class ListScreen extends Component {
 
   setFocusedElement = (id) => {
     this.setState({focusedElement : id})
+  }
+
+  setFocusedElementText = (text) => {
+    this.setState({focusedElementText : text})
   }
 
   zoomIn = () => {
@@ -145,14 +147,18 @@ class ListScreen extends Component {
           >
             
             {this.state.containers.map(x => (
-              <NewContainer class={"new_container"} id={x} containerCounter = {this.state.containerCounter.toString()} setFocusedElement = {this.setFocusedElement.bind(this)}  />
+              <NewContainer class={"new_container"} id={x} 
+              containerCounter = {this.state.containerCounter.toString()} 
+              setFocusedElement = {this.setFocusedElement.bind(this)} 
+              setFocusedElementText = {this.setFocusedElementText.bind(this)}
+              focusedElementText = {this.state.focusedElementText}  />
             ))}
 
 
 
             {/* Add Map Components from Database here   */}  
           </div>
-          <ControllerModifier focusedElement = {this.state.focusedElement} />
+          <ControllerModifier focusedElement = {this.state.focusedElement} focusedElementText = {this.state.focusedElementText} setFocusedElementText = {this.setFocusedElementText.bind(this)}/>
         </div>
         
       </div>

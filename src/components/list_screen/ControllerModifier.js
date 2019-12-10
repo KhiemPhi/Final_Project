@@ -13,7 +13,8 @@ class ControllerModifier extends Component {
     super(props)
     this.state = {
         updatable: false,
-        innerText: props.focusedElement,
+        innerText: this.props.focusedElementText,
+        focusedElement: this.props.focusedElement,
         status: props.status
     };
     
@@ -23,21 +24,27 @@ class ControllerModifier extends Component {
     this.setState({
          innerText: value
     });
-    
+    this.props.setFocusedElementText(this.state.innerText)
+  
 }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    return {
-      innerText: nextProps.focusedElement ? nextProps.focusedElement : "",
-    };
+componentWillReceiveProps(nextProps) {
+  if (nextProps.focusedElementText !== this.props.focusedElementText) {
+    //Forcibly overwrite input value to new default if the default ever changes
+    this.setState({innerText: nextProps.focusedElementText});
   }
+  if (nextProps.focusedElement !== this.props.focusedElement) {
+    //Forcibly overwrite input value to new default if the default ever changes
+    this.setState({focusedElement: nextProps.focusedElement});
+  }
+}
   
   render() {   
     return (
             
         <div className="control_container col s3" id = "modifier_area">
             <div style ={{paddingTop: "15%", marginLeft: "20%"}} > Properties </div>            
-              <TextInput id = "text_input" value = {this.state.innerText} onChange={e => this.onMakeInnerTextChange(e.target.value)}    />
+              <TextInput id = "text_input"  value = {this.state.focusedElement ? this.state.innerText : ""} onChange={e => this.onMakeInnerTextChange(e.target.value)}    />
               <div className = "row" style ={{paddingTop: "5%"}}>
                 <div className = "col s8" style={{marginTop: "25px", fontSize: "12px"}}>Font Size:</div>
                 <div className = "col s4">

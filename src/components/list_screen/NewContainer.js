@@ -43,22 +43,26 @@ class NewContainer extends Component {
    * Alert if clicked on outside of element
    */
   handleClickOutside(event) {
-    console.log(event.target)
+    
     var container = document.getElementById("modifier_area")    
     if (this.wrapperRef && !this.wrapperRef.contains(event.target) && !container.contains(event.target) ) {
           this.setState({ hasFocus: false });           
           this.props.setFocusedElement(null); //No More Focused Element
+          //this.props.setFocusedElementText(null);
     }
   }
 
   setFocus = () => {
     this.setState({ hasFocus: true });
     this.props.setFocusedElement(this.props.id);
-
-    //Changing Colors
-    var div = document.getElementById(this.props.id)
-    div.style.backgroundColor = "red";
     
+    
+    
+    //Changing Colors
+    
+    // div.style.backgroundColor = "red";
+    // Getting x and y coordinates to save into database
+    //console.log(div.style.transform)
     this.setState({disableDragging : false})
     
   }
@@ -66,13 +70,14 @@ class NewContainer extends Component {
   disableDragging = () => {
     var div = document.getElementById(this.props.id)
     this.setState({disableDragging : true})
+    
   }
 
   render() {
     // x = left , y = top value, width = widht, height = height
     return (
       
-      <div ref={this.setWrapperRef} >
+      <div ref={this.setWrapperRef} > 
         <Rnd
           className={this.state.hasFocus ? this.props.class : this.props.class + "_out_focus"}
           default={{
@@ -85,6 +90,7 @@ class NewContainer extends Component {
           id={this.props.id}
           onClick= {this.setFocus}
           onMouseEnter =  {this.disableDragging}
+          bounds = {"body"}
         >
           {this.state.hasFocus && (
             <div className="resizers">
@@ -94,7 +100,7 @@ class NewContainer extends Component {
               <div className="resizer bottom-right"></div>
             </div>
           )}
-        </Rnd>
+  {this.props.focusedElementText}</Rnd>
       </div>
     );
   }
