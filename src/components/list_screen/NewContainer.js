@@ -48,12 +48,16 @@ class NewContainer extends Component {
 
   setFocus = () => {
     this.setState({ hasFocus: true });
-    
+    this.props.setFocusedElement(this.props.id);
+
+    //Changing Colors
+    var div = document.getElementById(this.props.id)
+    div.style.backgroundColor = "red";
   }
 
   render() {
     return (
-      <div ref={this.setWrapperRef} id={this.props.id}>
+      <div ref={this.setWrapperRef} >
         <Rnd
           className={this.state.hasFocus ? this.props.class : this.props.class + "_out_focus"}
           default={{
@@ -62,7 +66,7 @@ class NewContainer extends Component {
             width: 120,
             height: 80
           }} 
-               
+          id={this.props.id}
           onClick= {this.setFocus}
         >
           {this.state.hasFocus && (

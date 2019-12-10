@@ -21,7 +21,7 @@ class ListScreen extends Component {
     containerCounterArray: [],
     defaultZoom: 1,
     focusedElement: null,
-    elements: [],
+    containers: [],
     
   };
 
@@ -63,9 +63,9 @@ class ListScreen extends Component {
     var counter = this.state.containerCounter;
     counter = counter + 1; 
     var id = "new_container" + counter.toString();
-          
-    const { elements } = this.state;
-    this.setState({ elements: elements.concat(id) });    
+    this.setFocusedElement(id)      
+    const { containers } = this.state;
+    this.setState({ containers: containers.concat(id) });    
     this.setState({ containerCounter: counter });
   };
 
@@ -143,9 +143,12 @@ class ListScreen extends Component {
             style={{ zIndex: "1" }}
           >
             
-            {this.state.elements.map(x => (
+            {this.state.containers.map(x => (
               <NewContainer class={"new_container"} id={x} containerCounter = {this.state.containerCounter.toString()} setFocusedElement = {this.setFocusedElement.bind(this)}  />
             ))}
+
+
+
             {/* Add Map Components from Database here   */}  
           </div>
           <ControllerModifier />
