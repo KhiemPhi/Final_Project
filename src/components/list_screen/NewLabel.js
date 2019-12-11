@@ -69,8 +69,8 @@ class NewLabel extends Component {
           default={{
             x: 0,
             y: 0,
-            width: 120,
-            height: 80
+            width: 200,
+            height: 20
           }}
           id={this.props.id}          
           onClick={this.setFocus}

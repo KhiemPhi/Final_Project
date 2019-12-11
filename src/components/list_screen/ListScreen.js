@@ -24,7 +24,10 @@ class ListScreen extends Component {
     containers: [],
     labels: [],
     focusedElementTextContainer: [],
-    focusedElementTextLabel : ["Prompt For Input"]
+    focusedElementTextLabel : [],
+    wireFrameWidth: "700px",
+    wireFrameHeight: "800px"
+    
   };
 
   handleChange = e => {
@@ -71,10 +74,13 @@ class ListScreen extends Component {
   };
 
   addLabel = () => {    
-    var counter = this.state.containerCounter;
+    var counter = this.state.labelCounter;
     counter = counter + 1;
     var id = "new_label" + counter.toString();
+    var defaultText = "Prompt For Input"
     const { labels } = this.state;
+    const {focusedElementTextLabel} = this.state;
+    this.setState({focusedElementTextLabel: focusedElementTextLabel.concat(defaultText)})
     this.setState({ labels: labels.concat(id) });
     this.setState({ labelCounter: counter });
   };
@@ -185,7 +191,7 @@ class ListScreen extends Component {
           <div
             className="white control_container_only_top_and_bottom col s8"
             id="edit_area"
-            style={{ zIndex: "1", position: "relative" }}
+            style={ { zIndex: "1", position: "relative", width:this.state.wireFrameWidth, height:this.state.wireFrameHeight }}
           >
             {this.state.containers.map(x => (
               <NewContainer
@@ -199,13 +205,13 @@ class ListScreen extends Component {
               />
             ))}
 
-            {this.state.labels.map(x => (
+            {this.state.labels.map(x => (              
               <NewLabel
-                class={"new_container"}
+                class={"new_label"}
                 id={x}
                 containerCounter={this.state.labelCounter.toString()}
                 setFocusedElement={this.setFocusedElement.bind(this)}
-                myText= {this.state.focusedElementTextLabel[0]}
+                myText= {this.state.focusedElementTextLabel[Number(x.slice(-1)) - 1]}
                 focusedElement={this.state.focusedElement}
                 createResizers = {this.createResizers.bind(this)}
               />
