@@ -186,6 +186,7 @@ class ListScreen extends Component {
             zoomOut={this.zoomOut.bind(this)}
             changeWireFrameHeight={this.changeWireFrameHeight.bind(this)}
             changeWireFrameWidth={this.changeWireFrameWidth.bind(this)}
+            wireFrameWidth = {Number(this.state.wireFrameWidth.substring(0, this.state.wireFrameWidth.length - 2))}
           />
 
           <div

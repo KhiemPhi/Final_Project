@@ -13,7 +13,7 @@ import DimesionsToolbar from "./DimesionsToolbar.js";
 class ControllerAdder extends Component {
   render() {   
     return (      
-        <div className="control_container col s3" >  
+        <div className = { this.props.wireFrameWidth > 300 ? "control_container col s3" : "control_container col s3 pull-s1"}            >  
           <Toolbar goHome = {this.props.goHome} zoomIn = {this.props.zoomIn} zoomOut = {this.props.zoomOut}/>  
           <Button
             flat
