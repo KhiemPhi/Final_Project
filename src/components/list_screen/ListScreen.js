@@ -82,8 +82,7 @@ class ListScreen extends Component {
     this.setState({ labelCounter: counter });
   };
 
-  addTextField = () => {
-    console.log("fire")
+  addTextField = () => {    
     var counter = this.state.textfieldCounter;
     counter = counter + 1;
     var id = "new_textfield" + counter.toString();
@@ -199,6 +198,12 @@ class ListScreen extends Component {
           var tempButtons = buttons;
           delete tempButtons[indexToBeDelete];
           this.setState({ buttons: tempButtons });
+          this.setState({ focusedElement: null });
+        } else if (this.state.focusedElement.includes("textfield")) {
+          const { textfields } = this.state;
+          var tempTextFields =  textfields;
+          delete tempTextFields[indexToBeDelete];
+          this.setState({ textfields: tempTextFields });
           this.setState({ focusedElement: null });
         }
       }
