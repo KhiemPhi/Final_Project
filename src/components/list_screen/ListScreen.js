@@ -48,18 +48,6 @@ class ListScreen extends Component {
       });
   };
 
-  componentWillUnmount = () => {
-    const fireStore = getFirestore();
-    if (this.props.todoList != null) {
-      fireStore
-        .collection("todoLists")
-        .doc(this.props.todoList.id)
-        .update({
-          createdAt: new Date()
-        });
-    }
-  };
-
   goHome = () => {
     this.props.history.push("/");
   };
@@ -130,18 +118,46 @@ class ListScreen extends Component {
     }     
   };
 
-   zoomIn = () => {
+  zoomIn = () => {
      var zoom = this.state.scale
      var zoomValue = (Number(zoom) * 2 ).toString()
      this.setState({scale : zoomValue})
    }
 
-   zoomOut = () => {
+  zoomOut = () => {
     var zoom = this.state.scale
      var zoomValue = (Number(zoom) / 2 ).toString()
      this.setState({scale : zoomValue})
    }
+  
+   unDoAndRedoDetect = event => {    
+    if (event.key === "d" && event.ctrlKey) {
+      console.log("Cltr+d Pressed");
+      
+    } else if (event.key === "Delete") {
+      console.log("Delete Pressed");
+      
+    }
+  };
 
+  componentDidMount = () => {    
+    document.addEventListener("keydown", this.unDoAndRedoDetect, false);
+  }
+
+  componentWillUnmount = () => {
+    const fireStore = getFirestore();
+    if (this.props.todoList != null) {
+      fireStore
+        .collection("todoLists")
+        .doc(this.props.todoList.id)
+        .update({
+          createdAt: new Date()
+        });
+    }
+    document.removeEventListener("keydown", this.unDoAndRedoDetect, false);
+  };
+
+  
   render() {
     const auth = this.props.auth;
     const todoList = this.props.todoList;
