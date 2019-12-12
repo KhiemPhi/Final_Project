@@ -3,10 +3,8 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { Button, Modal, Icon } from "react-materialize";
 import "materialize-css/dist/css/materialize.min.css";
 import { getFirestore } from "redux-firestore";
-import { Link, NavLink } from "react-router-dom";
 import Checkbox from "react-materialize/lib/Checkbox";
 
 export class ItemScreen extends Component {
