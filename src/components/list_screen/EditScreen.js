@@ -1,12 +1,10 @@
-import React, { Component, useRef } from "react";
+import React, { Component} from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { Button, Icon, TextInput } from "react-materialize";
 import "materialize-css/dist/css/materialize.min.css";
 import { getFirestore } from "redux-firestore";
-import { Link } from "react-router-dom";
 import ControllerAdder from "./ControllerAdder.js";
 import ControllerModifier from "./ControllerModifier.js";
 import NewContainer from "./NewContainer.js";
