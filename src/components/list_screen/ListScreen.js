@@ -130,12 +130,16 @@ class ListScreen extends Component {
     }     
   };
 
-   zoomIn = (value) => {
-     
+   zoomIn = () => {
+     var zoom = this.state.scale
+     var zoomValue = (Number(zoom) * 2 ).toString()
+     this.setState({scale : zoomValue})
    }
 
-   zoomOut = (value) => {
-
+   zoomOut = () => {
+    var zoom = this.state.scale
+     var zoomValue = (Number(zoom) / 2 ).toString()
+     this.setState({scale : zoomValue})
    }
 
   render() {
@@ -187,12 +191,14 @@ class ListScreen extends Component {
             changeWireFrameWidth={this.changeWireFrameWidth.bind(this)}
             wireFrameWidth = {Number(this.state.wireFrameWidth.substring(0, this.state.wireFrameWidth.length - 2))}
             scale = {this.state.scale}
+           
           />
 
           <div
             className="white control_container_only_top_and_bottom col s8"
             id="edit_area"
             style={ { zIndex: "1", width:this.state.wireFrameWidth, height:this.state.wireFrameHeight, transform: "scale(" + this.state.scale + ")" }}
+            
           >
             {this.state.containers.map(x => (
               <NewContainer
@@ -203,6 +209,7 @@ class ListScreen extends Component {
                 myText={this.state.focusedElementTextContainer[Number(x.slice(-1)) - 1]}
                 focusedElement={this.state.focusedElement}
                 createResizers = {this.createResizers.bind(this)}
+                scale = {this.state.scale}
               />
             ))}
 
@@ -215,6 +222,7 @@ class ListScreen extends Component {
                 myText= {this.state.focusedElementTextLabel[Number(x.slice(-1)) - 1]}
                 focusedElement={this.state.focusedElement}
                 createResizers = {this.createResizers.bind(this)}
+                scale = {this.state.scale}
               />
             ))}
 
@@ -225,6 +233,7 @@ class ListScreen extends Component {
             focusedElement={this.state.focusedElement}
             focusedElementText={this.state.focusedElementText}
             wireFrameWidth = {Number(this.state.wireFrameWidth.substring(0, this.state.wireFrameWidth.length - 2))}
+            scale = {this.state.scale}
           />
         </div>
       </div>

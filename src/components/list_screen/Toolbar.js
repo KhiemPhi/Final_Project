@@ -9,45 +9,47 @@ import { getFirestore } from "redux-firestore";
 import { Link } from "react-router-dom"; //
 
 class Toolbar extends Component {
-  render() {   
+  render() {
     return (
-          <div className="row control_container_only_bottom">
-            <div className="col s3 pull-s1 ">
-              <Button
-                flat
-                icon={<Icon children="zoom_in" />}
-                className="transparent"
-                large
-                onClick = {this.props.zoomIn}
-              ></Button>
-            </div>
-            <div className="col s3 pull-s1">
-              <Button
-                flat
-                icon={<Icon children="zoom_out" />}
-                className="transparent"
-                large
-                onClick = {this.props.zoomOut}
-              ></Button>
-            </div>
-            <div className="col s3 pull-s2 ">
-              <Button flat className="transparent" large onClick = {this.props.goHome}>
-                Save
-              </Button>
-            </div>
-            <div className="col s3 pull-s2">
-              <Button flat className="transparent" onClick = {this.props.goHome} large>
-                Close
-              </Button>
-            </div>
-          </div>
+      <div className="row control_container_only_bottom">
+        <Button
+          className="transparent col s2 "
+          flat
+          icon={<Icon children="zoom_in" />}
+          large
+          onClick={this.props.zoomIn}
+        ></Button>
 
-         
-      
+        <Button
+          flat
+          icon={<Icon children="zoom_out" />}
+          className="col s2 transparent"
+          large
+          onClick={this.props.zoomOut}
+        ></Button>
+
+        <Button
+          flat
+          className=" col s4 transparent"
+          large
+          onClick={this.props.goHome}
+        >
+          Save
+        </Button>
+
+        <Button
+          flat
+          className="col s4 transparent"
+          onClick={this.props.goHome}
+          large
+        >
+          Close
+        </Button>
+      </div>
     );
   }
 }
 
-export default compose(  
-  firestoreConnect([{ collection: "todoLists" }])
-)(Toolbar);
+export default compose(firestoreConnect([{ collection: "todoLists" }]))(
+  Toolbar
+);

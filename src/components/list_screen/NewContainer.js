@@ -75,6 +75,7 @@ class NewContainer extends Component {
           id={this.props.id}          
           onClick={this.setFocus}
           disableDragging = {this.props.focusedElement === this.props.id ? false : true}
+          style={ { transform: "scale(" + this.props.scale + ")" }}
           bounds={"body"}
   >{this.props.myText}</Rnd>
       </div>

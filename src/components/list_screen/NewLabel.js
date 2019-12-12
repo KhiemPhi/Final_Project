@@ -58,7 +58,7 @@ class NewLabel extends Component {
   render() {
     // x = left , y = top value, width = widht, height = height
     return (
-      <div ref={node => (this.node = node)} >
+      <div ref={node => (this.node = node)} style = {{transform: "scale(" + this.props.scale + ")"}} >
         
         <Rnd
           className={
@@ -76,6 +76,7 @@ class NewLabel extends Component {
           onClick={this.setFocus}
           disableDragging = {this.props.focusedElement === this.props.id ? false : true}
           bounds={"body"}
+          style = {{transform: "scale(" + this.props.scale + ")"}}
   >{this.props.myText}</Rnd>
       </div>
     );
