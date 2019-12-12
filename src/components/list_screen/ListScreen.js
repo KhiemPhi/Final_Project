@@ -23,8 +23,8 @@ class ListScreen extends Component {
     focusedElement: null,
     containers: [],
     labels: [],
-    focusedElementTextContainer: [],
-    focusedElementTextLabel: [],
+    ContainerTextArray: [],
+    LabelTextArray: [],
     wireFrameWidth: "700px",
     wireFrameHeight: "800px",
     scale: "1"
@@ -67,16 +67,16 @@ class ListScreen extends Component {
     var id = "new_label" + counter.toString();
     var defaultText = "Prompt For Input";
     const { labels } = this.state;
-    const { focusedElementTextLabel } = this.state;
+    const { LabelTextArray } = this.state;
     this.setState({
-      focusedElementTextLabel: focusedElementTextLabel.concat(defaultText)
+      LabelTextArray: LabelTextArray.concat(defaultText)
     });
     this.setState({ labels: labels.concat(id) });
     this.setState({ labelCounter: counter });
   };
 
   setFocusedElement = id => {
-    this.setState({ focusedElement: id });
+    this.setState({ focusedElement: id });    
   };
 
   changeWireFrameHeight = value => {
@@ -110,13 +110,13 @@ class ListScreen extends Component {
     var newTextArray = [];
     //perform Check To see what element is being focused
     if (this.state.focusedElement.includes("container")) {
-      newTextArray = this.state.focusedElementTextContainer;
+      newTextArray = this.state.ContainerTextArray;
       newTextArray[index] = value;
-      this.setState({ focusedElementTextContainer: newTextArray });
+      this.setState({ ContainerTextArray: newTextArray });
     } else if (this.state.focusedElement.includes("label")) {
-      newTextArray = this.state.focusedElementTextLabel;
+      newTextArray = this.state.LabelTextArray;
       newTextArray[index] = value;
-      this.setState({ focusedElementTextLabel: newTextArray });
+      this.setState({ LabelTextArray: newTextArray });
     }
   };
 
@@ -245,7 +245,7 @@ class ListScreen extends Component {
                 containerCounter={this.state.containerCounter.toString()}
                 setFocusedElement={this.setFocusedElement.bind(this)}
                 myText={
-                  this.state.focusedElementTextContainer[
+                  this.state.ContainerTextArray[
                     Number(x.slice(-1)) - 1
                   ]
                 }
@@ -262,7 +262,7 @@ class ListScreen extends Component {
                 containerCounter={this.state.labelCounter.toString()}
                 setFocusedElement={this.setFocusedElement.bind(this)}
                 myText={
-                  this.state.focusedElementTextLabel[Number(x.slice(-1)) - 1]
+                  this.state.LabelTextArray[Number(x.slice(-1)) - 1]
                 }
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
