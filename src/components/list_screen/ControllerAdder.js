@@ -62,6 +62,7 @@ class ControllerAdder extends Component {
           flat
           className="grey lighten-1 button_component"
           id="button_creator"
+          onClick = {this.props.addButton}
           style={{
             height: "30px",
             width: "50%",

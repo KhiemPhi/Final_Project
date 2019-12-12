@@ -421,15 +421,6 @@ body {
   z-index:  2;
 }
 
-.new_label{
-  height: 80px;
-  width: 120px;
-  background-color: white; 
-  border: 3px solid #4286f4;
-  position: relative;
-  z-index:  1;
-}
-
 .new_container_out_focus{
   height: 80px;
   width: 120px;
@@ -437,12 +428,6 @@ body {
   border: 1px solid black;
   position: absolute;
   z-index:  1;
-}
-
-.new_label_out_focus{
-  background-color: white;  
-  position: absolute;
-  z-index:  2;
 }
 
 .new_container .resizers{
@@ -480,6 +465,21 @@ body {
   
 }
 
+.new_label{
+  height: 80px;
+  width: 120px;
+  background-color: white; 
+  border: 3px solid #4286f4;
+  position: relative;
+  z-index:  2;
+}
+
+.new_label_out_focus{
+  background-color: white;  
+  position: absolute;
+  z-index:  2;
+}
+
 .new_label .resizers{
   width: 90%;
   height: 90%;
@@ -510,6 +510,57 @@ body {
   
 }
 .new_label .resizers .resizer.bottom-right {
+  right: -5px;
+  bottom: -5px;
+  
+}
+
+.new_button{
+  height: 80px;
+  width: 120px;
+  background-color: #bdbdbd;
+  border: 3px solid #4286f4;
+  position: relative;
+  z-index:  2;
+}
+
+.new_button_out_focus{
+  background-color: #bdbdbd;
+  border: 1px solid black;  
+  position: absolute;
+  z-index:  2;
+}
+
+.new_button .resizers{
+  width: 90%;
+  height: 90%;
+  box-sizing: border-box;
+}
+
+.new_button .resizers .resizer{
+  width: 10px;
+  height: 10px;  
+  background: white;
+  border: 3px solid #4286f4;
+  position: absolute;
+}
+
+.new_button .resizers .resizer.top-left {
+  left: -5px;
+  top: -5px;
+  
+}
+.new_button .resizers .resizer.top-right {
+  right: -5px;
+  top: -5px;
+  
+}
+.new_button .resizers .resizer.bottom-left {
+  left: -5px;
+  bottom: -5px;
+  
+}
+.new_button .resizers .resizer.bottom-right {
   right: -5px;
   bottom: -5px;
   

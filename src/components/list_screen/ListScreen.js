@@ -11,6 +11,7 @@ import ControllerAdder from "./ControllerAdder.js";
 import ControllerModifier from "./ControllerModifier.js";
 import NewContainer from "./NewContainer.js";
 import NewLabel from "./NewLabel.js";
+import NewButton from "./NewButton.js";
 
 class ListScreen extends Component {
   state = {
@@ -18,13 +19,15 @@ class ListScreen extends Component {
     owner: "",
     containerCounter: 0,
     labelCounter: 0,
-    containerCounterArray: [],
+    buttonCounter: 0,
     defaultZoom: 1,
     focusedElement: null,
     containers: [],
     labels: [],
+    buttons: [],
     ContainerTextArray: [],
     LabelTextArray: [],
+    ButtonTextArray: [],
     wireFrameWidth: "700px",
     wireFrameHeight: "800px",
     scale: "1"
@@ -75,8 +78,22 @@ class ListScreen extends Component {
     this.setState({ labelCounter: counter });
   };
 
+  addButton = () => {
+    var counter = this.state.buttonCounter;
+    counter = counter + 1;
+    var id = "new_button" + counter.toString();
+    var defaultText = "SUBMIT";
+    const { buttons } = this.state;
+    const { ButtonTextArray } = this.state;
+    this.setState({
+      ButtonTextArray: ButtonTextArray.concat(defaultText)
+    });
+    this.setState({ buttons: buttons.concat(id) });
+    this.setState({ buttonCounter: counter });
+  }
+
   setFocusedElement = id => {
-    this.setState({ focusedElement: id });    
+    this.setState({ focusedElement: id });
   };
 
   changeWireFrameHeight = value => {
@@ -117,6 +134,10 @@ class ListScreen extends Component {
       newTextArray = this.state.LabelTextArray;
       newTextArray[index] = value;
       this.setState({ LabelTextArray: newTextArray });
+    } else if (this.state.focusedElement.includes("button")) {
+      newTextArray = this.state.ButtonTextArray;
+      newTextArray[index] = value;
+      this.setState({ ButtonTextArray: newTextArray });
     }
   };
 
@@ -138,18 +159,24 @@ class ListScreen extends Component {
     } else if (event.key === "Delete") {
       if (this.state.focusedElement !== null) {
         var indexToBeDelete = Number(this.state.focusedElement.slice(-1) - 1);
-        if (this.state.focusedElement.includes("container")) {          
+        if (this.state.focusedElement.includes("container")) {
           const { containers } = this.state;
           var tempContainer = containers;
-          delete tempContainer[indexToBeDelete]        
+          delete tempContainer[indexToBeDelete];
           this.setState({ containers: tempContainer });
-          this.setState({focusedElement : null})
+          this.setState({ focusedElement: null });
         } else if (this.state.focusedElement.includes("label")) {
           const { labels } = this.state;
           var tempLabels = labels;
-          delete tempLabels[indexToBeDelete]        
+          delete tempLabels[indexToBeDelete];
           this.setState({ labels: tempLabels });
-          this.setState({focusedElement : null})
+          this.setState({ focusedElement: null });
+        } else if (this.state.focusedElement.includes("button")) {
+          const { buttons } = this.state;
+          var tempButtons = buttons;
+          delete tempButtons[indexToBeDelete];
+          this.setState({ buttons: tempButtons });
+          this.setState({ focusedElement: null });
         }
       }
     }
@@ -214,9 +241,10 @@ class ListScreen extends Component {
           <ControllerAdder
             goHome={this.goHome.bind(this)}
             zoomIn={this.zoomIn.bind(this)}
+            zoomOut={this.zoomOut.bind(this)}
             addContainer={this.addContainer.bind(this)}
             addLabel={this.addLabel.bind(this)}
-            zoomOut={this.zoomOut.bind(this)}
+            addButton = {this.addButton.bind(this)}
             changeWireFrameHeight={this.changeWireFrameHeight.bind(this)}
             changeWireFrameWidth={this.changeWireFrameWidth.bind(this)}
             wireFrameWidth={Number(
@@ -238,17 +266,13 @@ class ListScreen extends Component {
               transform: "scale(" + this.state.scale + ")"
             }}
           >
-            {this.state.containers.map(x => (             
+            {this.state.containers.map(x => (
               <NewContainer
                 class={"new_container"}
                 id={x}
                 containerCounter={this.state.containerCounter.toString()}
                 setFocusedElement={this.setFocusedElement.bind(this)}
-                myText={
-                  this.state.ContainerTextArray[
-                    Number(x.slice(-1)) - 1
-                  ]
-                }
+                myText={this.state.ContainerTextArray[Number(x.slice(-1)) - 1]}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
@@ -259,11 +283,22 @@ class ListScreen extends Component {
               <NewLabel
                 class={"new_label"}
                 id={x}
-                containerCounter={this.state.labelCounter.toString()}
+                labelCounter={this.state.labelCounter.toString()}
                 setFocusedElement={this.setFocusedElement.bind(this)}
-                myText={
-                  this.state.LabelTextArray[Number(x.slice(-1)) - 1]
-                }
+                myText={this.state.LabelTextArray[Number(x.slice(-1)) - 1]}
+                focusedElement={this.state.focusedElement}
+                createResizers={this.createResizers.bind(this)}
+                scale={this.state.scale}
+              />
+            ))}
+
+            {this.state.buttons.map(x => (
+              <NewButton
+                class={"new_button"}
+                id={x}
+                buttonCounter={this.state.buttonCounter.toString()}
+                setFocusedElement={this.setFocusedElement.bind(this)}
+                myText={this.state.ButtonTextArray[Number(x.slice(-1)) - 1]}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
