@@ -161,6 +161,11 @@ class EditScreen extends Component {
     }
   };
 
+  editFontSize = (value) => {
+    var focusedElement = this.state.focusedElement;
+    
+  }
+
   
 
   zoomIn = () => {

@@ -1,12 +1,8 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-import { connect } from "react-redux";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { Button, Icon } from "react-materialize";
+import { Button, } from "react-materialize";
 import "materialize-css/dist/css/materialize.min.css";
-import { getFirestore } from "redux-firestore";
-import { Link } from "react-router-dom";
 import Toolbar from "./Toolbar.js";
 import DimesionsToolbar from "./DimesionsToolbar.js";
 

@@ -39,6 +39,7 @@ class NewLabel extends Component {
         // Out of Focus
         this.setState({ hasFocus: false });
         this.setState({myText: this.props.focusedElementText})
+        document.getElementById("text_input").value = ""
       }     
       if (this.props.focusedElement !== null){
         var div = this.props.createResizers()   

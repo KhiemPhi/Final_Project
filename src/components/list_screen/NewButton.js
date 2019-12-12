@@ -19,6 +19,7 @@ class NewButton extends Component {
     document.getElementById("text_input").value = document.getElementById(
       this.props.id
     ).textContent;
+    
     var div = this.props.createResizers()      
     document.getElementById(this.props.id).appendChild(div)
   };
@@ -39,6 +40,7 @@ class NewButton extends Component {
         // Out of Focus
         this.setState({ hasFocus: false });
         this.setState({myText: this.props.focusedElementText})
+        document.getElementById("text_input").value = ""
       }     
       if (this.props.focusedElement !== null){
         var div = this.props.createResizers()   
@@ -67,8 +69,7 @@ class NewButton extends Component {
           id={this.props.id}          
           onClick={this.setFocus}
           disableDragging = {!this.state.hasFocus}
-          bounds={"body"}
-          
+          bounds={"body"}          
           style = {{transform: "scale(" + this.props.scale + ")"}}
   >{this.props.myText}</Rnd>
       </div>

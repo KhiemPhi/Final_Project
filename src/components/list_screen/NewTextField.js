@@ -1,16 +1,9 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-import { connect } from "react-redux";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { Button, Icon } from "react-materialize";
 import "materialize-css/dist/css/materialize.min.css";
-import { getFirestore } from "redux-firestore";
-import { Link } from "react-router-dom";
-import Toolbar from "./Toolbar.js";
-import DimesionsToolbar from "./DimesionsToolbar.js";
 import { Rnd } from "react-rnd";
-import Divider from "react-materialize/lib/Divider";
+
 
 class NewTextField extends Component {
   state = {
@@ -46,6 +39,7 @@ class NewTextField extends Component {
         // Out of Focus
         this.setState({ hasFocus: false });
         this.setState({myText: this.props.focusedElementText})
+        document.getElementById("text_input").value = ""
       }     
       if (this.props.focusedElement !== null){
         var div = this.props.createResizers()   
