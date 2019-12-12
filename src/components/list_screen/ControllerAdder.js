@@ -78,6 +78,7 @@ class ControllerAdder extends Component {
           flat
           className="white button_component"
           id="textfield_button"
+          onClick = {this.props.addTextField}
           style={{
             height: "30px",
             width: "80%",

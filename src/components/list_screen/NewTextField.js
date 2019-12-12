@@ -12,7 +12,7 @@ import DimesionsToolbar from "./DimesionsToolbar.js";
 import { Rnd } from "react-rnd";
 import Divider from "react-materialize/lib/Divider";
 
-class NewContainer extends Component {
+class NewTextField extends Component {
   state = {
     hasFocus: false,
     disableDragging: false
@@ -45,7 +45,6 @@ class NewContainer extends Component {
       if (!editing.contains(e.target)) {
         // Out of Focus
         this.setState({ hasFocus: false });
-        this.props.setFocusedElement(null);
         this.setState({myText: this.props.focusedElementText})
       }     
       if (this.props.focusedElement !== null){
@@ -59,8 +58,7 @@ class NewContainer extends Component {
   render() {
     // x = left , y = top value, width = widht, height = height
     return (
-      <div ref={node => (this.node = node)} id={this.props.id + "wrapper"}  >
-        
+      <div ref={node => (this.node = node)} style = {{transform: "scale(" + this.props.scale + ")", color: "red"}}  >        
         <Rnd
           className={
             this.state.hasFocus
@@ -70,14 +68,14 @@ class NewContainer extends Component {
           default={{
             x: 0,
             y: 0,
-            width: 120,
-            height: 80
+            width: 210,
+            height: 30
           }}
           id={this.props.id}          
           onClick={this.setFocus}
           disableDragging = {!this.state.hasFocus}
-          style={ { transform: "scale(" + this.props.scale + ")", color: "red" }}
           bounds={"body"}
+          style = {{transform: "scale(" + this.props.scale + ")" , color: "gray" }}
   >{this.props.myText}</Rnd>
       </div>
     );
@@ -85,5 +83,5 @@ class NewContainer extends Component {
 }
 
 export default compose(firestoreConnect([{ collection: "todoLists" }]))(
-  NewContainer
+  NewTextField
 );

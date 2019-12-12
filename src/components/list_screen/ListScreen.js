@@ -12,6 +12,7 @@ import ControllerModifier from "./ControllerModifier.js";
 import NewContainer from "./NewContainer.js";
 import NewLabel from "./NewLabel.js";
 import NewButton from "./NewButton.js";
+import NewTextField from "./NewTextField.js";
 
 class ListScreen extends Component {
   state = {
@@ -20,14 +21,17 @@ class ListScreen extends Component {
     containerCounter: 0,
     labelCounter: 0,
     buttonCounter: 0,
+    textfieldCounter: 0,
     defaultZoom: 1,
     focusedElement: null,
     containers: [],
     labels: [],
     buttons: [],
+    textfields: [],
     ContainerTextArray: [],
     LabelTextArray: [],
     ButtonTextArray: [],
+    TextFieldTextArray: [],
     wireFrameWidth: "700px",
     wireFrameHeight: "800px",
     scale: "1"
@@ -78,6 +82,21 @@ class ListScreen extends Component {
     this.setState({ labelCounter: counter });
   };
 
+  addTextField = () => {
+    console.log("fire")
+    var counter = this.state.textfieldCounter;
+    counter = counter + 1;
+    var id = "new_textfield" + counter.toString();
+    var defaultText = "INPUT";
+    const { textfields } = this.state;
+    const { TextFieldTextArray } = this.state;
+    this.setState({
+      TextFieldTextArray: TextFieldTextArray.concat(defaultText)
+    });
+    this.setState({ textfields: textfields.concat(id) });
+    this.setState({ textfieldCounter: counter });
+  };
+
   addButton = () => {
     var counter = this.state.buttonCounter;
     counter = counter + 1;
@@ -90,7 +109,7 @@ class ListScreen extends Component {
     });
     this.setState({ buttons: buttons.concat(id) });
     this.setState({ buttonCounter: counter });
-  }
+  };
 
   setFocusedElement = id => {
     this.setState({ focusedElement: id });
@@ -138,6 +157,10 @@ class ListScreen extends Component {
       newTextArray = this.state.ButtonTextArray;
       newTextArray[index] = value;
       this.setState({ ButtonTextArray: newTextArray });
+    } else if (this.state.focusedElement.includes("textfield")) {
+      newTextArray = this.state.TextFieldTextArray;
+      newTextArray[index] = value;
+      this.setState({ TextFieldTextArray: newTextArray });
     }
   };
 
@@ -244,7 +267,8 @@ class ListScreen extends Component {
             zoomOut={this.zoomOut.bind(this)}
             addContainer={this.addContainer.bind(this)}
             addLabel={this.addLabel.bind(this)}
-            addButton = {this.addButton.bind(this)}
+            addButton={this.addButton.bind(this)}
+            addTextField = {this.addTextField.bind(this)}
             changeWireFrameHeight={this.changeWireFrameHeight.bind(this)}
             changeWireFrameWidth={this.changeWireFrameWidth.bind(this)}
             wireFrameWidth={Number(
@@ -299,6 +323,19 @@ class ListScreen extends Component {
                 buttonCounter={this.state.buttonCounter.toString()}
                 setFocusedElement={this.setFocusedElement.bind(this)}
                 myText={this.state.ButtonTextArray[Number(x.slice(-1)) - 1]}
+                focusedElement={this.state.focusedElement}
+                createResizers={this.createResizers.bind(this)}
+                scale={this.state.scale}
+              />
+            ))}
+
+            {this.state.textfields.map(x => (
+              <NewTextField
+                class={"new_textfield"}
+                id={x}
+                textfieldCounter={this.state.textfieldCounter.toString()}
+                setFocusedElement={this.setFocusedElement.bind(this)}
+                myText={this.state.TextFieldTextArray[Number(x.slice(-1)) - 1]}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}

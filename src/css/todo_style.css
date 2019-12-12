@@ -566,6 +566,56 @@ body {
   
 }
 
+.new_textfield{
+  height: 80px;
+  width: 120px;
+  background-color: white;
+  border: 3px solid #4286f4;
+  position: relative;
+  z-index:  2;
+}
+
+.new_textfield_out_focus{
+  background-color: white;
+  border: 1px solid black;  
+  position: absolute;
+  z-index:  2;
+}
+
+.new_textfield .resizers{
+  width: 90%;
+  height: 90%;
+  box-sizing: border-box;
+}
+
+.new_textfield .resizers .resizer{
+  width: 10px;
+  height: 10px;  
+  background: white;
+  border: 3px solid #4286f4;
+  position: absolute;
+}
+
+.new_textfield .resizers .resizer.top-left {
+  left: -5px;
+  top: -5px;
+  
+}
+.new_textfield .resizers .resizer.top-right {
+  right: -5px;
+  top: -5px;
+  
+}
+.new_textfield .resizers .resizer.bottom-left {
+  left: -5px;
+  bottom: -5px;
+  
+}
+.new_textfield .resizers .resizer.bottom-right {
+  right: -5px;
+  bottom: -5px;  
+}
+
 
 /* ANIMATIONS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
