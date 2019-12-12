@@ -74,7 +74,7 @@ class NewLabel extends Component {
           }}
           id={this.props.id}          
           onClick={this.setFocus}
-          disableDragging = {this.props.focusedElement === this.props.id ? false : true}
+          disableDragging = {!this.state.hasFocus}
           bounds={"body"}
           style = {{transform: "scale(" + this.props.scale + ")"}}
   >{this.props.myText}</Rnd>

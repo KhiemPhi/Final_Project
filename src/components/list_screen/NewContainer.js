@@ -45,6 +45,7 @@ class NewContainer extends Component {
       if (!editing.contains(e.target)) {
         // Out of Focus
         this.setState({ hasFocus: false });
+        this.props.setFocusedElement(null);
         this.setState({myText: this.props.focusedElementText})
       }     
       if (this.props.focusedElement !== null){
@@ -74,7 +75,7 @@ class NewContainer extends Component {
           }}
           id={this.props.id}          
           onClick={this.setFocus}
-          disableDragging = {this.props.focusedElement === this.props.id ? false : true}
+          disableDragging = {!this.state.hasFocus}
           style={ { transform: "scale(" + this.props.scale + ")" }}
           bounds={"body"}
   >{this.props.myText}</Rnd>

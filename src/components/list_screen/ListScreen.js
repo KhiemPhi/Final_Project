@@ -24,7 +24,7 @@ class ListScreen extends Component {
     containers: [],
     labels: [],
     focusedElementTextContainer: [],
-    focusedElementTextLabel : [],
+    focusedElementTextLabel: [],
     wireFrameWidth: "700px",
     wireFrameHeight: "800px",
     scale: "1"
@@ -53,7 +53,7 @@ class ListScreen extends Component {
   };
 
   addContainer = () => {
-    var counter = this.state.labelCounter;
+    var counter = this.state.containerCounter;
     counter = counter + 1;
     var id = "new_container" + counter.toString();
     const { containers } = this.state;
@@ -61,14 +61,16 @@ class ListScreen extends Component {
     this.setState({ containerCounter: counter });
   };
 
-  addLabel = () => {    
+  addLabel = () => {
     var counter = this.state.labelCounter;
     counter = counter + 1;
     var id = "new_label" + counter.toString();
-    var defaultText = "Prompt For Input"
+    var defaultText = "Prompt For Input";
     const { labels } = this.state;
-    const {focusedElementTextLabel} = this.state;
-    this.setState({focusedElementTextLabel: focusedElementTextLabel.concat(defaultText)})
+    const { focusedElementTextLabel } = this.state;
+    this.setState({
+      focusedElementTextLabel: focusedElementTextLabel.concat(defaultText)
+    });
     this.setState({ labels: labels.concat(id) });
     this.setState({ labelCounter: counter });
   };
@@ -77,72 +79,85 @@ class ListScreen extends Component {
     this.setState({ focusedElement: id });
   };
 
-  changeWireFrameHeight = (value) => {
-    this.setState({wireFrameHeight : value})
+  changeWireFrameHeight = value => {
+    this.setState({ wireFrameHeight: value });
   };
 
-  changeWireFrameWidth = (value) => {
-    this.setState({wireFrameWidth : value})
+  changeWireFrameWidth = value => {
+    this.setState({ wireFrameWidth: value });
   };
 
   createResizers = () => {
-    var div = document.createElement("div") 
-    var top_left = document.createElement("div") 
-    var top_right = document.createElement("div") 
-    var bottom_left = document.createElement("div") 
-    var bottom_right = document.createElement("div")
-    top_left.className = "resizer top-left"
-    top_right.className = "resizer top-right"
-    bottom_left.className = "resizer bottom-left"
-    bottom_right.className = "resizer bottom-right"
-    div.className = "resizers"
-    div.appendChild(top_left)
-    div.appendChild(top_right)
-    div.appendChild(bottom_left)
-    div.appendChild(bottom_right)
-    return div
-  }
-
-  editText = value => {    
-    var index =  this.state.focusedElement.slice(-1) - 1
-    var newTextArray = []
-    //perform Check To see what element is being focused
-    if (this.state.focusedElement.includes('container')){
-      newTextArray = this.state.focusedElementTextContainer
-      newTextArray[index] = value
-      this.setState({focusedElementTextContainer : newTextArray})
-    } else if (this.state.focusedElement.includes('label')){
-      newTextArray = this.state.focusedElementTextLabel
-      newTextArray[index] = value
-      this.setState({focusedElementTextLabel : newTextArray})
-    }     
+    var div = document.createElement("div");
+    var top_left = document.createElement("div");
+    var top_right = document.createElement("div");
+    var bottom_left = document.createElement("div");
+    var bottom_right = document.createElement("div");
+    top_left.className = "resizer top-left";
+    top_right.className = "resizer top-right";
+    bottom_left.className = "resizer bottom-left";
+    bottom_right.className = "resizer bottom-right";
+    div.className = "resizers";
+    div.appendChild(top_left);
+    div.appendChild(top_right);
+    div.appendChild(bottom_left);
+    div.appendChild(bottom_right);
+    return div;
   };
 
-  zoomIn = () => {
-     var zoom = this.state.scale
-     var zoomValue = (Number(zoom) * 2 ).toString()
-     this.setState({scale : zoomValue})
-   }
-
-  zoomOut = () => {
-    var zoom = this.state.scale
-     var zoomValue = (Number(zoom) / 2 ).toString()
-     this.setState({scale : zoomValue})
-   }
-  
-   unDoAndRedoDetect = event => {    
-    if (event.key === "d" && event.ctrlKey) {
-      console.log("Cltr+d Pressed");
-      
-    } else if (event.key === "Delete") {
-      console.log("Delete Pressed");
-      
+  editText = value => {
+    var index = this.state.focusedElement.slice(-1) - 1;
+    var newTextArray = [];
+    //perform Check To see what element is being focused
+    if (this.state.focusedElement.includes("container")) {
+      newTextArray = this.state.focusedElementTextContainer;
+      newTextArray[index] = value;
+      this.setState({ focusedElementTextContainer: newTextArray });
+    } else if (this.state.focusedElement.includes("label")) {
+      newTextArray = this.state.focusedElementTextLabel;
+      newTextArray[index] = value;
+      this.setState({ focusedElementTextLabel: newTextArray });
     }
   };
 
-  componentDidMount = () => {    
-    document.addEventListener("keydown", this.unDoAndRedoDetect, false);
-  }
+  zoomIn = () => {
+    var zoom = this.state.scale;
+    var zoomValue = (Number(zoom) * 2).toString();
+    this.setState({ scale: zoomValue });
+  };
+
+  zoomOut = () => {
+    var zoom = this.state.scale;
+    var zoomValue = (Number(zoom) / 2).toString();
+    this.setState({ scale: zoomValue });
+  };
+
+  deleteAndCopyDetect = event => {
+    if (event.key === "d" && event.ctrlKey) {
+      console.log("Cltr+d Pressed");
+    } else if (event.key === "Delete") {
+      if (this.state.focusedElement !== null) {
+        var indexToBeDelete = Number(this.state.focusedElement.slice(-1) - 1);
+        if (this.state.focusedElement.includes("container")) {          
+          const { containers } = this.state;
+          var tempContainer = containers;
+          delete tempContainer[indexToBeDelete]        
+          this.setState({ containers: tempContainer });
+          this.setState({focusedElement : null})
+        } else if (this.state.focusedElement.includes("label")) {
+          const { labels } = this.state;
+          var tempLabels = labels;
+          delete tempLabels[indexToBeDelete]        
+          this.setState({ labels: tempLabels });
+          this.setState({focusedElement : null})
+        }
+      }
+    }
+  };
+
+  componentDidMount = () => {
+    document.addEventListener("keydown", this.deleteAndCopyDetect, false);
+  };
 
   componentWillUnmount = () => {
     const fireStore = getFirestore();
@@ -157,7 +172,6 @@ class ListScreen extends Component {
     document.removeEventListener("keydown", this.unDoAndRedoDetect, false);
   };
 
-  
   render() {
     const auth = this.props.auth;
     const todoList = this.props.todoList;
@@ -201,44 +215,58 @@ class ListScreen extends Component {
             goHome={this.goHome.bind(this)}
             zoomIn={this.zoomIn.bind(this)}
             addContainer={this.addContainer.bind(this)}
-            addLabel = {this.addLabel.bind(this)}
+            addLabel={this.addLabel.bind(this)}
             zoomOut={this.zoomOut.bind(this)}
             changeWireFrameHeight={this.changeWireFrameHeight.bind(this)}
             changeWireFrameWidth={this.changeWireFrameWidth.bind(this)}
-            wireFrameWidth = {Number(this.state.wireFrameWidth.substring(0, this.state.wireFrameWidth.length - 2))}
-            scale = {this.state.scale}
-           
+            wireFrameWidth={Number(
+              this.state.wireFrameWidth.substring(
+                0,
+                this.state.wireFrameWidth.length - 2
+              )
+            )}
+            scale={this.state.scale}
           />
 
           <div
             className="white control_container_only_top_and_bottom col s8"
             id="edit_area"
-            style={ { zIndex: "1", width:this.state.wireFrameWidth, height:this.state.wireFrameHeight, transform: "scale(" + this.state.scale + ")" }}
-            
+            style={{
+              zIndex: "1",
+              width: this.state.wireFrameWidth,
+              height: this.state.wireFrameHeight,
+              transform: "scale(" + this.state.scale + ")"
+            }}
           >
-            {this.state.containers.map(x => (
+            {this.state.containers.map(x => (             
               <NewContainer
                 class={"new_container"}
                 id={x}
                 containerCounter={this.state.containerCounter.toString()}
                 setFocusedElement={this.setFocusedElement.bind(this)}
-                myText={this.state.focusedElementTextContainer[Number(x.slice(-1)) - 1]}
+                myText={
+                  this.state.focusedElementTextContainer[
+                    Number(x.slice(-1)) - 1
+                  ]
+                }
                 focusedElement={this.state.focusedElement}
-                createResizers = {this.createResizers.bind(this)}
-                scale = {this.state.scale}
+                createResizers={this.createResizers.bind(this)}
+                scale={this.state.scale}
               />
             ))}
 
-            {this.state.labels.map(x => (              
+            {this.state.labels.map(x => (
               <NewLabel
                 class={"new_label"}
                 id={x}
                 containerCounter={this.state.labelCounter.toString()}
                 setFocusedElement={this.setFocusedElement.bind(this)}
-                myText= {this.state.focusedElementTextLabel[Number(x.slice(-1)) - 1]}
+                myText={
+                  this.state.focusedElementTextLabel[Number(x.slice(-1)) - 1]
+                }
                 focusedElement={this.state.focusedElement}
-                createResizers = {this.createResizers.bind(this)}
-                scale = {this.state.scale}
+                createResizers={this.createResizers.bind(this)}
+                scale={this.state.scale}
               />
             ))}
 
@@ -248,8 +276,13 @@ class ListScreen extends Component {
             editText={this.editText.bind(this)}
             focusedElement={this.state.focusedElement}
             focusedElementText={this.state.focusedElementText}
-            wireFrameWidth = {Number(this.state.wireFrameWidth.substring(0, this.state.wireFrameWidth.length - 2))}
-            scale = {this.state.scale}
+            wireFrameWidth={Number(
+              this.state.wireFrameWidth.substring(
+                0,
+                this.state.wireFrameWidth.length - 2
+              )
+            )}
+            scale={this.state.scale}
           />
         </div>
       </div>
