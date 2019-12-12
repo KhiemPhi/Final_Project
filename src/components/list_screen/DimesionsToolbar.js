@@ -16,29 +16,32 @@ class DimensionsToolbar extends Component {
   };
 
   setWireFrameHeight = value => {
-    var height = Number(value);
-    if (height > 1 && height <= 5000 && !isNaN(height)) {
-      this.setState({ height: value + "px" });
-    }    
+    if (value !== "") {
+      var height = Number(value);
+      if (height > 1 && height <= 5000 && !isNaN(height)) {
+        this.setState({ height: value + "px" });
+      }
+    }
   };
 
   setWireFrameWidth = value => {
-    var width = Number(value);
-    if (width > 1 && width <= 5000 && !isNaN(width)) {
-      this.setState({ width: value + "px" });
+    if (value !== "") {
+      var width = Number(value);
+      if (width > 1 && width <= 5000 && !isNaN(width)) {
+        this.setState({ width: value + "px" });
+      }
     }
-    
   };
 
   enableButton = () => {
-    this.setState({disabled : false})
-  }
+    this.setState({ disabled: false });
+  };
 
   makeDimesionChanges = () => {
-    this.props.changeWireFrameWidth(this.state.width)
-    this.props.changeWireFrameHeight(this.state.height)
-    this.setState({disabled : true})
-  }
+    this.props.changeWireFrameWidth(this.state.width);
+    this.props.changeWireFrameHeight(this.state.height);
+    this.setState({ disabled: true });
+  };
 
   render() {
     return (
@@ -51,7 +54,7 @@ class DimensionsToolbar extends Component {
             <input
               id="font_size_input"
               onChange={e => this.setWireFrameHeight(e.target.value)}
-              onClick = {this.enableButton}
+              onClick={this.enableButton}
             ></input>
           </div>
           <div className="col s8 push-s1" style={{ marginTop: "25px" }}>
@@ -61,12 +64,11 @@ class DimensionsToolbar extends Component {
             <input
               id="font_size_input"
               onChange={e => this.setWireFrameWidth(e.target.value)}
-              onClick = {this.enableButton}
+              onClick={this.enableButton}
             ></input>
           </div>
           <Button
-            
-            className="teal button_component"            
+            className="teal button_component"
             style={{
               height: "30px",
               width: "50%",
@@ -74,10 +76,10 @@ class DimensionsToolbar extends Component {
               border: "1px solid black"
             }}
             disabled={this.state.disabled}
-            onClick = {this.makeDimesionChanges}
-          > 
+            onClick={this.makeDimesionChanges}
+          >
             Update
-          </Button> 
+          </Button>
         </div>
       </div>
     );
