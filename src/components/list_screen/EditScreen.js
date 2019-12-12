@@ -14,7 +14,7 @@ import NewLabel from "./NewLabel.js";
 import NewButton from "./NewButton.js";
 import NewTextField from "./NewTextField.js";
 
-class ListScreen extends Component {
+class EditScreen extends Component {
   state = {
     name: "",
     owner: "",
@@ -381,4 +381,4 @@ const mapStateToProps = (state, ownProps) => {
 export default compose(
   connect(mapStateToProps),
   firestoreConnect([{ collection: "todoLists" }])
-)(ListScreen);
+)(EditScreen);
