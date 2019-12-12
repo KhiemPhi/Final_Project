@@ -26,8 +26,8 @@ class ListScreen extends Component {
     focusedElementTextContainer: [],
     focusedElementTextLabel : [],
     wireFrameWidth: "700px",
-    wireFrameHeight: "800px"
-    
+    wireFrameHeight: "800px",
+    scale: "1"
   };
 
   handleChange = e => {
@@ -89,20 +89,13 @@ class ListScreen extends Component {
     this.setState({ focusedElement: id });
   };
 
-  zoomIn = () => {
-    console.log("zoom-in");
+  changeWireFrameHeight = (value) => {
+    this.setState({wireFrameHeight : value})
   };
 
-  zoomOut = () => {
-    console.log("zoom-out");
+  changeWireFrameWidth = (value) => {
+    this.setState({wireFrameWidth : value})
   };
-
-  changeWireFrameHeight = value => {
-    var edit_area = document.getElementById("edit_area");
-    edit_area.style.height = value + "px";
-  };
-
-  changeWireFrameWidth = () => {};
 
   createResizers = () => {
     var div = document.createElement("div") 
@@ -134,10 +127,16 @@ class ListScreen extends Component {
       newTextArray = this.state.focusedElementTextLabel
       newTextArray[index] = value
       this.setState({focusedElementTextLabel : newTextArray})
-    } 
-
-    
+    }     
   };
+
+   zoomIn = (value) => {
+     
+   }
+
+   zoomOut = (value) => {
+
+   }
 
   render() {
     const auth = this.props.auth;
@@ -187,12 +186,13 @@ class ListScreen extends Component {
             changeWireFrameHeight={this.changeWireFrameHeight.bind(this)}
             changeWireFrameWidth={this.changeWireFrameWidth.bind(this)}
             wireFrameWidth = {Number(this.state.wireFrameWidth.substring(0, this.state.wireFrameWidth.length - 2))}
+            scale = {this.state.scale}
           />
 
           <div
             className="white control_container_only_top_and_bottom col s8"
             id="edit_area"
-            style={ { zIndex: "1", position: "relative", width:this.state.wireFrameWidth, height:this.state.wireFrameHeight }}
+            style={ { zIndex: "1", width:this.state.wireFrameWidth, height:this.state.wireFrameHeight, transform: "scale(" + this.state.scale + ")" }}
           >
             {this.state.containers.map(x => (
               <NewContainer
@@ -224,7 +224,7 @@ class ListScreen extends Component {
             editText={this.editText.bind(this)}
             focusedElement={this.state.focusedElement}
             focusedElementText={this.state.focusedElementText}
-            
+            wireFrameWidth = {Number(this.state.wireFrameWidth.substring(0, this.state.wireFrameWidth.length - 2))}
           />
         </div>
       </div>
