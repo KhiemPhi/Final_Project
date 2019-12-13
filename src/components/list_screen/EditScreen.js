@@ -220,16 +220,33 @@ class EditScreen extends Component {
 
   handleTextColorChange = (color, event) => {        
     if (this.state.focusedElement.includes("container")){
-      var containers = this.state.containers
-      var containerToBeEdit = containers.filter(container => container.id === this.state.focusedElement)[0]
-      document.getElementById(this.state.focusedElement).style.color = color.hex
-      containerToBeEdit.textColor = color.hex //Confirmed Edit Into Object
+        var containers = this.state.containers
+        var containerToBeEdit = containers.filter(container => container.id === this.state.focusedElement)[0]       
+        containerToBeEdit.textColor = color.hex
+        var indexContainer = Number(containerToBeEdit.id.slice(-1)) - 1
+        containers[indexContainer] = containerToBeEdit
+        this.setState({containers : containers}) //Confirmed Edit Into Object   
     } else if (this.state.focusedElement.includes("label")){
-
+        var labels = this.state.labels
+        var labelToBeEdit = labels.filter(label => label.id === this.state.focusedElement )[0]        
+        labelToBeEdit.textColor = color.hex
+        var indexLabel = Number(labelToBeEdit.id.slice(-1)) - 1
+        labels[indexLabel] = labelToBeEdit
+        this.setState({labels : labels}) //Confirmed Edit Into Object  
     } else if (this.state.focusedElement.includes("button")){
-
+        var buttons = this.state.buttons
+        var buttonToBeEdit = buttons.filter(button => button.id === this.state.focusedElement )[0]        
+        buttonToBeEdit.textColor = color.hex
+        var indexButton = Number(buttonToBeEdit.id.slice(-1)) - 1
+        buttons[indexButton] = buttonToBeEdit
+        this.setState({buttons : buttons}) //Confirmed Edit Into Object
     } else if (this.state.focusedElement.includes("textfield")){
-
+        var textfields = this.state.textfields
+        var textfieldToBeEdit = textfields.filter(textfield => textfield.id === this.state.focusedElement )[0]        
+        textfieldToBeEdit.textColor = color.hex
+        var indexTextField = Number(textfieldToBeEdit.id.slice(-1)) - 1
+        textfields[indexTextField] = textfieldToBeEdit
+        this.setState({textfields : textfields}) //Confirmed Edit Into Object
     }
 }
   
