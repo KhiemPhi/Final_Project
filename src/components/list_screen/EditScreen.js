@@ -572,6 +572,8 @@ class EditScreen extends Component {
                 fontSize = {x.fontSize}
                 xCoordinate = {x.xCoordinate}
                 yCoordinate = {x.yCoordinate}
+                width = {x.width}
+                height = {x.height}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
@@ -592,6 +594,8 @@ class EditScreen extends Component {
                 fontSize = {x.fontSize}
                 xCoordinate = {x.xCoordinate}
                 yCoordinate = {x.yCoordinate}
+                width = {x.width}
+                height = {x.height}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
@@ -611,6 +615,8 @@ class EditScreen extends Component {
                 fontSize = {x.fontSize}
                 xCoordinate = {x.xCoordinate}
                 yCoordinate = {x.yCoordinate}
+                width = {x.width}
+                height = {x.height}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
@@ -630,6 +636,8 @@ class EditScreen extends Component {
                 fontSize = {x.fontSize}
                 xCoordinate = {x.xCoordinate}
                 yCoordinate = {x.yCoordinate}
+                width = {x.width}
+                height = {x.height}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
