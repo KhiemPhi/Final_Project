@@ -377,10 +377,12 @@ const mapStateToProps = (state, ownProps) => {
   const { id } = ownProps.match.params;
   const { todoLists } = state.firestore.data;
   const todoList = todoLists ? todoLists[id] : null;
+  
   if (todoList) todoList.id = id;
   return {
     todoList, // Mark Elements Here in The TodoList to Map Onto Edit Area Later
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    profile: state.firebase.profile
   };
 };
 

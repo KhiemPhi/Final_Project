@@ -3,13 +3,18 @@ import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { TextInput} from "react-materialize";
 import "materialize-css/dist/css/materialize.min.css";
-import { SketchPicker } from 'react-color';
+import { ChromePicker } from 'react-color';
 
 class ControllerModifier extends Component {  
   state = {
-    showColorPickerBackground: false,
-    showColorPickerBorderColor: false,
-    showColorPicerTextColor: false
+    showColorPickerBackgroundColor: true,
+    hideColorPickerBorderColor: true,
+    hideColorPicerTextColor: true
+  }
+
+  toggleBackGroundColorDiv = () => {    
+    const {showColorPickerBackgroundColor} = this.state
+    this.setState({showColorPickerBackgroundColor : !showColorPickerBackgroundColor})
   }
   
   render() {   
@@ -26,7 +31,8 @@ class ControllerModifier extends Component {
                 </div>
                 <div className = "col s8" style={{marginTop: "25px", fontSize: "12px"}}>Background:</div>
                 <div className = "col s1">
-                  <div className = "background_color" id = "background_color_input"></div>
+                  {this.state.showColorPickerBackgroundColor && <div className = "background_color" id = "background_color_input" onClick= {this.toggleBackGroundColorDiv} ></div>}
+                  {!this.state.showColorPickerBackgroundColor && <ChromePicker onChangeComplete= {this.toggleBackGroundColorDiv}/>}
                 </div>
                 <div className = "col s8" style={{marginTop: "25px", fontSize: "12px"}}>Border Color:</div>
                 <div className = "col s1">

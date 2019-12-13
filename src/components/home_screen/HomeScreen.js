@@ -46,7 +46,7 @@ class HomeScreen extends Component {
       <div id="todo_home">
         <div className="home_your_lists_container">
           <h3 id="home_your_lists_heading">Your WireFrames</h3>
-          <TodoListLinks history = {this.props.history} />
+          <TodoListLinks history = {this.props.history} profile = {this.props.profile}/>
         </div>
 
         <div id="home_banner_container">
