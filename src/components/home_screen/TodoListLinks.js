@@ -15,15 +15,15 @@ class TodoListLinks extends React.Component {
     return (
       <div className="row todo-lists section">
         {todoLists &&
-          todoLists.filter(element => element.owner === owner).map(todoList => (
+          todoLists.filter(element => element.owner === owner).map(WireFrame => (
             <div className = "row" >
-              <Link to={"/todoList/" + todoList.id} key={todoList.id}>
+              <Link to={"/WireFrame/" + WireFrame.id} key={WireFrame.id}>
                 <TodoListCard
-                  todoList={todoList}
+                  WireFrame={WireFrame}
                   history={this.props.history}
                 />
               </Link>
-              <DeleteButton  todoList={todoList}
+              <DeleteButton  WireFrame={WireFrame}
                   history={this.props.history}></DeleteButton>
             </div>
           ))}

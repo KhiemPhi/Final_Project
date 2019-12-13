@@ -32,7 +32,7 @@ class App extends Component {
               <Route path="/register" component={RegisterScreen} />
               <Route path="/login" component={LoginScreen} />
               <Route path="/edit/:id/:index" component = {ItemScreen} />
-              <Route path="/todoList/:id" component={EditScreen} />
+              <Route path="/WireFrame/:id" component={EditScreen} />
               <Route path="/:any" component={HomeScreen} />
             </Switch>
           </div>

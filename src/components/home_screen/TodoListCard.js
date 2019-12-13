@@ -7,10 +7,10 @@ import { compose } from "redux";
 
 class TodoListCard extends React.Component {
   render() {
-    const { todoList } = this.props;
+    const { WireFrame } = this.props;
     return (
       <div className = "col s10" >
-        <div className="todo_list_link" >{todoList.name}</div>
+        <div className="todo_list_link" >{WireFrame.name}</div>
        
       </div>
     );
