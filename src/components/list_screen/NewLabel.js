@@ -12,6 +12,12 @@ class NewLabel extends Component {
    
   };
 
+  updateXAndYCoordinates = (data) => {
+    var newX = data.x
+    var newY = data.yd 
+    this.props.updateXAndYCoordinatesFocusedElement(newX,newY)
+  }
+
   setFocus = () => {
     console.log(this.props.id);
     this.props.setFocusedElement(this.props.id);
@@ -72,6 +78,7 @@ class NewLabel extends Component {
           id={this.props.id}          
           onClick={this.setFocus}
           disableDragging = {!this.state.hasFocus}
+          onDrag = {this.updateXAndYCoordinates}
           bounds={"body"}
           style = {{transform: "scale(" + this.props.scale + ")",  color: this.props.textColor, backgroundColor: this.props.backgroundColor, fontSize: this.props.fontSize}}
   >{this.props.myText}</Rnd>
