@@ -455,6 +455,8 @@ class EditScreen extends Component {
                 textColor={x.textColor}
                 backgroundColor={x.backgroundColor}
                 fontSize = {x.fontSize}
+                xCoordinate = {x.xCoordinate}
+                yCoordinate = {x.yCoordinate}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
@@ -472,6 +474,8 @@ class EditScreen extends Component {
                 textColor={x.textColor}
                 backgroundColor={x.backgroundColor}
                 fontSize = {x.fontSize}
+                xCoordinate = {x.xCoordinate}
+                yCoordinate = {x.yCoordinate}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
@@ -488,6 +492,8 @@ class EditScreen extends Component {
                 textColor={x.textColor}
                 backgroundColor={x.backgroundColor}
                 fontSize = {x.fontSize}
+                xCoordinate = {x.xCoordinate}
+                yCoordinate = {x.yCoordinate}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
@@ -504,6 +510,8 @@ class EditScreen extends Component {
                 textColor={x.textColor}
                 backgroundColor={x.backgroundColor}
                 fontSize = {x.fontSize}
+                xCoordinate = {x.xCoordinate}
+                yCoordinate = {x.yCoordinate}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
