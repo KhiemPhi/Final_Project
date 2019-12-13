@@ -319,7 +319,7 @@ class EditScreen extends Component {
     }
   }
 
-  updateWidthAndHeightCoordinatesFocusedElement = (width, height) => {
+  updateWidthAndHeightFocusedElement = (width, height) => {
     var index = this.state.focusedElement.slice(-1) - 1;
     var newArray = [];
     //perform Check To see what element is being focused
@@ -566,6 +566,7 @@ class EditScreen extends Component {
                 containerCounter={this.state.containerCounter.toString()}
                 setFocusedElement={this.setFocusedElement.bind(this)}
                 updateXAndYCoordinatesFocusedElement = {this.updateXAndYCoordinatesFocusedElement.bind(this)}
+                updateWidthAndHeightFocusedElement = {this.updateWidthAndHeightFocusedElement.bind(this)}
                 myText={x.text}
                 textColor={x.textColor}
                 backgroundColor={x.backgroundColor}
@@ -588,6 +589,7 @@ class EditScreen extends Component {
                 labelCounter={this.state.labelCounter.toString()}
                 setFocusedElement={this.setFocusedElement.bind(this)}
                 updateXAndYCoordinatesFocusedElement = {this.updateXAndYCoordinatesFocusedElement.bind(this)}
+                updateWidthAndHeightFocusedElement = {this.updateWidthAndHeightFocusedElement.bind(this)}
                 myText={x.text}
                 textColor={x.textColor}
                 backgroundColor={x.backgroundColor}
@@ -609,6 +611,7 @@ class EditScreen extends Component {
                 buttonCounter={this.state.buttonCounter.toString()}
                 setFocusedElement={this.setFocusedElement.bind(this)}
                 updateXAndYCoordinatesFocusedElement = {this.updateXAndYCoordinatesFocusedElement.bind(this)}
+                updateWidthAndHeightFocusedElement = {this.updateWidthAndHeightFocusedElement.bind(this)}
                 myText={x.text}
                 textColor={x.textColor}
                 backgroundColor={x.backgroundColor}
@@ -630,6 +633,7 @@ class EditScreen extends Component {
                 textfieldCounter={this.state.textfieldCounter.toString()}
                 setFocusedElement={this.setFocusedElement.bind(this)}
                 updateXAndYCoordinatesFocusedElement = {this.updateXAndYCoordinatesFocusedElement.bind(this)}
+                updateWidthAndHeightFocusedElement = {this.updateWidthAndHeightFocusedElement.bind(this)}
                 myText={x.text}
                 textColor={x.textColor}
                 backgroundColor={x.backgroundColor}
