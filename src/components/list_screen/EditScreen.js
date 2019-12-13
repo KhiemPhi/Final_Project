@@ -1,4 +1,4 @@
-import React, { Component} from "react";
+import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -25,8 +25,7 @@ class EditScreen extends Component {
     containers: [],
     labels: [],
     buttons: [],
-    textfields: [],
-    ContainerTextArray: [],
+    textfields: [],   
     LabelTextArray: [],
     ButtonTextArray: [],
     TextFieldTextArray: [],
@@ -62,10 +61,11 @@ class EditScreen extends Component {
     counter = counter + 1;
     var id = "new_container" + counter.toString();
     var newContainer = {
-      "id" : id,
-      "textColor" : "#000000",
-      "backgroundColor" : "#ffffff"
-    }
+      id: id,
+      textColor: "#000000",
+      backgroundColor: "#ffffff",
+      text: ""
+    };
     const { containers } = this.state;
     this.setState({ containers: containers.concat(newContainer) });
     this.setState({ containerCounter: counter });
@@ -77,34 +77,28 @@ class EditScreen extends Component {
     var id = "new_label" + counter.toString();
     var defaultText = "Prompt For Input";
     var newLabel = {
-      "id" : id,
-      "textColor" : "#000000",
-      "backgroundColor" : "#ffffff"
-    }
-    const { labels } = this.state;
-    const { LabelTextArray } = this.state;
-    this.setState({
-      LabelTextArray: LabelTextArray.concat(defaultText)
-    });
+      id: id,
+      textColor: "#000000",
+      backgroundColor: "#ffffff",
+      text: defaultText
+    };
+    const { labels } = this.state;     
     this.setState({ labels: labels.concat(newLabel) });
     this.setState({ labelCounter: counter });
   };
 
-  addTextField = () => {    
+  addTextField = () => {
     var counter = this.state.textfieldCounter;
     counter = counter + 1;
     var id = "new_textfield" + counter.toString();
     var defaultText = "INPUT";
     var newTextField = {
-      "id" : id,
-      "textColor" : "#808080",
-      "backgroundColor" : "#ffffff"
-    }
-    const { textfields } = this.state;
-    const { TextFieldTextArray } = this.state;
-    this.setState({
-      TextFieldTextArray: TextFieldTextArray.concat(defaultText)
-    });
+      id: id,
+      textColor: "#808080",
+      backgroundColor: "#ffffff",
+      text: defaultText
+    };
+    const { textfields } = this.state;   
     this.setState({ textfields: textfields.concat(newTextField) });
     this.setState({ textfieldCounter: counter });
   };
@@ -115,15 +109,12 @@ class EditScreen extends Component {
     var id = "new_button" + counter.toString();
     var defaultText = "SUBMIT";
     var newButton = {
-      "id" : id,
-      "textColor" : "#000000",
-      "backgroundColor" : "#bdbdbd"
-    }
-    const { buttons } = this.state;
-    const { ButtonTextArray } = this.state;
-    this.setState({
-      ButtonTextArray: ButtonTextArray.concat(defaultText)
-    });
+      id: id,
+      textColor: "#000000",
+      backgroundColor: "#bdbdbd",
+      text: defaultText
+    };
+    const { buttons } = this.state;   
     this.setState({ buttons: buttons.concat(newButton) });
     this.setState({ buttonCounter: counter });
   };
@@ -160,96 +151,111 @@ class EditScreen extends Component {
 
   editText = value => {
     var index = this.state.focusedElement.slice(-1) - 1;
-    var newTextArray = [];
+    var newArray = [];
     //perform Check To see what element is being focused
     if (this.state.focusedElement.includes("container")) {
-      newTextArray = this.state.ContainerTextArray;
-      newTextArray[index] = value;
-      this.setState({ ContainerTextArray: newTextArray });
+      newArray = this.state.containers
+      newArray[index].text = value
+      this.setState({ containers: newArray });
     } else if (this.state.focusedElement.includes("label")) {
-      newTextArray = this.state.LabelTextArray;
-      newTextArray[index] = value;
-      this.setState({ LabelTextArray: newTextArray });
+      newArray = this.state.labels
+      newArray[index].text = value
+      this.setState({ labels: newArray });      
     } else if (this.state.focusedElement.includes("button")) {
-      newTextArray = this.state.ButtonTextArray;
-      newTextArray[index] = value;
-      this.setState({ ButtonTextArray: newTextArray });
+      newArray = this.state.buttons
+      newArray[index].text = value
+      this.setState({ buttons: newArray }); 
     } else if (this.state.focusedElement.includes("textfield")) {
-      newTextArray = this.state.TextFieldTextArray;
-      newTextArray[index] = value;
-      this.setState({ TextFieldTextArray: newTextArray });
+      newArray = this.state.textfields
+      newArray[index].text = value
+      this.setState({ textfields: newArray });
     }
   };
 
-  editFontSize = (value) => {
+  editFontSize = value => {
     var focusedElement = this.state.focusedElement;
-    document.getElementById(focusedElement).style.fontSize = value + "px"
-  }
+    document.getElementById(focusedElement).style.fontSize = value + "px";
+  };
 
-  handleBackGroundColorChange = (color, event) => {      
-      if (this.state.focusedElement.includes("container")){        
-        var containers = this.state.containers
-        var containerToBeEdit = containers.filter(container => container.id === this.state.focusedElement)[0]       
-        containerToBeEdit.backgroundColor = color.hex
-        var indexContainer = Number(containerToBeEdit.id.slice(-1)) - 1
-        containers[indexContainer] = containerToBeEdit
-        this.setState({containers : containers}) //Confirmed Edit Into Object      
-      } else if (this.state.focusedElement.includes("label")){
-        var labels = this.state.labels
-        var labelToBeEdit = labels.filter(label => label.id === this.state.focusedElement )[0]        
-        labelToBeEdit.backgroundColor = color.hex
-        var indexLabel = Number(labelToBeEdit.id.slice(-1)) - 1
-        labels[indexLabel] = labelToBeEdit
-        this.setState({labels : labels}) //Confirmed Edit Into Object      
-      } else if (this.state.focusedElement.includes("button")){
-        var buttons = this.state.buttons
-        var buttonToBeEdit = buttons.filter(button => button.id === this.state.focusedElement )[0]        
-        buttonToBeEdit.backgroundColor = color.hex
-        var indexButton = Number(buttonToBeEdit.id.slice(-1)) - 1
-        buttons[indexButton] = buttonToBeEdit
-        this.setState({buttons : buttons}) //Confirmed Edit Into Object      
-      } else if (this.state.focusedElement.includes("textfield")){
-        var textfields = this.state.textfields
-        var textfieldToBeEdit = textfields.filter(textfield => textfield.id === this.state.focusedElement )[0]        
-        textfieldToBeEdit.backgroundColor = color.hex
-        var indexTextField = Number(textfieldToBeEdit.id.slice(-1)) - 1
-        textfields[indexTextField] = textfieldToBeEdit
-        this.setState({textfields : textfields}) //Confirmed Edit Into Object      
-      }
-  }
-
-  handleTextColorChange = (color, event) => {        
-    if (this.state.focusedElement.includes("container")){
-        var containers = this.state.containers
-        var containerToBeEdit = containers.filter(container => container.id === this.state.focusedElement)[0]       
-        containerToBeEdit.textColor = color.hex
-        var indexContainer = Number(containerToBeEdit.id.slice(-1)) - 1
-        containers[indexContainer] = containerToBeEdit
-        this.setState({containers : containers}) //Confirmed Edit Into Object   
-    } else if (this.state.focusedElement.includes("label")){
-        var labels = this.state.labels
-        var labelToBeEdit = labels.filter(label => label.id === this.state.focusedElement )[0]        
-        labelToBeEdit.textColor = color.hex
-        var indexLabel = Number(labelToBeEdit.id.slice(-1)) - 1
-        labels[indexLabel] = labelToBeEdit
-        this.setState({labels : labels}) //Confirmed Edit Into Object  
-    } else if (this.state.focusedElement.includes("button")){
-        var buttons = this.state.buttons
-        var buttonToBeEdit = buttons.filter(button => button.id === this.state.focusedElement )[0]        
-        buttonToBeEdit.textColor = color.hex
-        var indexButton = Number(buttonToBeEdit.id.slice(-1)) - 1
-        buttons[indexButton] = buttonToBeEdit
-        this.setState({buttons : buttons}) //Confirmed Edit Into Object
-    } else if (this.state.focusedElement.includes("textfield")){
-        var textfields = this.state.textfields
-        var textfieldToBeEdit = textfields.filter(textfield => textfield.id === this.state.focusedElement )[0]        
-        textfieldToBeEdit.textColor = color.hex
-        var indexTextField = Number(textfieldToBeEdit.id.slice(-1)) - 1
-        textfields[indexTextField] = textfieldToBeEdit
-        this.setState({textfields : textfields}) //Confirmed Edit Into Object
+  handleBackGroundColorChange = (color, event) => {
+    if (this.state.focusedElement.includes("container")) {
+      var containers = this.state.containers;
+      var containerToBeEdit = containers.filter(
+        container => container.id === this.state.focusedElement
+      )[0];
+      containerToBeEdit.backgroundColor = color.hex;
+      var indexContainer = Number(containerToBeEdit.id.slice(-1)) - 1;
+      containers[indexContainer] = containerToBeEdit;
+      this.setState({ containers: containers }); //Confirmed Edit Into Object
+    } else if (this.state.focusedElement.includes("label")) {
+      var labels = this.state.labels;
+      var labelToBeEdit = labels.filter(
+        label => label.id === this.state.focusedElement
+      )[0];
+      labelToBeEdit.backgroundColor = color.hex;
+      var indexLabel = Number(labelToBeEdit.id.slice(-1)) - 1;
+      labels[indexLabel] = labelToBeEdit;
+      this.setState({ labels: labels }); //Confirmed Edit Into Object
+    } else if (this.state.focusedElement.includes("button")) {
+      var buttons = this.state.buttons;
+      var buttonToBeEdit = buttons.filter(
+        button => button.id === this.state.focusedElement
+      )[0];
+      buttonToBeEdit.backgroundColor = color.hex;
+      var indexButton = Number(buttonToBeEdit.id.slice(-1)) - 1;
+      buttons[indexButton] = buttonToBeEdit;
+      this.setState({ buttons: buttons }); //Confirmed Edit Into Object
+    } else if (this.state.focusedElement.includes("textfield")) {
+      var textfields = this.state.textfields;
+      var textfieldToBeEdit = textfields.filter(
+        textfield => textfield.id === this.state.focusedElement
+      )[0];
+      textfieldToBeEdit.backgroundColor = color.hex;
+      var indexTextField = Number(textfieldToBeEdit.id.slice(-1)) - 1;
+      textfields[indexTextField] = textfieldToBeEdit;
+      this.setState({ textfields: textfields }); //Confirmed Edit Into Object
     }
-}
-  
+  };
+
+  handleTextColorChange = (color, event) => {
+    if (this.state.focusedElement.includes("container")) {
+      var containers = this.state.containers;
+      var containerToBeEdit = containers.filter(
+        container => container.id === this.state.focusedElement
+      )[0];
+      containerToBeEdit.textColor = color.hex;
+      var indexContainer = Number(containerToBeEdit.id.slice(-1)) - 1;
+      containers[indexContainer] = containerToBeEdit;
+      this.setState({ containers: containers }); //Confirmed Edit Into Object
+    } else if (this.state.focusedElement.includes("label")) {
+      var labels = this.state.labels;
+      var labelToBeEdit = labels.filter(
+        label => label.id === this.state.focusedElement
+      )[0];
+      labelToBeEdit.textColor = color.hex;
+      var indexLabel = Number(labelToBeEdit.id.slice(-1)) - 1;
+      labels[indexLabel] = labelToBeEdit;
+      this.setState({ labels: labels }); //Confirmed Edit Into Object
+    } else if (this.state.focusedElement.includes("button")) {
+      var buttons = this.state.buttons;
+      var buttonToBeEdit = buttons.filter(
+        button => button.id === this.state.focusedElement
+      )[0];
+      buttonToBeEdit.textColor = color.hex;
+      var indexButton = Number(buttonToBeEdit.id.slice(-1)) - 1;
+      buttons[indexButton] = buttonToBeEdit;
+      this.setState({ buttons: buttons }); //Confirmed Edit Into Object
+    } else if (this.state.focusedElement.includes("textfield")) {
+      var textfields = this.state.textfields;
+      var textfieldToBeEdit = textfields.filter(
+        textfield => textfield.id === this.state.focusedElement
+      )[0];
+      textfieldToBeEdit.textColor = color.hex;
+      var indexTextField = Number(textfieldToBeEdit.id.slice(-1)) - 1;
+      textfields[indexTextField] = textfieldToBeEdit;
+      this.setState({ textfields: textfields }); //Confirmed Edit Into Object
+    }
+  };
 
   zoomIn = () => {
     var zoom = this.state.scale;
@@ -263,9 +269,36 @@ class EditScreen extends Component {
     this.setState({ scale: zoomValue });
   };
 
+  duplicateElement = id => {
+    var index = Number(id.slice(-1)) - 1;
+    if (id.includes("container")) {
+      console.log("fire")
+      const { containers } = this.state;
+      var containerToBeDuplicate = containers[index];
+      var counter = this.state.containerCounter;
+      counter = counter + 1;
+      var newId = "new_container" + counter.toString();
+      var newContainer = {
+        id: newId,
+        textColor: containerToBeDuplicate.textColor,
+        backgroundColor: containerToBeDuplicate.backgroundColor,
+        text : containerToBeDuplicate.text
+      };
+      this.setState({ containers: containers.concat(newContainer) });
+      this.setState({ containerCounter: counter });
+    } else if (id.includes("label")) {
+    } else if (id.includes("button")) {
+    } else if (id.includes("textfield")) {
+    }
+  };
+
   deleteAndCopyDetect = event => {
     if (event.key === "d" && event.ctrlKey) {
-      console.log("Cltr+d Pressed");
+      event.preventDefault();
+      if (this.state.focusedElement !== null) {
+        var elementToDuplicate = this.state.focusedElement;
+        this.duplicateElement(elementToDuplicate);
+      }
     } else if (event.key === "Delete") {
       if (this.state.focusedElement !== null) {
         var indexToBeDelete = Number(this.state.focusedElement.slice(-1) - 1);
@@ -289,7 +322,7 @@ class EditScreen extends Component {
           this.setState({ focusedElement: null });
         } else if (this.state.focusedElement.includes("textfield")) {
           const { textfields } = this.state;
-          var tempTextFields =  textfields;
+          var tempTextFields = textfields;
           delete tempTextFields[indexToBeDelete];
           this.setState({ textfields: tempTextFields });
           this.setState({ focusedElement: null });
@@ -361,7 +394,7 @@ class EditScreen extends Component {
             addContainer={this.addContainer.bind(this)}
             addLabel={this.addLabel.bind(this)}
             addButton={this.addButton.bind(this)}
-            addTextField = {this.addTextField.bind(this)}
+            addTextField={this.addTextField.bind(this)}
             changeWireFrameHeight={this.changeWireFrameHeight.bind(this)}
             changeWireFrameWidth={this.changeWireFrameWidth.bind(this)}
             wireFrameWidth={Number(
@@ -380,7 +413,9 @@ class EditScreen extends Component {
               zIndex: "1",
               width: this.state.wireFrameWidth,
               height: this.state.wireFrameHeight,
-              transform: "scale(" + this.state.scale + ")"
+              zoom: "200%",
+              transform: "scale(" + this.state.scale + ")",
+              transformOrigin: "0 0"
             }}
           >
             {this.state.containers.map(x => (
@@ -389,12 +424,13 @@ class EditScreen extends Component {
                 id={x.id}
                 containerCounter={this.state.containerCounter.toString()}
                 setFocusedElement={this.setFocusedElement.bind(this)}
-                myText={this.state.ContainerTextArray[Number(x.id.slice(-1)) - 1]}
-                textColor = {x.textColor}
-                backgroundColor = {x.backgroundColor}
+                myText={x.text}
+                textColor={x.textColor}
+                backgroundColor={x.backgroundColor}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
+                
               />
             ))}
 
@@ -404,9 +440,9 @@ class EditScreen extends Component {
                 id={x.id}
                 labelCounter={this.state.labelCounter.toString()}
                 setFocusedElement={this.setFocusedElement.bind(this)}
-                myText={this.state.LabelTextArray[Number(x.id.slice(-1)) - 1]}
-                textColor = {x.textColor}
-                backgroundColor = {x.backgroundColor}
+                myText={x.text}
+                textColor={x.textColor}
+                backgroundColor={x.backgroundColor}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
@@ -419,9 +455,9 @@ class EditScreen extends Component {
                 id={x.id}
                 buttonCounter={this.state.buttonCounter.toString()}
                 setFocusedElement={this.setFocusedElement.bind(this)}
-                myText={this.state.ButtonTextArray[Number(x.id.slice(-1)) - 1]}
-                textColor = {x.textColor}
-                backgroundColor = {x.backgroundColor}
+                myText={x.text}
+                textColor={x.textColor}
+                backgroundColor={x.backgroundColor}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
@@ -434,9 +470,9 @@ class EditScreen extends Component {
                 id={x.id}
                 textfieldCounter={this.state.textfieldCounter.toString()}
                 setFocusedElement={this.setFocusedElement.bind(this)}
-                myText={this.state.TextFieldTextArray[Number(x.id.slice(-1)) - 1]}
-                textColor = {x.textColor}
-                backgroundColor = {x.backgroundColor}
+                myText={x.text}
+                textColor={x.textColor}
+                backgroundColor={x.backgroundColor}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
@@ -456,8 +492,10 @@ class EditScreen extends Component {
                 this.state.wireFrameWidth.length - 2
               )
             )}
-            handleBackGroundColorChange = {this.handleBackGroundColorChange.bind(this)}
-            handleTextColorChange = {this.handleTextColorChange.bind(this)}
+            handleBackGroundColorChange={this.handleBackGroundColorChange.bind(
+              this
+            )}
+            handleTextColorChange={this.handleTextColorChange.bind(this)}
             scale={this.state.scale}
           />
         </div>
@@ -470,7 +508,7 @@ const mapStateToProps = (state, ownProps) => {
   const { id } = ownProps.match.params;
   const { todoLists } = state.firestore.data;
   const todoList = todoLists ? todoLists[id] : null;
-  
+
   if (todoList) todoList.id = id;
   return {
     todoList, // Mark Elements Here in The TodoList to Map Onto Edit Area Later

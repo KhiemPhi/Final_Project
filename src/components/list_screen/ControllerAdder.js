@@ -17,6 +17,7 @@ class ControllerAdder extends Component {
             ? "control_container col s4"
             : "control_container col s4 pull-s1"
         }
+        style = {{ transformOrigin: "0 0"}}
       >
         <Toolbar
           goHome={this.props.goHome}

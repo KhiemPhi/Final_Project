@@ -55,7 +55,7 @@ class NewContainer extends Component {
   };
 
   render() {
-    // x = left , y = top value, width = widht, height = height
+    // x = left , y = top value, width = width, height = height
     return (
       <div ref={node => (this.node = node)} id={this.props.id + "wrapper"}  >
         
