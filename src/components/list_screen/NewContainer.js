@@ -25,8 +25,7 @@ class NewContainer extends Component {
     ).textContent;
     var fontSizeString = document.getElementById(this.props.id).style.fontSize.toString()
     var fontSize = fontSizeString.substring(0, fontSizeString.length-2)
-    document.getElementById("fontSize_input").value = fontSize
-    
+    document.getElementById("fontSize_input").value = fontSize    
     var div = this.props.createResizers()      
     document.getElementById(this.props.id).appendChild(div)
   };
