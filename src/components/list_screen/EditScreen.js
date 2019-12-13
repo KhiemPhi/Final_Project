@@ -325,24 +325,76 @@ class EditScreen extends Component {
 
   duplicateElement = id => {
     var index = Number(id.slice(-1)) - 1;
+    var counter = 0;
+    var newId = ""
     if (id.includes("container")) {    
       const { containers } = this.state;
       var containerToBeDuplicate = containers[index];
-      var counter = this.state.containerCounter;
+      counter = this.state.containerCounter;
       counter = counter + 1;
-      var newId = "new_container" + counter.toString();
+      newId = "new_container" + counter.toString();
       var newContainer = {
         id: newId,
         textColor: containerToBeDuplicate.textColor,
         backgroundColor: containerToBeDuplicate.backgroundColor,
         text : containerToBeDuplicate.text,
-        fontSize : containerToBeDuplicate.fontSize
+        fontSize : containerToBeDuplicate.fontSize,
+        xCoordinate : containerToBeDuplicate.xCoordinate + 100,
+        yCoordinate : containerToBeDuplicate.yCoordinate + 100,
       };
       this.setState({ containers: containers.concat(newContainer) });
       this.setState({ containerCounter: counter });
     } else if (id.includes("label")) {
+      const { labels } = this.state;
+      var labelToBeDuplicate = labels[index];
+      counter = this.state.labelCounter;
+      counter = counter + 1;
+      newId = "new_label" + counter.toString();
+      var newLabel = {
+        id: newId,
+        textColor: labelToBeDuplicate.textColor,
+        backgroundColor: labelToBeDuplicate.backgroundColor,
+        text : labelToBeDuplicate.text,
+        fontSize : labelToBeDuplicate.fontSize,
+        xCoordinate : labelToBeDuplicate.xCoordinate + 100,
+        yCoordinate : labelToBeDuplicate.yCoordinate + 100,
+      };
+      this.setState({ labels: labels.concat(newLabel) });
+      this.setState({ labelCounter: counter });
     } else if (id.includes("button")) {
+      const { buttons } = this.state;
+      var buttonToBeDuplicate = buttons[index];
+      counter = this.state.buttonCounter;
+      counter = counter + 1;
+      newId = "new_button" + counter.toString();
+      var newButton = {
+        id: newId,
+        textColor: buttonToBeDuplicate.textColor,
+        backgroundColor: buttonToBeDuplicate.backgroundColor,
+        text : buttonToBeDuplicate.text,
+        fontSize : buttonToBeDuplicate.fontSize,
+        xCoordinate : buttonToBeDuplicate.xCoordinate + 100,
+        yCoordinate : buttonToBeDuplicate.yCoordinate + 100,
+      };
+      this.setState({ containers: buttons.concat(newButton) });
+      this.setState({ buttonCounter: counter });
     } else if (id.includes("textfield")) {
+      const { textfields } = this.state;
+      var textfieldToBeDuplicate = textfields[index];
+      counter = this.state.textfieldCounter;
+      counter = counter + 1;
+      newId = "new_textfield" + counter.toString();
+      var newTextField = {
+        id: newId,
+        textColor: textfieldToBeDuplicate.textColor,
+        backgroundColor: textfieldToBeDuplicate.backgroundColor,
+        text : textfieldToBeDuplicate.text,
+        fontSize : textfieldToBeDuplicate.fontSize,
+        xCoordinate : textfieldToBeDuplicate.xCoordinate + 100,
+        yCoordinate : textfieldToBeDuplicate.yCoordinate + 100,
+      };
+      this.setState({ textfields: textfields.concat(newTextField) });
+      this.setState({ textfieldCounter: counter });
     }
   };
 
