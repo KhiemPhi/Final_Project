@@ -64,7 +64,9 @@ class EditScreen extends Component {
       text: "",
       fontSize : "16px",
       xCoordinate : 0,
-      yCoordinate: 0
+      yCoordinate: 0,
+      width : 120,
+      height: 80
     };
     const { containers } = this.state;
     this.setState({ containers: containers.concat(newContainer) });
@@ -83,7 +85,9 @@ class EditScreen extends Component {
       text: defaultText,
       fontSize: "16px",
       xCoordinate : 0,
-      yCoordinate: 0
+      yCoordinate: 0,
+      width: 300,
+      height: 45
     };
     const { labels } = this.state;     
     this.setState({ labels: labels.concat(newLabel) });
@@ -102,7 +106,9 @@ class EditScreen extends Component {
       text: defaultText,
       fontSize : "16px",
       xCoordinate : 0,
-      yCoordinate: 0
+      yCoordinate: 0,
+      width: 210,
+      height: 30
     };
     const { textfields } = this.state;   
     this.setState({ textfields: textfields.concat(newTextField) });
@@ -121,7 +127,9 @@ class EditScreen extends Component {
       text: defaultText,
       fontsize: "16px",
       xCoordinate : 0,
-      yCoordinate: 0
+      yCoordinate: 0,
+      width: 130,
+      height: 30
     };
     const { buttons } = this.state;   
     this.setState({ buttons: buttons.concat(newButton) });
@@ -307,6 +315,33 @@ class EditScreen extends Component {
       newArray = this.state.textfields
       newArray[index].xCoordinate = x
       newArray[index].yCoordinate = y
+      this.setState({ textfields: newArray });
+    }
+  }
+
+  updateWidthAndHeightCoordinatesFocusedElement = (width, height) => {
+    var index = this.state.focusedElement.slice(-1) - 1;
+    var newArray = [];
+    //perform Check To see what element is being focused
+    if (this.state.focusedElement.includes("container")) {
+      newArray = this.state.containers
+      newArray[index].width = width
+      newArray[index].height = height
+      this.setState({ containers: newArray });
+    } else if (this.state.focusedElement.includes("label")) {
+      newArray = this.state.labels
+      newArray[index].width = width
+      newArray[index].height = height
+      this.setState({ labels: newArray });      
+    } else if (this.state.focusedElement.includes("button")) {
+      newArray = this.state.buttons
+      newArray[index].width = width
+      newArray[index].height = height
+      this.setState({ buttons: newArray }); 
+    } else if (this.state.focusedElement.includes("textfield")) {
+      newArray = this.state.textfields
+      newArray[index].width = width
+      newArray[index].height = height
       this.setState({ textfields: newArray });
     }
   }
