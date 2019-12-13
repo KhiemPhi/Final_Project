@@ -64,8 +64,8 @@ class NewLabel extends Component {
               : this.props.class + "_out_focus"
           }
           default={{
-            x: 0,
-            y: 0,
+            x: this.props.xCoordinate,
+            y: this.props.yCoordinate,
             width: 300,
             height: 45
           }}

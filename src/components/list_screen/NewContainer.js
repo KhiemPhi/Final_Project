@@ -66,8 +66,8 @@ class NewContainer extends Component {
               : this.props.class + "_out_focus"
           }
           default={{
-            x: 0,
-            y: 0,
+            x: this.props.xCoordinate,
+            y: this.props.yCoordinate,
             width: 120,
             height: 80
           }}
