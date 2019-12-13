@@ -14,7 +14,7 @@ class NewLabel extends Component {
 
   updateXAndYCoordinates = (data) => {
     var newX = data.x
-    var newY = data.yd 
+    var newY = data.y 
     this.props.updateXAndYCoordinatesFocusedElement(newX,newY)
   }
 
