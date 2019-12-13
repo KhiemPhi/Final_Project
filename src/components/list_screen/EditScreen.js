@@ -64,7 +64,8 @@ class EditScreen extends Component {
       id: id,
       textColor: "#000000",
       backgroundColor: "#ffffff",
-      text: ""
+      text: "",
+      fontSize : "16px"
     };
     const { containers } = this.state;
     this.setState({ containers: containers.concat(newContainer) });
@@ -80,7 +81,8 @@ class EditScreen extends Component {
       id: id,
       textColor: "#000000",
       backgroundColor: "#ffffff",
-      text: defaultText
+      text: defaultText,
+      fontSize: "16px"
     };
     const { labels } = this.state;     
     this.setState({ labels: labels.concat(newLabel) });
@@ -96,7 +98,8 @@ class EditScreen extends Component {
       id: id,
       textColor: "#808080",
       backgroundColor: "#ffffff",
-      text: defaultText
+      text: defaultText,
+      fontSize : "16px"
     };
     const { textfields } = this.state;   
     this.setState({ textfields: textfields.concat(newTextField) });
@@ -112,7 +115,8 @@ class EditScreen extends Component {
       id: id,
       textColor: "#000000",
       backgroundColor: "#bdbdbd",
-      text: defaultText
+      text: defaultText,
+      fontsize: "16px"
     };
     const { buttons } = this.state;   
     this.setState({ buttons: buttons.concat(newButton) });
@@ -172,9 +176,27 @@ class EditScreen extends Component {
     }
   };
 
-  editFontSize = value => {
-    var focusedElement = this.state.focusedElement;
-    document.getElementById(focusedElement).style.fontSize = value + "px";
+  editFontSize = value => {    
+    var index = this.state.focusedElement.slice(-1) - 1;
+    var newArray = [];
+    //perform Check To see what element is being focused
+    if (this.state.focusedElement.includes("container")) {
+      newArray = this.state.containers
+      newArray[index].fontSize = value.toString() + "px"
+      this.setState({ containers: newArray });
+    } else if (this.state.focusedElement.includes("label")) {
+      newArray = this.state.labels
+      newArray[index].fontSize = value.toString() + "px"
+      this.setState({ labels: newArray });      
+    } else if (this.state.focusedElement.includes("button")) {
+      newArray = this.state.buttons
+      newArray[index].fontSize = value.toString() + "px"
+      this.setState({ buttons: newArray }); 
+    } else if (this.state.focusedElement.includes("textfield")) {
+      newArray = this.state.textfields
+      newArray[index].fontSize = value.toString() + "px"
+      this.setState({ textfields: newArray });
+    }
   };
 
   handleBackGroundColorChange = (color, event) => {
@@ -427,6 +449,7 @@ class EditScreen extends Component {
                 myText={x.text}
                 textColor={x.textColor}
                 backgroundColor={x.backgroundColor}
+                fontSize = {x.fontSize}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
@@ -443,6 +466,7 @@ class EditScreen extends Component {
                 myText={x.text}
                 textColor={x.textColor}
                 backgroundColor={x.backgroundColor}
+                fontSize = {x.fontSize}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
@@ -458,6 +482,7 @@ class EditScreen extends Component {
                 myText={x.text}
                 textColor={x.textColor}
                 backgroundColor={x.backgroundColor}
+                fontSize = {x.fontSize}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
@@ -473,6 +498,7 @@ class EditScreen extends Component {
                 myText={x.text}
                 textColor={x.textColor}
                 backgroundColor={x.backgroundColor}
+                fontSize = {x.fontSize}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}

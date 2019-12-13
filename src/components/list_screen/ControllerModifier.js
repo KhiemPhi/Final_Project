@@ -32,7 +32,7 @@ class ControllerModifier extends Component {
               <div className = "row" style ={{paddingTop: "5%"}}>
                 <div className = "col s8" style={{marginTop: "25px", fontSize: "12px"}}>Font Size:</div>
                 <div className = "col s4">
-                  <input id = "font_size_input" onChange = {e => this.props.editFontSize(e.target.value)} ></input>
+                  <TextInput id = "fontSize_input" onChange = {e => this.props.editFontSize(e.target.value)} ></TextInput>
                 </div>
                 <div className = "col s8" style={{marginTop: "25px", fontSize: "12px"}}>Background:</div>
                 <div className = "col s1">

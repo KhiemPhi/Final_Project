@@ -19,6 +19,9 @@ class NewLabel extends Component {
     document.getElementById("text_input").value = document.getElementById(
       this.props.id
     ).textContent;
+    var fontSizeString = document.getElementById(this.props.id).style.fontSize.toString()
+    var fontSize = fontSizeString.substring(0, fontSizeString.length-2)
+    document.getElementById("fontSize_input").value = fontSize 
     var div = this.props.createResizers()      
     document.getElementById(this.props.id).appendChild(div)
   };
@@ -40,6 +43,7 @@ class NewLabel extends Component {
         this.setState({ hasFocus: false });
         this.setState({myText: this.props.focusedElementText})
         document.getElementById("text_input").value = ""
+        document.getElementById("fontSize_input").value = ""
       }     
       if (this.props.focusedElement !== null){
         var div = this.props.createResizers()   
@@ -69,7 +73,7 @@ class NewLabel extends Component {
           onClick={this.setFocus}
           disableDragging = {!this.state.hasFocus}
           bounds={"body"}
-          style = {{transform: "scale(" + this.props.scale + ")",  color: this.props.textColor, backgroundColor: this.props.backgroundColor}}
+          style = {{transform: "scale(" + this.props.scale + ")",  color: this.props.textColor, backgroundColor: this.props.backgroundColor, fontSize: this.props.fontSize}}
   >{this.props.myText}</Rnd>
       </div>
     );
