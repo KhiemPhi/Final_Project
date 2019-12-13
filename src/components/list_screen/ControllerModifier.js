@@ -9,7 +9,7 @@ class ControllerModifier extends Component {
   state = {
     showColorPickerBackgroundColor: true,
     hideColorPickerBorderColor: true,
-    hideColorPicerTextColor: true
+    showColorPickerTextColor: true
   }
 
   toggleBackGroundColorDiv = () => {    
@@ -17,6 +17,11 @@ class ControllerModifier extends Component {
     this.setState({showColorPickerBackgroundColor : !showColorPickerBackgroundColor})
   }
   
+  toggleTextColorDiv = () => {    
+    const {showColorPickerTextColor} = this.state
+    this.setState({showColorPickerTextColor : !showColorPickerTextColor})
+  }
+
   render() {   
     return (            
         <div className= {this.props.wireFrameWidth > 1000 ? this.props.wireFrameWidth >= 3000 ? "control_container col s12" : "control_container col s5" : "control_container col s3"} id = "modifier_area">
@@ -32,15 +37,16 @@ class ControllerModifier extends Component {
                 <div className = "col s8" style={{marginTop: "25px", fontSize: "12px"}}>Background:</div>
                 <div className = "col s1">
                   {this.state.showColorPickerBackgroundColor && <div className = "background_color" id = "background_color_input" onClick= {this.toggleBackGroundColorDiv} ></div>}
-                  {!this.state.showColorPickerBackgroundColor && <ChromePicker onChangeComplete= {this.toggleBackGroundColorDiv}/>}
+                  {!this.state.showColorPickerBackgroundColor && <ChromePicker color={this.props.focusedElement !== null ? document.getElementById(this.props.focusedElement).style.backgroundColor : "#ffffff"} onChange = {this.props.handleBackGroundColorChange}/>}
                 </div>
-                <div className = "col s8" style={{marginTop: "25px", fontSize: "12px"}}>Border Color:</div>
+                <div className = "col s8" style={{marginTop: "25px", fontSize: "12px"}}>Text Color:</div>
                 <div className = "col s1">
-                  <div className = "border_color" id = "border_color_input"></div>
+                  {this.state.showColorPickerTextColor && <div className = "text_color" id = "text_color_input" onClick= {this.toggleTextColorDiv} ></div>}
+                  {!this.state.showColorPickerTextColor && <ChromePicker color={this.props.focusedElement !== null ? document.getElementById(this.props.focusedElement).style.color : "#ffffff"} onChange = {this.props.handleTextColorChange}/>}
                 </div>
-                <div className = "col s8" style={{marginTop: "25px", fontSize: "12px" }}>Text Color:</div>
+                <div className = "col s8" style={{marginTop: "25px", fontSize: "12px" }}>Border Color:</div>
                 <div className = "col s1">
-                  <div className = "text_color" id = "text_color_input" ></div>
+                  <div className = "border_color" id = "border_color_input" ></div>
                 </div>
                 <div className = "col s9" style={{marginTop: "25px", fontSize: "12px"}}>Border Thickness:</div>
                 <div className = "col s3 ">

@@ -4,7 +4,6 @@ import { firestoreConnect } from "react-redux-firebase";
 import "materialize-css/dist/css/materialize.min.css";
 import { Rnd } from "react-rnd";
 
-
 class NewContainer extends Component {
   state = {
     hasFocus: false,
@@ -19,6 +18,9 @@ class NewContainer extends Component {
     document.getElementById("text_input").value = document.getElementById(
       this.props.id
     ).textContent;
+    document.getElementById("font_size_input").value = document.getElementById(
+      this.props.id
+    ).style.fontSize;
     
     var div = this.props.createResizers()      
     document.getElementById(this.props.id).appendChild(div)
@@ -42,6 +44,7 @@ class NewContainer extends Component {
         this.props.setFocusedElement(null);
         this.setState({myText: this.props.focusedElementText})
         document.getElementById("text_input").value = ""
+        document.getElementById("font_size_input").value = "What"
       }     
       if (this.props.focusedElement !== null){
         var div = this.props.createResizers()   
@@ -71,7 +74,7 @@ class NewContainer extends Component {
           id={this.props.id}          
           onClick={this.setFocus}
           disableDragging = {!this.state.hasFocus}
-          style={ { transform: "scale(" + this.props.scale + ")", color: "red" }}
+          style={ { transform: "scale(" + this.props.scale + ")", color: this.props.textColor, backgroundColor: this.props.backgroundColor }} // color is text color, background Color is color
           bounds={"body"}
   >{this.props.myText}</Rnd>
       </div>

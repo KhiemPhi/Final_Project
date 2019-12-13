@@ -1,15 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { NavLink, Redirect, Link } from "react-router-dom";
+import { Redirect} from "react-router-dom";
 import { firestoreConnect } from "react-redux-firebase";
 import TodoListLinks from "./TodoListLinks";
 import { getFirestore } from "redux-firestore";
-import { createDeflate } from "zlib";
-import { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } from "constants";
-import { emptyStatement } from "@babel/types";
-import { useHistory } from "react-router-dom";
-import { Button, Icon } from "react-materialize";
+
 
 class HomeScreen extends Component {
   state = {

@@ -70,7 +70,7 @@ class NewButton extends Component {
           onClick={this.setFocus}
           disableDragging = {!this.state.hasFocus}
           bounds={"body"}          
-          style = {{transform: "scale(" + this.props.scale + ")"}}
+          style = {{transform: "scale(" + this.props.scale + ")",  color: this.props.textColor, backgroundColor: this.props.backgroundColor}}
   >{this.props.myText}</Rnd>
       </div>
     );

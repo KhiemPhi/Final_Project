@@ -10,7 +10,6 @@ import LoginScreen from './components/login_screen/LoginScreen.js';
 import HomeScreen from './components/home_screen/HomeScreen.js';
 import EditScreen from './components/list_screen/EditScreen.js';
 import DatabaseTester from './test/DatabaseTester'
-import {Button, Icon} from "react-materialize";
 import ItemScreen from './components/item_screen/ItemScreen.js';
 
 class App extends Component {
