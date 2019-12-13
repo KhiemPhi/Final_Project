@@ -163,7 +163,7 @@ class EditScreen extends Component {
 
   editFontSize = (value) => {
     var focusedElement = this.state.focusedElement;
-    
+    document.getElementById(focusedElement).style.fontSize = value + "px"
   }
 
   
@@ -356,6 +356,7 @@ class EditScreen extends Component {
           </div>
           <ControllerModifier
             editText={this.editText.bind(this)}
+            editFontSize={this.editFontSize.bind(this)}
             focusedElement={this.state.focusedElement}
             focusedElementText={this.state.focusedElementText}
             wireFrameWidth={Number(
