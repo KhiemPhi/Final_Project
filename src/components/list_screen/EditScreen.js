@@ -284,6 +284,33 @@ class EditScreen extends Component {
     }
   };
 
+  updateXAndYCoordinatesFocusedElement = (x, y) => {
+    var index = this.state.focusedElement.slice(-1) - 1;
+    var newArray = [];
+    //perform Check To see what element is being focused
+    if (this.state.focusedElement.includes("container")) {
+      newArray = this.state.containers
+      newArray[index].xCoordinate = x
+      newArray[index].yCoordinate = y
+      this.setState({ containers: newArray });
+    } else if (this.state.focusedElement.includes("label")) {
+      newArray = this.state.labels
+      newArray[index].xCoordinate = x
+      newArray[index].yCoordinate = y
+      this.setState({ labels: newArray });      
+    } else if (this.state.focusedElement.includes("button")) {
+      newArray = this.state.buttons
+      newArray[index].xCoordinate = x
+      newArray[index].yCoordinate = y
+      this.setState({ buttons: newArray }); 
+    } else if (this.state.focusedElement.includes("textfield")) {
+      newArray = this.state.textfields
+      newArray[index].xCoordinate = x
+      newArray[index].yCoordinate = y
+      this.setState({ textfields: newArray });
+    }
+  }
+
   zoomIn = () => {
     var zoom = this.state.scale;
     var zoomValue = (Number(zoom) * 2).toString();
@@ -451,6 +478,7 @@ class EditScreen extends Component {
                 id={x.id}
                 containerCounter={this.state.containerCounter.toString()}
                 setFocusedElement={this.setFocusedElement.bind(this)}
+                updateXAndYCoordinatesFocusedElement = {this.updateXAndYCoordinatesFocusedElement.bind(this)}
                 myText={x.text}
                 textColor={x.textColor}
                 backgroundColor={x.backgroundColor}
@@ -470,6 +498,7 @@ class EditScreen extends Component {
                 id={x.id}
                 labelCounter={this.state.labelCounter.toString()}
                 setFocusedElement={this.setFocusedElement.bind(this)}
+                updateXAndYCoordinatesFocusedElement = {this.updateXAndYCoordinatesFocusedElement.bind(this)}
                 myText={x.text}
                 textColor={x.textColor}
                 backgroundColor={x.backgroundColor}
@@ -488,6 +517,7 @@ class EditScreen extends Component {
                 id={x.id}
                 buttonCounter={this.state.buttonCounter.toString()}
                 setFocusedElement={this.setFocusedElement.bind(this)}
+                updateXAndYCoordinatesFocusedElement = {this.updateXAndYCoordinatesFocusedElement.bind(this)}
                 myText={x.text}
                 textColor={x.textColor}
                 backgroundColor={x.backgroundColor}
@@ -506,6 +536,7 @@ class EditScreen extends Component {
                 id={x.id}
                 textfieldCounter={this.state.textfieldCounter.toString()}
                 setFocusedElement={this.setFocusedElement.bind(this)}
+                updateXAndYCoordinatesFocusedElement = {this.updateXAndYCoordinatesFocusedElement.bind(this)}
                 myText={x.text}
                 textColor={x.textColor}
                 backgroundColor={x.backgroundColor}

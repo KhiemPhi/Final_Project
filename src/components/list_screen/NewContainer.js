@@ -7,9 +7,14 @@ import { Rnd } from "react-rnd";
 class NewContainer extends Component {
   state = {
     hasFocus: false,
-    disableDragging: false
-   
+    disableDragging: false,    
   };
+
+  updateXAndYCoordinates = (data) => {
+    var newX = data.x
+    var newY = data.yd 
+    this.props.updateXAndYCoordinatesFocusedElement(newX,newY)
+  }
 
   setFocus = () => {
     console.log(this.props.id);
@@ -73,6 +78,7 @@ class NewContainer extends Component {
           }}
           id={this.props.id}          
           onClick={this.setFocus}
+          onDrag = {this.updateXAndYCoordinates}
           disableDragging = {!this.state.hasFocus}
           style={ { transform: "scale(" + this.props.scale + ")", color: this.props.textColor, backgroundColor: this.props.backgroundColor, fontSize:this.props.fontSize }} // color is text color, background Color is color
           bounds={"body"}
