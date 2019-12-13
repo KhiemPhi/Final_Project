@@ -25,10 +25,7 @@ class EditScreen extends Component {
     containers: [],
     labels: [],
     buttons: [],
-    textfields: [],   
-    LabelTextArray: [],
-    ButtonTextArray: [],
-    TextFieldTextArray: [],
+    textfields: [],
     wireFrameWidth: "700px",
     wireFrameHeight: "800px",
     scale: "1"
@@ -293,8 +290,7 @@ class EditScreen extends Component {
 
   duplicateElement = id => {
     var index = Number(id.slice(-1)) - 1;
-    if (id.includes("container")) {
-      console.log("fire")
+    if (id.includes("container")) {    
       const { containers } = this.state;
       var containerToBeDuplicate = containers[index];
       var counter = this.state.containerCounter;
@@ -304,7 +300,8 @@ class EditScreen extends Component {
         id: newId,
         textColor: containerToBeDuplicate.textColor,
         backgroundColor: containerToBeDuplicate.backgroundColor,
-        text : containerToBeDuplicate.text
+        text : containerToBeDuplicate.text,
+        fontSize : containerToBeDuplicate.fontSize
       };
       this.setState({ containers: containers.concat(newContainer) });
       this.setState({ containerCounter: counter });
