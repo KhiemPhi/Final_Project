@@ -62,7 +62,9 @@ class EditScreen extends Component {
       textColor: "#000000",
       backgroundColor: "#ffffff",
       text: "",
-      fontSize : "16px"
+      fontSize : "16px",
+      xCoordinate : 0,
+      yCoordinate: 0
     };
     const { containers } = this.state;
     this.setState({ containers: containers.concat(newContainer) });
@@ -79,7 +81,9 @@ class EditScreen extends Component {
       textColor: "#000000",
       backgroundColor: "#ffffff",
       text: defaultText,
-      fontSize: "16px"
+      fontSize: "16px",
+      xCoordinate : 0,
+      yCoordinate: 0
     };
     const { labels } = this.state;     
     this.setState({ labels: labels.concat(newLabel) });
@@ -96,7 +100,9 @@ class EditScreen extends Component {
       textColor: "#808080",
       backgroundColor: "#ffffff",
       text: defaultText,
-      fontSize : "16px"
+      fontSize : "16px",
+      xCoordinate : 0,
+      yCoordinate: 0
     };
     const { textfields } = this.state;   
     this.setState({ textfields: textfields.concat(newTextField) });
@@ -113,7 +119,9 @@ class EditScreen extends Component {
       textColor: "#000000",
       backgroundColor: "#bdbdbd",
       text: defaultText,
-      fontsize: "16px"
+      fontsize: "16px",
+      xCoordinate : 0,
+      yCoordinate: 0
     };
     const { buttons } = this.state;   
     this.setState({ buttons: buttons.concat(newButton) });
