@@ -19,6 +19,7 @@ class NewContainer extends Component {
     var newX = Number(xString.substring(0, xString.length - 2 ))    
     var newY = Number(yString.substring(0, yString.length - 2 ))     
     this.props.updateXAndYCoordinatesFocusedElement(newX,newY)
+    this.setFocus()
   }
 
   updateWidthAndHeight = (data) => {
@@ -36,6 +37,7 @@ class NewContainer extends Component {
     document.getElementById("text_input").value = document.getElementById(
       this.props.id
     ).textContent;
+    document.getElementById("border_radius_input").value = this.props.borderRadius.substring(0, this.props.borderRadius.length-2)
     var fontSizeString = document.getElementById(this.props.id).style.fontSize.toString()
     var fontSize = fontSizeString.substring(0, fontSizeString.length-2)
     document.getElementById("fontSize_input").value = fontSize    
@@ -62,6 +64,7 @@ class NewContainer extends Component {
         this.setState({myText: this.props.focusedElementText})
         document.getElementById("text_input").value = ""
         document.getElementById("fontSize_input").value = ""
+        document.getElementById("border_radius_input").value = ""
       }     
       if (this.props.focusedElement !== null){
         var div = this.props.createResizers()   
@@ -74,7 +77,7 @@ class NewContainer extends Component {
   render() {
     // x = left , y = top value, width = width, height = height
     return (
-      <div ref={node => (this.node = node)} id={this.props.id + "wrapper"}  >
+      <div ref={node => (this.node = node)} id={this.props.id + "wrapper"} style = {{zIndex : 4}}  >
         
         <Rnd
           className={
@@ -93,7 +96,7 @@ class NewContainer extends Component {
           onResize = {this.updateWidthAndHeight}
           onDrag = {this.updateXAndYCoordinates}
           disableDragging = {!this.state.hasFocus}
-          style={ { transform: "scale(" + this.props.scale + ")", color: this.props.textColor, backgroundColor: this.props.backgroundColor, fontSize:this.props.fontSize }} // color is text color, background Color is color
+          style={ { transform: "scale(" + this.props.scale + ")", color: this.props.textColor, backgroundColor: this.props.backgroundColor, fontSize:this.props.fontSize, borderRadius:this.props.borderRadius }} // color is text color, background Color is color
           bounds={".edit_area"}
   >{this.props.myText}</Rnd>
       </div>

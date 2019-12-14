@@ -14,10 +14,10 @@ class ControllerAdder extends Component {
           this.props.wireFrameWidth > 500
             ? this.props.wireFrameWidth > 1000 ? this.props.wireFrameWidth > 2000 ? "control_container col s12": "control_container col s5"  : "control_container col s3"
             : this.props.wireFrameWidth > 300
-            ? "control_container col s4"
+            ? "control_container col s4 l4"
             : "control_container col s4 pull-s1"
         }
-        style = {{ transformOrigin: "0 0"}}
+        style = {{ transformOrigin: "500 0"}}
       >
         <Toolbar
           goHome={this.props.goHome}

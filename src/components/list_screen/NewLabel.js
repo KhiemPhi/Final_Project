@@ -21,6 +21,7 @@ class NewLabel extends Component {
     var newX = Number(xString.substring(0, xString.length - 2 ))    
     var newY = Number(yString.substring(0, yString.length - 2 ))     
     this.props.updateXAndYCoordinatesFocusedElement(newX,newY)
+    this.setFocus()
   }
 
   setFocus = () => {
@@ -33,6 +34,7 @@ class NewLabel extends Component {
     var fontSizeString = document.getElementById(this.props.id).style.fontSize.toString()
     var fontSize = fontSizeString.substring(0, fontSizeString.length-2)
     document.getElementById("fontSize_input").value = fontSize 
+    document.getElementById("border_radius_input").value = this.props.borderRadius.substring(0, this.props.borderRadius.length-2)
     var div = this.props.createResizers()      
     document.getElementById(this.props.id).appendChild(div)
   };
@@ -55,6 +57,7 @@ class NewLabel extends Component {
         this.setState({myText: this.props.focusedElementText})
         document.getElementById("text_input").value = ""
         document.getElementById("fontSize_input").value = ""
+        document.getElementById("border_radius_input").value = ""
       }     
       if (this.props.focusedElement !== null){
         var div = this.props.createResizers()   

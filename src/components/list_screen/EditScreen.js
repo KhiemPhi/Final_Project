@@ -66,7 +66,8 @@ class EditScreen extends Component {
       xCoordinate : 0,
       yCoordinate: 0,
       width : 120,
-      height: 80
+      height: 80,
+      borderRadius : "1px"
     };
     const { containers } = this.state;
     this.setState({ containers: containers.concat(newContainer) });
@@ -87,7 +88,8 @@ class EditScreen extends Component {
       xCoordinate : 0,
       yCoordinate: 0,
       width: 300,
-      height: 45
+      height: 45,
+      borderRadius : "1px"
     };
     const { labels } = this.state;     
     this.setState({ labels: labels.concat(newLabel) });
@@ -108,7 +110,8 @@ class EditScreen extends Component {
       xCoordinate : 0,
       yCoordinate: 0,
       width: 210,
-      height: 30
+      height: 30,
+      borderRadius : "1px"
     };
     const { textfields } = this.state;   
     this.setState({ textfields: textfields.concat(newTextField) });
@@ -129,7 +132,8 @@ class EditScreen extends Component {
       xCoordinate : 0,
       yCoordinate: 0,
       width: 130,
-      height: 30
+      height: 30,
+      borderRadius : "1px"
     };
     const { buttons } = this.state;   
     this.setState({ buttons: buttons.concat(newButton) });
@@ -377,7 +381,8 @@ class EditScreen extends Component {
         xCoordinate : containerToBeDuplicate.xCoordinate + 100,
         yCoordinate : containerToBeDuplicate.yCoordinate + 100,
         width: containerToBeDuplicate.width,
-        height: containerToBeDuplicate.height
+        height: containerToBeDuplicate.height,
+        borderRadius : containerToBeDuplicate.borderRadius
       };
       this.setState({ containers: containers.concat(newContainer) });
       this.setState({ containerCounter: counter });
@@ -396,7 +401,8 @@ class EditScreen extends Component {
         xCoordinate : labelToBeDuplicate.xCoordinate + 100,
         yCoordinate : labelToBeDuplicate.yCoordinate + 100,
         width: labelToBeDuplicate.width,
-        height: labelToBeDuplicate.height
+        height: labelToBeDuplicate.height,
+        borderRadius: labelToBeDuplicate.borderRadius
       };
       this.setState({ labels: labels.concat(newLabel) });
       this.setState({ labelCounter: counter });
@@ -415,7 +421,8 @@ class EditScreen extends Component {
         xCoordinate : buttonToBeDuplicate.xCoordinate + 100,
         yCoordinate : buttonToBeDuplicate.yCoordinate + 100,
         width: buttonToBeDuplicate.width,
-        height: buttonToBeDuplicate.height
+        height: buttonToBeDuplicate.height,
+        borderRadius: buttonToBeDuplicate.borderRadius
       };
       this.setState({ buttons: buttons.concat(newButton) });
       this.setState({ buttonCounter: counter });
@@ -434,7 +441,8 @@ class EditScreen extends Component {
         xCoordinate : textfieldToBeDuplicate.xCoordinate + 100,
         yCoordinate : textfieldToBeDuplicate.yCoordinate + 100,
         width: textfieldToBeDuplicate.width,
-        height: textfieldToBeDuplicate.height
+        height: textfieldToBeDuplicate.height,
+        borderRadius: textfieldToBeDuplicate.borderRadius
       };
       this.setState({ textfields: textfields.concat(newTextField) });
       this.setState({ textfieldCounter: counter });
@@ -556,7 +564,7 @@ class EditScreen extends Component {
           />
 
           <div
-            className="edit_area white control_container_only_top_and_bottom col s8"
+            className="edit_area white control_container_only_top_and_bottom col s8 l4"
             id="edit_area"
             style={{
               zIndex: "1",
@@ -564,7 +572,11 @@ class EditScreen extends Component {
               height: this.state.wireFrameHeight,
               zoom: "200%",
               transform: "scale(" + this.state.scale + ")",
-              transformOrigin: "0 0"
+              transformOrigin: "0 0",
+              overflow: "scroll",
+              maxWidth: "5000px",
+              maxHeight: "5000px"
+
             }}
           >
             {this.state.containers.map(x => (
@@ -583,6 +595,7 @@ class EditScreen extends Component {
                 yCoordinate = {x.yCoordinate}
                 width = {x.width}
                 height = {x.height}
+                borderRadius = {x.borderRadius}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
@@ -606,6 +619,7 @@ class EditScreen extends Component {
                 yCoordinate = {x.yCoordinate}
                 width = {x.width}
                 height = {x.height}
+                borderRadius = {x.borderRadius}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
@@ -628,6 +642,7 @@ class EditScreen extends Component {
                 yCoordinate = {x.yCoordinate}
                 width = {x.width}
                 height = {x.height}
+                borderRadius = {x.borderRadius}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
@@ -650,6 +665,7 @@ class EditScreen extends Component {
                 yCoordinate = {x.yCoordinate}
                 width = {x.width}
                 height = {x.height}
+                borderRadius = {x.borderRadius}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
