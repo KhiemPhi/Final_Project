@@ -85,8 +85,8 @@ class NewContainer extends Component {
           default={{
             x: this.props.xCoordinate,
             y: this.props.yCoordinate,
-            width: 120,
-            height: 80
+            width: this.props.width,
+            height: this.props.height
           }}
           id={this.props.id}          
           onClick={this.setFocus}

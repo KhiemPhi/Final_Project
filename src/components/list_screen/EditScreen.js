@@ -376,6 +376,8 @@ class EditScreen extends Component {
         fontSize : containerToBeDuplicate.fontSize,
         xCoordinate : containerToBeDuplicate.xCoordinate + 100,
         yCoordinate : containerToBeDuplicate.yCoordinate + 100,
+        width: containerToBeDuplicate.width,
+        height: containerToBeDuplicate.height
       };
       this.setState({ containers: containers.concat(newContainer) });
       this.setState({ containerCounter: counter });
@@ -393,6 +395,8 @@ class EditScreen extends Component {
         fontSize : labelToBeDuplicate.fontSize,
         xCoordinate : labelToBeDuplicate.xCoordinate + 100,
         yCoordinate : labelToBeDuplicate.yCoordinate + 100,
+        width: labelToBeDuplicate.width,
+        height: labelToBeDuplicate.height
       };
       this.setState({ labels: labels.concat(newLabel) });
       this.setState({ labelCounter: counter });
@@ -410,8 +414,10 @@ class EditScreen extends Component {
         fontSize : buttonToBeDuplicate.fontSize,
         xCoordinate : buttonToBeDuplicate.xCoordinate + 100,
         yCoordinate : buttonToBeDuplicate.yCoordinate + 100,
+        width: buttonToBeDuplicate.width,
+        height: buttonToBeDuplicate.height
       };
-      this.setState({ containers: buttons.concat(newButton) });
+      this.setState({ buttons: buttons.concat(newButton) });
       this.setState({ buttonCounter: counter });
     } else if (id.includes("textfield")) {
       const { textfields } = this.state;
@@ -427,6 +433,8 @@ class EditScreen extends Component {
         fontSize : textfieldToBeDuplicate.fontSize,
         xCoordinate : textfieldToBeDuplicate.xCoordinate + 100,
         yCoordinate : textfieldToBeDuplicate.yCoordinate + 100,
+        width: textfieldToBeDuplicate.width,
+        height: textfieldToBeDuplicate.height
       };
       this.setState({ textfields: textfields.concat(newTextField) });
       this.setState({ textfieldCounter: counter });

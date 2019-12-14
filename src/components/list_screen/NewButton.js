@@ -84,8 +84,8 @@ class NewButton extends Component {
           default={{
             x: this.props.xCoordinate,
             y: this.props.yCoordinate,
-            width: 130,
-            height: 30
+            width: this.props.width,
+            height: this.props.height
           }}
           id={this.props.id}          
           onClick={this.setFocus}
