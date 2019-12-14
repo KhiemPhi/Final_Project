@@ -69,7 +69,7 @@ class EditScreen extends Component {
       height: 80,
       borderRadius : "1px",
       borderColor: "#000000",
-      borderThickness : "1px"
+      borderThickness : "2px"
     };
     const { containers } = this.state;
     this.setState({ containers: containers.concat(newContainer) });
@@ -245,6 +245,31 @@ class EditScreen extends Component {
     } else if (this.state.focusedElement.includes("textfield")) {
       newArray = this.state.textfields
       newArray[index].borderRadius = value.toString() + "px"
+      this.setState({ textfields: newArray });
+    }
+  };
+
+  handleBorderThicknessChange = value => {
+    console.log("here thickness")    
+    var index = this.state.focusedElement.slice(-1) - 1;
+    var newArray = [];
+    
+    //perform Check To see what element is being focused
+    if (this.state.focusedElement.includes("container")) {
+      newArray = this.state.containers
+      newArray[index].borderThickness = value.toString() + "px"
+      this.setState({ containers: newArray });
+    } else if (this.state.focusedElement.includes("label")) {
+      newArray = this.state.labels
+      newArray[index].borderThickness = value.toString() + "px"
+      this.setState({ labels: newArray });      
+    } else if (this.state.focusedElement.includes("button")) {
+      newArray = this.state.buttons
+      newArray[index].borderThickness = value.toString() 
+      this.setState({ buttons: newArray }); 
+    } else if (this.state.focusedElement.includes("textfield")) {
+      newArray = this.state.textfields
+      newArray[index].borderThickness = value.toString() + "px"
       this.setState({ textfields: newArray });
     }
   };
@@ -732,6 +757,7 @@ class EditScreen extends Component {
             )}
             handleTextColorChange={this.handleTextColorChange.bind(this)}
             handleBorderRadiusChange = {this.handleBorderRadiusChange.bind(this)}
+            handleBorderThicknessChange = {this.handleBorderThicknessChange.bind(this)}
             scale={this.state.scale}
           />
         </div>

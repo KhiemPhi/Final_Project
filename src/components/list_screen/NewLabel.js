@@ -101,7 +101,9 @@ class NewLabel extends Component {
             color: this.props.textColor,
             backgroundColor: this.props.backgroundColor,
             fontSize: this.props.fontSize,
-            border: this.props.borderThickness + "px" + this.props.borderColor
+            border: this.props.borderThickness + "solid" + this.props.borderColor,
+            borderRadius: this.props.borderRadius,
+            borderWidth: this.props.borderThickness
           }}
         >
           {this.props.myText}

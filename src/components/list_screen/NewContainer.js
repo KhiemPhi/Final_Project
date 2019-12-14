@@ -116,7 +116,8 @@ class NewContainer extends Component {
             backgroundColor: this.props.backgroundColor,
             fontSize: this.props.fontSize,
             borderRadius: this.props.borderRadius,
-            border: this.props.borderThickness + "px" + this.props.borderColor
+            border: this.props.borderThickness + "solid" + this.props.borderColor,
+            borderWidth: this.props.borderThickness
           }} // color is text color, background Color is color
           bounds={".edit_area"}
         >

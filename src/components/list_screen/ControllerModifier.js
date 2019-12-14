@@ -76,7 +76,7 @@ class ControllerModifier extends Component {
                 <div className = "col s7" style={{marginTop: "25px", fontSize: "12px"}}>Border Thickness:</div>
                 <div className = "col s5">
                   {!this.state.showBorderThicknessSlider && <input  id = "border_thickness_input" onClick= {this.toggleBorderThicknessSlider}  ></input>}
-                  {this.state.showBorderThicknessSlider && <BorderThicknessSlider focusedElement = {this.props.focusedElement} toggleBorderThicknessSlider= {this.toggleBorderThicknessSlider.bind(this)} ></BorderThicknessSlider>}
+                  {this.state.showBorderThicknessSlider && <BorderThicknessSlider focusedElement = {this.props.focusedElement} toggleBorderThicknessSlider= {this.toggleBorderThicknessSlider.bind(this) } handleBorderThicknessChange = {this.props.handleBorderThicknessChange} ></BorderThicknessSlider>}
                 </div>
                 <div className = "col s7" style={{marginTop: "25px", fontSize: "12px"}}>Border Radius:</div>
                 <div className = "col s5 ">
