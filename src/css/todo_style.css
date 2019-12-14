@@ -264,32 +264,11 @@ body {
 }
 
 /* ITEM SCREEN CONTROLS */
-#item_heading {
-  
-}
+
 #item_form_container {
   display: grid;
 }
-#item_description_prompt {
-}
-#item_description_textfield {
-}
-#item_assigned_to_prompt {
-}
-#item_assigned_to_textfield {
-}
-#item_due_date_prompt {
-}
-#item_due_date_picker {
-}
-#item_completed_prompt {
-}
-#item_completed_checkbox {
-}
-#item_form_submit_button {
-}
-#item_form_cancel_button {
-}
+
 
 /* ITEM SCREEN CLASSES */
 .item_prompt {
@@ -370,7 +349,7 @@ body {
   padding-bottom: 50px;
 }
 
-.control_container_no_right{
+._no_right{
   border: 1px solid black;
   border-right: none;
 }
@@ -391,8 +370,7 @@ body {
 }
 
 .control_container_only_top_and_bottom{
-  border: 1px solid black;
-  border-right: none;
+  border: 1px solid black;  
   border-left: none;
   
 }
