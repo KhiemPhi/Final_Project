@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import "materialize-css/dist/css/materialize.min.css";
-import TodoListCard from "./TodoListCard";
+import WireFrameCard from "./WireFrameCard";
 import DeleteButton from "./DeleteButton";
 
-class TodoListLinks extends React.Component {
+class WireFrameLinks extends React.Component {
   
 
   render() {
@@ -18,7 +18,7 @@ class TodoListLinks extends React.Component {
           todoLists.filter(element => element.owner === owner).map(WireFrame => (
             <div className = "row" >
               <Link to={"/WireFrame/" + WireFrame.id} key={WireFrame.id}>
-                <TodoListCard
+                <WireFrameCard
                   WireFrame={WireFrame}
                   history={this.props.history}
                 />
@@ -40,4 +40,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default compose(connect(mapStateToProps))(TodoListLinks);
+export default compose(connect(mapStateToProps))(WireFrameLinks);

@@ -2,7 +2,7 @@ import React from "react";
 import "materialize-css/dist/css/materialize.min.css";
 
 
-class TodoListCard extends React.Component {
+class WireFrameCard extends React.Component {
   render() {
     const { WireFrame } = this.props;
     return (
@@ -13,4 +13,4 @@ class TodoListCard extends React.Component {
     );
   }
 }
-export default TodoListCard;
+export default WireFrameCard;

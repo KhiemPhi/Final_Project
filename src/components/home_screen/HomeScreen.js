@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { Redirect} from "react-router-dom";
 import { firestoreConnect } from "react-redux-firebase";
-import TodoListLinks from "./TodoListLinks";
+import WireFrameLinks from "./WireFrameLinks";
 import { getFirestore } from "redux-firestore";
 
 
@@ -42,7 +42,7 @@ class HomeScreen extends Component {
       <div id="todo_home">
         <div className="home_your_lists_container">
           <h3 id="home_your_lists_heading">Your WireFrames</h3>
-          <TodoListLinks history = {this.props.history} profile = {this.props.profile}/>
+          <WireFrameLinks history = {this.props.history} profile = {this.props.profile}/>
         </div>
 
         <div id="home_banner_container">
