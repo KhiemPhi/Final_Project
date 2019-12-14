@@ -548,7 +548,7 @@ class EditScreen extends Component {
           />
 
           <div
-            className="white control_container_only_top_and_bottom col s8"
+            className="edit_area white control_container_only_top_and_bottom col s8"
             id="edit_area"
             style={{
               zIndex: "1",

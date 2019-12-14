@@ -18,6 +18,14 @@ class NewButton extends Component {
     this.props.updateXAndYCoordinatesFocusedElement(newX,newY)
   }
 
+  updateWidthAndHeight = (data) => {
+    var widthString = document.getElementById(this.props.id).style.width.toString()
+    var width = Number(widthString.substring(0, widthString.length - 2 ))
+    var heightString = document.getElementById(this.props.id).style.height.toString()
+    var height = Number(heightString.substring(0, heightString.length - 2 ))   
+    this.props.updateWidthAndHeightFocusedElement(width,height)
+  }
+
   setFocus = () => {
     console.log(this.props.id);
     this.props.setFocusedElement(this.props.id);
@@ -46,8 +54,7 @@ class NewButton extends Component {
       var editing = document.getElementById("modifier_area");
       if (!editing.contains(e.target)) {
         // Out of Focus
-        this.setState({ hasFocus: false });
-        this.setState({myText: this.props.focusedElementText})
+        this.setState({ hasFocus: false });        
         document.getElementById("text_input").value = ""
         document.getElementById("fontSize_input").value = ""
       }     
@@ -78,8 +85,9 @@ class NewButton extends Component {
           id={this.props.id}          
           onClick={this.setFocus}
           onDrag= {this.updateXAndYCoordinates}
+          onResize={this.updateWidthAndHeight}
           disableDragging = {!this.state.hasFocus}
-          bounds={"body"}          
+          bounds={".edit_area"}          
           style = {{transform: "scale(" + this.props.scale + ")",  color: this.props.textColor, backgroundColor: this.props.backgroundColor, fontSize: this.props.fontSize}}
   >{this.props.myText}</Rnd>
       </div>

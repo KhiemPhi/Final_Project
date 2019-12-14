@@ -16,6 +16,14 @@ class NewContainer extends Component {
     this.props.updateXAndYCoordinatesFocusedElement(newX,newY)
   }
 
+  updateWidthAndHeight = (data) => {
+    var widthString = document.getElementById(this.props.id).style.width.toString()
+    var width = Number(widthString.substring(0, widthString.length - 2 ))
+    var heightString = document.getElementById(this.props.id).style.height.toString()
+    var height = Number(heightString.substring(0, heightString.length - 2 ))   
+    this.props.updateWidthAndHeightFocusedElement(width,height)
+  }
+
   setFocus = () => {
     console.log(this.props.id);
     this.props.setFocusedElement(this.props.id);
@@ -42,10 +50,10 @@ class NewContainer extends Component {
   handleClick = e => {
     if (!this.node.contains(e.target)) {
       var editing = document.getElementById("modifier_area");
+      
       if (!editing.contains(e.target)) {
         // Out of Focus
-        this.setState({ hasFocus: false });
-        this.props.setFocusedElement(null);
+        this.setState({ hasFocus: false });       
         this.setState({myText: this.props.focusedElementText})
         document.getElementById("text_input").value = ""
         document.getElementById("fontSize_input").value = ""
@@ -77,10 +85,11 @@ class NewContainer extends Component {
           }}
           id={this.props.id}          
           onClick={this.setFocus}
+          onResize = {this.updateWidthAndHeight}
           onDrag = {this.updateXAndYCoordinates}
           disableDragging = {!this.state.hasFocus}
           style={ { transform: "scale(" + this.props.scale + ")", color: this.props.textColor, backgroundColor: this.props.backgroundColor, fontSize:this.props.fontSize }} // color is text color, background Color is color
-          bounds={"body"}
+          bounds={".edit_area"}
   >{this.props.myText}</Rnd>
       </div>
     );
