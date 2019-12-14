@@ -37,7 +37,7 @@ class ColorPickerBorder extends Component {
                   .backgroundColor
               : "#000000"
           }
-          onChange={this.props.handleBackGroundColorChange}
+          onChange={this.props.handleBorderColorChange}
         />
         
       </div>

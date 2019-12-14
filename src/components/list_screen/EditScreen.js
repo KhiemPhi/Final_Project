@@ -67,7 +67,9 @@ class EditScreen extends Component {
       yCoordinate: 0,
       width : 120,
       height: 80,
-      borderRadius : "1px"
+      borderRadius : "1px",
+      borderColor: "#000000",
+      borderThickness : "1px"
     };
     const { containers } = this.state;
     this.setState({ containers: containers.concat(newContainer) });
@@ -89,7 +91,9 @@ class EditScreen extends Component {
       yCoordinate: 0,
       width: 300,
       height: 45,
-      borderRadius : "1px"
+      borderRadius : "1px",
+      borderColor : "#ffffff",
+      borderThickness: "0px"
     };
     const { labels } = this.state;     
     this.setState({ labels: labels.concat(newLabel) });
@@ -111,7 +115,9 @@ class EditScreen extends Component {
       yCoordinate: 0,
       width: 210,
       height: 30,
-      borderRadius : "1px"
+      borderRadius : "1px",
+      borderColor : "#000000",
+      borderThickness: "1px"
     };
     const { textfields } = this.state;   
     this.setState({ textfields: textfields.concat(newTextField) });
@@ -133,7 +139,9 @@ class EditScreen extends Component {
       yCoordinate: 0,
       width: 130,
       height: 30,
-      borderRadius : "1px"
+      borderRadius : "1px",     
+      borderColor : "#000000",
+      borderThickness: "1px"
     };
     const { buttons } = this.state;   
     this.setState({ buttons: buttons.concat(newButton) });
@@ -596,6 +604,8 @@ class EditScreen extends Component {
                 width = {x.width}
                 height = {x.height}
                 borderRadius = {x.borderRadius}
+                borderColor = {x.borderColor}
+                borderThickness = {x.borderThickness}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
@@ -620,6 +630,8 @@ class EditScreen extends Component {
                 width = {x.width}
                 height = {x.height}
                 borderRadius = {x.borderRadius}
+                borderColor = {x.borderColor}
+                borderThickness = {x.borderThickness}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
@@ -643,6 +655,8 @@ class EditScreen extends Component {
                 width = {x.width}
                 height = {x.height}
                 borderRadius = {x.borderRadius}
+                borderColor = {x.borderColor}
+                borderThickness = {x.borderThickness}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
@@ -666,6 +680,8 @@ class EditScreen extends Component {
                 width = {x.width}
                 height = {x.height}
                 borderRadius = {x.borderRadius}
+                borderColor = {x.borderColor}
+                borderThickness = {x.borderThickness}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
