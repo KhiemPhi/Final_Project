@@ -224,6 +224,31 @@ class EditScreen extends Component {
     }
   };
 
+  handleBorderRadiusChange = value => {
+    console.log("here")    
+    var index = this.state.focusedElement.slice(-1) - 1;
+    var newArray = [];
+    
+    //perform Check To see what element is being focused
+    if (this.state.focusedElement.includes("container")) {
+      newArray = this.state.containers
+      newArray[index].borderRadius = value.toString() + "px"
+      this.setState({ containers: newArray });
+    } else if (this.state.focusedElement.includes("label")) {
+      newArray = this.state.labels
+      newArray[index].borderRadius = value.toString() + "px"
+      this.setState({ labels: newArray });      
+    } else if (this.state.focusedElement.includes("button")) {
+      newArray = this.state.buttons
+      newArray[index].borderRadius = value.toString() + "px"
+      this.setState({ buttons: newArray }); 
+    } else if (this.state.focusedElement.includes("textfield")) {
+      newArray = this.state.textfields
+      newArray[index].borderRadius = value.toString() + "px"
+      this.setState({ textfields: newArray });
+    }
+  };
+
   handleBackGroundColorChange = (color, event) => {
     if (this.state.focusedElement.includes("container")) {
       var containers = this.state.containers;
@@ -706,6 +731,7 @@ class EditScreen extends Component {
               this
             )}
             handleTextColorChange={this.handleTextColorChange.bind(this)}
+            handleBorderRadiusChange = {this.handleBorderRadiusChange.bind(this)}
             scale={this.state.scale}
           />
         </div>

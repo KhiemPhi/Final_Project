@@ -78,10 +78,10 @@ class ControllerModifier extends Component {
                   {!this.state.showBorderThicknessSlider && <input  id = "border_thickness_input" onClick= {this.toggleBorderThicknessSlider}  ></input>}
                   {this.state.showBorderThicknessSlider && <BorderThicknessSlider focusedElement = {this.props.focusedElement} toggleBorderThicknessSlider= {this.toggleBorderThicknessSlider.bind(this)} ></BorderThicknessSlider>}
                 </div>
-                <div className = "col s7" style={{marginTop: "25px", fontSize: "12px"}}>Border Thickness:</div>
+                <div className = "col s7" style={{marginTop: "25px", fontSize: "12px"}}>Border Radius:</div>
                 <div className = "col s5 ">
-                  {!this.state.showBorderRadiusSlider && <input  id = "border_radius_input" onClick= {this.toggleBorderRadiusSlider}  ></input>}
-                  {this.state.showBorderRadiusSlider && <BorderRadiusSlider focusedElement = {this.props.focusedElement} toggleBorderRadiusSlider= {this.toggleBorderRadiusSlider.bind(this)} ></BorderRadiusSlider>}                  
+                  {!this.state.showBorderRadiusSlider && <input id = "border_radius_input" onClick= {this.toggleBorderRadiusSlider}  ></input>}
+                  {this.state.showBorderRadiusSlider && <BorderRadiusSlider focusedElement = {this.props.focusedElement} toggleBorderRadiusSlider= {this.toggleBorderRadiusSlider.bind(this)  }  handleBorderRadiusChange = {this.props.handleBorderRadiusChange} ></BorderRadiusSlider>}                  
                 </div>                
              </div>   
           </div>

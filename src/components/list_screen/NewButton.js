@@ -74,7 +74,7 @@ class NewButton extends Component {
         this.setState({ hasFocus: false });
         document.getElementById("text_input").value = "";
         document.getElementById("fontSize_input").value = "";
-        document.getElementById("border_radius_input").value = "";
+        //document.getElementById("border_radius_input").value = "";
       }
       if (this.props.focusedElement !== null) {
         var div = this.props.createResizers();

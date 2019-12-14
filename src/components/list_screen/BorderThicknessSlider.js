@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import "materialize-css/dist/css/materialize.min.css";
-import {Range} from "react-materialize"
-
+import { Range } from "react-materialize";
 
 class BorderThicknessSlider extends Component {
   componentWillMount() {
@@ -19,8 +18,8 @@ class BorderThicknessSlider extends Component {
       var editing = document.getElementById("modifier_area");
       if (!editing.contains(e.target)) {
         // Out of Focus
-        console.log("fire")
-        this.props.toggleBorderThicknessSlider()
+        console.log("fire");
+        this.props.toggleBorderThicknessSlider();
       }
     }
   };
@@ -32,8 +31,7 @@ class BorderThicknessSlider extends Component {
         ref={node => (this.node = node)}
         style={{ transform: "scale(" + this.props.scale + ")", color: "red" }}
       >
-        <Range/>
-        
+        <input max="100" min="0" type = "range" ></input>
       </div>
     );
   }

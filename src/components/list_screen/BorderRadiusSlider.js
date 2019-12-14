@@ -36,7 +36,7 @@ class BorderRadiusSlider extends Component {
         ref={node => (this.node = node)}
         style={{ transform: "scale(" + this.props.scale + ")", color: "red" }}
       >
-        <Range/>
+        <Range id = "border_radius_input" onChange = {e => this.props.handleBorderRadiusChange(e.target.value)} ></Range>
         
         
       </div>
