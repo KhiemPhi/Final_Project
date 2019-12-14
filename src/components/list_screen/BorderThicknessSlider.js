@@ -31,7 +31,7 @@ class BorderThicknessSlider extends Component {
         ref={node => (this.node = node)}
         style={{ transform: "scale(" + this.props.scale + ")", color: "red" }}
       >
-        <Range max="100" min="0" type = "range" onChange = {e => this.props.handleBorderThicknessChange(e.target.value)} ></Range>
+        <Range id = "border_thickness_input" max="100" min="0" type = "range" onChange = {e => this.props.handleBorderThicknessChange(e.target.value)} ></Range>
       </div>
     );
   }

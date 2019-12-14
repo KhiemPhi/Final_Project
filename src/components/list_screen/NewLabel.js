@@ -42,6 +42,12 @@ class NewLabel extends Component {
       0,
       this.props.borderRadius.length - 2
     );
+    document.getElementById(
+      "border_thickness_input"
+    ).value = this.props.borderThickness.substring(
+      0,
+      this.props.borderThickness.length - 2
+    );
     var div = this.props.createResizers();
     document.getElementById(this.props.id).appendChild(div);
   };
@@ -63,7 +69,9 @@ class NewLabel extends Component {
         this.setState({ myText: this.props.focusedElementText });
         document.getElementById("text_input").value = "";
         document.getElementById("fontSize_input").value = "";
-        //document.getElementById("border_radius_input").value = "";
+        document.getElementById("border_radius_input").value = "";
+        document.getElementById("border_thickness_input").value = ""
+        document.getElementById("border_thickness_input").value = ""
       }
       if (this.props.focusedElement !== null) {
         var div = this.props.createResizers();
@@ -101,7 +109,7 @@ class NewLabel extends Component {
             color: this.props.textColor,
             backgroundColor: this.props.backgroundColor,
             fontSize: this.props.fontSize,
-            border: this.props.borderThickness + "solid" + this.props.borderColor,
+            border: this.props.borderThickness + "solid " + this.props.borderColor,
             borderRadius: this.props.borderRadius,
             borderWidth: this.props.borderThickness
           }}

@@ -249,8 +249,7 @@ class EditScreen extends Component {
     }
   };
 
-  handleBorderThicknessChange = value => {
-    console.log("here thickness")    
+  handleBorderThicknessChange = value => {      
     var index = this.state.focusedElement.slice(-1) - 1;
     var newArray = [];
     
@@ -265,7 +264,7 @@ class EditScreen extends Component {
       this.setState({ labels: newArray });      
     } else if (this.state.focusedElement.includes("button")) {
       newArray = this.state.buttons
-      newArray[index].borderThickness = value.toString() 
+      newArray[index].borderThickness = value.toString() + "px"
       this.setState({ buttons: newArray }); 
     } else if (this.state.focusedElement.includes("textfield")) {
       newArray = this.state.textfields
@@ -602,7 +601,7 @@ class EditScreen extends Component {
             defaultValue={todoList.owner}
           />
         </div>
-        <div className="row" style={{ display: "flex" }}>
+        <div className="row" style={{ display: "flex", overflow:"scroll" }}>
           <ControllerAdder
             goHome={this.goHome.bind(this)}
             zoomIn={this.zoomIn.bind(this)}
@@ -631,8 +630,7 @@ class EditScreen extends Component {
               height: this.state.wireFrameHeight,
               zoom: "200%",
               transform: "scale(" + this.state.scale + ")",
-              transformOrigin: "0 0",
-              overflow: "scroll",
+              transformOrigin: "0 0",              
               maxWidth: "5000px",
               maxHeight: "5000px"
 
