@@ -13,8 +13,13 @@ class NewButton extends Component {
   };
 
   updateXAndYCoordinates = (data) => {
-    var newX = data.x
-    var newY = data.y 
+    var transform = document.getElementById(this.props.id).style.transform.toString()
+    var xyValue = transform.substring(10, transform.length-1)
+    var splitIndex = xyValue.indexOf(",")    
+    var xString = xyValue.substring(0,splitIndex)
+    var yString = xyValue.substring(splitIndex+2, xyValue.length)    
+    var newX = Number(xString.substring(0, xString.length - 2 ))    
+    var newY = Number(yString.substring(0, yString.length - 2 ))     
     this.props.updateXAndYCoordinatesFocusedElement(newX,newY)
   }
 

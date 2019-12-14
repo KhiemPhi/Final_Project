@@ -27,7 +27,7 @@ class EditScreen extends Component {
     buttons: [],
     textfields: [],
     wireFrameWidth: "700px",
-    wireFrameHeight: "800px",
+    wireFrameHeight: "900px",
     scale: "1"
   };
 
