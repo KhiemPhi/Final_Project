@@ -362,6 +362,7 @@ class EditScreen extends Component {
     var zoom = this.state.scale;
     var zoomValue = (Number(zoom) * 2).toString();
     this.setState({ scale: zoomValue });
+    
   };
 
   zoomOut = () => {
