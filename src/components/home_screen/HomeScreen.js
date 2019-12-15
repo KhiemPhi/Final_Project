@@ -20,7 +20,10 @@ class HomeScreen extends Component {
       .add({
         name: "New List",
         owner: this.props.profile.firstName + " " + this.props.profile.lastName ,
-        items: [],
+        containers: [],
+        labels: [],
+        buttons: [],
+        textfields: [],
         createdAt: new Date()
       })
       .then(docRef => {       

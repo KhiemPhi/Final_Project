@@ -10,9 +10,7 @@
                 {   
                     "id" : "new_container1", 
                     "textColor": "#000000",
-                    "backgroundColor": "red",
-                    "text": "Hello World",
-                    "fontSize" : "16px",
+                    "backgroundColor": "red",               
                     "xCoordinate" : 0,
                     "yCoordinate": 0,
                     "width" : 120,
@@ -25,9 +23,7 @@
                 {   
                     "id" : "new_container2", 
                     "textColor": "#000000",
-                    "backgroundColor": "yellow",
-                    "text": "Hello World Now",
-                    "fontSize" : "16px",
+                    "backgroundColor": "yellow",                    
                     "xCoordinate" : 100,
                     "yCoordinate": 100,
                     "width" : 120,
@@ -52,6 +48,40 @@
                     "borderColor": "#000000",
                     "borderThickness" : "1px"
                 }
+            ],
+
+            "labels" : [
+                {
+                    "id": "new_label1",
+                    "textColor": "green",
+                    "backgroundColor": "white",
+                    "text": "My Labels",
+                    "fontsize": "16px",
+                    "xCoordinate" : 200,
+                    "yCoordinate": 200,
+                    "width": 130,
+                    "height": 30,
+                    "borderRadius" : "1px",
+                    "borderColor": "#000000",
+                    "borderThickness" : "0px"
+                }
+            ],
+
+            "textfields" : [
+               {
+                "id": "new_textfield1",
+                "textColor": "green",
+                "backgroundColor": "white",
+                "text": "My TextField",
+                "fontsize": "16px",
+                "xCoordinate" : 200,
+                "yCoordinate": 200,
+                "width": 130,
+                "height": 30,
+                "borderRadius" : "1px",
+                "borderColor": "#000000",
+                "borderThickness" : "1px"
+               }     
             ]
             
         },

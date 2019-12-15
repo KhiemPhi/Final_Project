@@ -13,7 +13,6 @@ import NewButton from "./NewButton.js";
 import NewTextField from "./NewTextField.js";
 
 class EditScreen extends Component {
-  
   state = {
     name: "",
     owner: "",
@@ -29,7 +28,8 @@ class EditScreen extends Component {
     textfields: [],
     wireFrameWidth: "700px",
     wireFrameHeight: "900px",
-    scale: "1"
+    scale: "1",
+    loaded: false
   };
 
   handleChange = e => {
@@ -51,31 +51,38 @@ class EditScreen extends Component {
   };
 
   saveWork = () => {
-    const fireStore = getFirestore()
+    const fireStore = getFirestore();
     fireStore
-        .collection("WireFrames")
-        .doc(this.props.WireFrame.id).get()
-        .then(doc => {
-          let newContainers = doc.data().containers
-          newContainers = this.state.containers
-          let newButtons = doc.data().buttons
-          newButtons = this.state.buttons
+      .collection("WireFrames")
+      .doc(this.props.WireFrame.id)
+      .get()
+      .then(doc => {
+        let newContainers = doc.data().containers;
+        newContainers = this.state.containers;
+        let newButtons = doc.data().buttons;
+        newButtons = this.state.buttons;
+        let newLabels = doc.data().labels
+        newLabels = this.state.labels
+        let newTextFields = doc.data().textfields
+        newTextFields = this.state.textfields
 
-          fireStore
-            .collection("WireFrames")
-            .doc(this.props.WireFrame.id)
-            .update({
-              containers: newContainers,
-              buttons: newButtons
-            });
-        });
-  }
+        fireStore
+          .collection("WireFrames")
+          .doc(this.props.WireFrame.id)
+          .update({
+            containers: newContainers,
+            buttons: newButtons,
+            labels: newLabels,
+            textfields: newTextFields
+          });
+      });
+  };
 
   goHome = () => {
     this.props.history.push("/");
   };
 
-  addContainer = () => {
+  addContainer = () => {    
     var counter = this.state.containerCounter;
     counter = counter + 1;
     var id = "new_container" + counter.toString();
@@ -84,18 +91,19 @@ class EditScreen extends Component {
       textColor: "#000000",
       backgroundColor: "#ffffff",
       text: "",
-      fontSize : "16px",
-      xCoordinate : 0,
+      fontSize: "16px",
+      xCoordinate: 0,
       yCoordinate: 0,
-      width : 120,
+      width: 120,
       height: 80,
-      borderRadius : "1px",
+      borderRadius: "1px",
       borderColor: "#000000",
-      borderThickness : "2px"
+      borderThickness: "2px"
     };
-    const { containers } = this.state;
+    const { containers } = this.state;    
     this.setState({ containers: containers.concat(newContainer) });
     this.setState({ containerCounter: counter });
+    this.setState({loaded: true})
   };
 
   addLabel = () => {
@@ -109,17 +117,18 @@ class EditScreen extends Component {
       backgroundColor: "#ffffff",
       text: defaultText,
       fontSize: "16px",
-      xCoordinate : 0,
+      xCoordinate: 0,
       yCoordinate: 0,
       width: 300,
       height: 45,
-      borderRadius : "1px",
-      borderColor : "#ffffff",
+      borderRadius: "1px",
+      borderColor: "#ffffff",
       borderThickness: "0px"
     };
-    const { labels } = this.state;     
+    const { labels } = this.state;
     this.setState({ labels: labels.concat(newLabel) });
     this.setState({ labelCounter: counter });
+    this.setState({loaded: true})
   };
 
   addTextField = () => {
@@ -132,18 +141,19 @@ class EditScreen extends Component {
       textColor: "#808080",
       backgroundColor: "#ffffff",
       text: defaultText,
-      fontSize : "16px",
-      xCoordinate : 0,
+      fontSize: "16px",
+      xCoordinate: 0,
       yCoordinate: 0,
       width: 210,
       height: 30,
-      borderRadius : "1px",
-      borderColor : "#000000",
+      borderRadius: "1px",
+      borderColor: "#000000",
       borderThickness: "1px"
     };
-    const { textfields } = this.state;   
+    const { textfields } = this.state;
     this.setState({ textfields: textfields.concat(newTextField) });
     this.setState({ textfieldCounter: counter });
+    this.setState({loaded: true})
   };
 
   addButton = () => {
@@ -157,21 +167,22 @@ class EditScreen extends Component {
       backgroundColor: "#bdbdbd",
       text: defaultText,
       fontsize: "16px",
-      xCoordinate : 0,
+      xCoordinate: 0,
       yCoordinate: 0,
       width: 130,
       height: 30,
-      borderRadius : "1px",     
-      borderColor : "#000000",
+      borderRadius: "1px",
+      borderColor: "#000000",
       borderThickness: "1px"
     };
-    const { buttons } = this.state;   
+    const { buttons } = this.state;
     this.setState({ buttons: buttons.concat(newButton) });
     this.setState({ buttonCounter: counter });
+    this.setState({loaded: true})
   };
 
   setFocusedElement = id => {
-    this.setState({ focusedElement: id });  
+    this.setState({ focusedElement: id });
   };
 
   changeWireFrameHeight = value => {
@@ -204,116 +215,113 @@ class EditScreen extends Component {
     var index = this.state.focusedElement.slice(-1) - 1;
     var newArray = [];
     //perform Check To see what element is being focused
-    if (this.state.focusedElement.includes("container")) {
-      newArray = this.state.containers
-      newArray[index].text = value
-      this.setState({ containers: newArray });
-    } else if (this.state.focusedElement.includes("label")) {
-      newArray = this.state.labels
-      newArray[index].text = value
-      this.setState({ labels: newArray });      
+    if (this.state.focusedElement.includes("label")) {
+      newArray = this.state.labels;
+      newArray[index].text = value;
+      this.setState({ labels: newArray });
     } else if (this.state.focusedElement.includes("button")) {
-      newArray = this.state.buttons
-      newArray[index].text = value
-      this.setState({ buttons: newArray }); 
+      newArray = this.state.buttons;
+      newArray[index].text = value;
+      this.setState({ buttons: newArray });
     } else if (this.state.focusedElement.includes("textfield")) {
-      newArray = this.state.textfields
-      newArray[index].text = value
+      newArray = this.state.textfields;
+      newArray[index].text = value;
       this.setState({ textfields: newArray });
     }
+    this.setState({loaded: true})
   };
 
-  editFontSize = value => {    
+  editFontSize = value => {
     var index = this.state.focusedElement.slice(-1) - 1;
     var newArray = [];
     //perform Check To see what element is being focused
-    if (this.state.focusedElement.includes("container")) {
-      newArray = this.state.containers
-      newArray[index].fontSize = value.toString() + "px"
-      this.setState({ containers: newArray });
-    } else if (this.state.focusedElement.includes("label")) {
-      newArray = this.state.labels
-      newArray[index].fontSize = value.toString() + "px"
-      this.setState({ labels: newArray });      
+    if (this.state.focusedElement.includes("label")) {
+      newArray = this.state.labels;
+      newArray[index].fontSize = value.toString() + "px";
+      this.setState({ labels: newArray });
     } else if (this.state.focusedElement.includes("button")) {
-      newArray = this.state.buttons
-      newArray[index].fontSize = value.toString() + "px"
-      this.setState({ buttons: newArray }); 
+      newArray = this.state.buttons;
+      newArray[index].fontSize = value.toString() + "px";
+      this.setState({ buttons: newArray });
     } else if (this.state.focusedElement.includes("textfield")) {
-      newArray = this.state.textfields
-      newArray[index].fontSize = value.toString() + "px"
+      newArray = this.state.textfields;
+      newArray[index].fontSize = value.toString() + "px";
       this.setState({ textfields: newArray });
     }
+    this.setState({loaded: true})
   };
 
   handleBorderRadiusChange = value => {
-    console.log("here")    
+    console.log("here");
     var index = this.state.focusedElement.slice(-1) - 1;
     var newArray = [];
-    
+
     //perform Check To see what element is being focused
     if (this.state.focusedElement.includes("container")) {
-      newArray = this.state.containers
-      newArray[index].borderRadius = value.toString() + "px"
+      newArray = this.state.containers;
+      newArray[index].borderRadius = value.toString() + "px";
       this.setState({ containers: newArray });
     } else if (this.state.focusedElement.includes("label")) {
-      newArray = this.state.labels
-      newArray[index].borderRadius = value.toString() + "px"
-      this.setState({ labels: newArray });      
+      newArray = this.state.labels;
+      newArray[index].borderRadius = value.toString() + "px";
+      this.setState({ labels: newArray });
     } else if (this.state.focusedElement.includes("button")) {
-      newArray = this.state.buttons
-      newArray[index].borderRadius = value.toString() + "px"
-      this.setState({ buttons: newArray }); 
+      newArray = this.state.buttons;
+      newArray[index].borderRadius = value.toString() + "px";
+      this.setState({ buttons: newArray });
     } else if (this.state.focusedElement.includes("textfield")) {
-      newArray = this.state.textfields
-      newArray[index].borderRadius = value.toString() + "px"
+      newArray = this.state.textfields;
+      newArray[index].borderRadius = value.toString() + "px";
       this.setState({ textfields: newArray });
     }
+    this.setState({loaded: true})
   };
 
-  handleBorderThicknessChange = value => {      
+  handleBorderThicknessChange = value => {
     var index = this.state.focusedElement.slice(-1) - 1;
-    var newArray = [];    
+    var newArray = [];
     //perform Check To see what element is being focused
     if (this.state.focusedElement.includes("container")) {
-      newArray = this.state.containers
-      newArray[index].borderThickness = value.toString() + "px"
+      newArray = this.state.containers;
+      newArray[index].borderThickness = value.toString() + "px";
       this.setState({ containers: newArray });
     } else if (this.state.focusedElement.includes("label")) {
-      newArray = this.state.labels
-      newArray[index].borderThickness = value.toString() + "px"
-      this.setState({ labels: newArray });      
+      newArray = this.state.labels;
+      newArray[index].borderThickness = value.toString() + "px";
+      this.setState({ labels: newArray });
     } else if (this.state.focusedElement.includes("button")) {
-      newArray = this.state.buttons
-      newArray[index].borderThickness = value.toString() + "px"
-      this.setState({ buttons: newArray }); 
+      newArray = this.state.buttons;
+      newArray[index].borderThickness = value.toString() + "px";
+      this.setState({ buttons: newArray });
     } else if (this.state.focusedElement.includes("textfield")) {
-      newArray = this.state.textfields
-      newArray[index].borderThickness = value.toString() + "px"
+      newArray = this.state.textfields;
+      newArray[index].borderThickness = value.toString() + "px";
       this.setState({ textfields: newArray });
     }
+    this.setState({loaded: true})
   };
 
-  handleBorderColorChange = (color, event) => {  
+  handleBorderColorChange = (color, event) => {
     var index = this.state.focusedElement.slice(-1) - 1;
-    var newArray = []  
-    if (this.state.focusedElement.includes("container")){
-      newArray = this.state.containers
-      newArray[index].borderColor = color.hex
-      this.setState({containers:newArray})
-    } else if (this.state.focusedElement.includes("label")){
-      newArray = this.state.labels
-      newArray[index].borderColor = color.hex
-      this.setState({labels:newArray})
-    } else if (this.state.focusedElement.includes("button")){
-      newArray = this.state.buttons
-      newArray[index].borderColor = color.hex
-      this.setState({buttons:newArray})
-    } else if (this.state.focusedElement.includes("textfield")){
-      newArray = this.state.textfields
-      newArray[index].borderColor = color.hex
-      this.setState({textfields:newArray})
+    var newArray = [];
+    if (this.state.focusedElement.includes("container")) {
+      newArray = this.state.containers;
+      newArray[index].borderColor = color.hex;
+      this.setState({ containers: newArray });
+    } else if (this.state.focusedElement.includes("label")) {
+      newArray = this.state.labels;
+      newArray[index].borderColor = color.hex;
+      this.setState({ labels: newArray });
+    } else if (this.state.focusedElement.includes("button")) {
+      newArray = this.state.buttons;
+      newArray[index].borderColor = color.hex;
+      this.setState({ buttons: newArray });
+    } else if (this.state.focusedElement.includes("textfield")) {
+      newArray = this.state.textfields;
+      newArray[index].borderColor = color.hex;
+      this.setState({ textfields: newArray });
     }
+    this.setState({loaded: true})
   };
 
   handleBackGroundColorChange = (color, event) => {
@@ -354,10 +362,14 @@ class EditScreen extends Component {
       textfields[indexTextField] = textfieldToBeEdit;
       this.setState({ textfields: textfields }); //Confirmed Edit Into Object
     }
+    this.setState({loaded: true})
   };
 
   handleTextColorChange = (color, event) => {
-    if (this.state.focusedElement.includes("container") && this.state.containers) {
+    if (
+      this.state.focusedElement.includes("container") &&
+      this.state.containers
+    ) {
       var containers = this.state.containers;
       var containerToBeEdit = containers.filter(
         container => container.id === this.state.focusedElement
@@ -394,6 +406,7 @@ class EditScreen extends Component {
       textfields[indexTextField] = textfieldToBeEdit;
       this.setState({ textfields: textfields }); //Confirmed Edit Into Object
     }
+    this.setState({loaded: true})
   };
 
   updateXAndYCoordinatesFocusedElement = (x, y) => {
@@ -401,73 +414,76 @@ class EditScreen extends Component {
     var newArray = [];
     //perform Check To see what element is being focused
     if (this.state.focusedElement.includes("container")) {
-      newArray = this.state.containers      
-      newArray[index].xCoordinate = x
-      newArray[index].yCoordinate = y
+      newArray = this.state.containers;
+      newArray[index].xCoordinate = x;
+      newArray[index].yCoordinate = y;
       this.setState({ containers: newArray });
     } else if (this.state.focusedElement.includes("label")) {
-      newArray = this.state.labels
-      newArray[index].xCoordinate = x
-      newArray[index].yCoordinate = y
-      this.setState({ labels: newArray });      
+      newArray = this.state.labels;
+      newArray[index].xCoordinate = x;
+      newArray[index].yCoordinate = y;
+      this.setState({ labels: newArray });
     } else if (this.state.focusedElement.includes("button")) {
-      newArray = this.state.buttons
-      newArray[index].xCoordinate = x
-      newArray[index].yCoordinate = y
-      this.setState({ buttons: newArray }); 
+      newArray = this.state.buttons;
+      newArray[index].xCoordinate = x;
+      newArray[index].yCoordinate = y;
+      this.setState({ buttons: newArray });
     } else if (this.state.focusedElement.includes("textfield")) {
-      newArray = this.state.textfields
-      newArray[index].xCoordinate = x
-      newArray[index].yCoordinate = y
+      newArray = this.state.textfields;
+      newArray[index].xCoordinate = x;
+      newArray[index].yCoordinate = y;
       this.setState({ textfields: newArray });
     }
-  }
+    this.setState({loaded: true})
+  };
 
   updateWidthAndHeightFocusedElement = (width, height) => {
     var index = this.state.focusedElement.slice(-1) - 1;
     var newArray = [];
     //perform Check To see what element is being focused
     if (this.state.focusedElement.includes("container")) {
-      newArray = this.state.containers
-      newArray[index].width = width
-      newArray[index].height = height
+      newArray = this.state.containers;
+      newArray[index].width = width;
+      newArray[index].height = height;
       this.setState({ containers: newArray });
     } else if (this.state.focusedElement.includes("label")) {
-      newArray = this.state.labels
-      newArray[index].width = width
-      newArray[index].height = height
-      this.setState({ labels: newArray });      
+      newArray = this.state.labels;
+      newArray[index].width = width;
+      newArray[index].height = height;
+      this.setState({ labels: newArray });
     } else if (this.state.focusedElement.includes("button")) {
-      newArray = this.state.buttons
-      newArray[index].width = width
-      newArray[index].height = height
-      this.setState({ buttons: newArray }); 
+      newArray = this.state.buttons;
+      newArray[index].width = width;
+      newArray[index].height = height;
+      this.setState({ buttons: newArray });
     } else if (this.state.focusedElement.includes("textfield")) {
-      newArray = this.state.textfields
-      newArray[index].width = width
-      newArray[index].height = height
+      newArray = this.state.textfields;
+      newArray[index].width = width;
+      newArray[index].height = height;
       this.setState({ textfields: newArray });
     }
-  }
+    this.setState({loaded: true})
+  };
 
   zoomIn = () => {
     var zoom = this.state.scale;
     var zoomValue = (Number(zoom) * 2).toString();
     this.setState({ scale: zoomValue });
-    
+    this.setState({loaded: true})
   };
 
   zoomOut = () => {
     var zoom = this.state.scale;
     var zoomValue = (Number(zoom) / 2).toString();
     this.setState({ scale: zoomValue });
+    this.setState({loaded: true})
   };
 
   duplicateElement = id => {
     var index = Number(id.slice(-1)) - 1;
     var counter = 0;
-    var newId = ""
-    if (id.includes("container")) {    
+    var newId = "";
+    if (id.includes("container")) {
       const { containers } = this.state;
       var containerToBeDuplicate = containers[index];
       counter = this.state.containerCounter;
@@ -477,13 +493,13 @@ class EditScreen extends Component {
         id: newId,
         textColor: containerToBeDuplicate.textColor,
         backgroundColor: containerToBeDuplicate.backgroundColor,
-        text : containerToBeDuplicate.text,
-        fontSize : containerToBeDuplicate.fontSize,
-        xCoordinate : containerToBeDuplicate.xCoordinate + 100,
-        yCoordinate : containerToBeDuplicate.yCoordinate + 100,
+        text: containerToBeDuplicate.text,
+        fontSize: containerToBeDuplicate.fontSize,
+        xCoordinate: containerToBeDuplicate.xCoordinate + 100,
+        yCoordinate: containerToBeDuplicate.yCoordinate + 100,
         width: containerToBeDuplicate.width,
         height: containerToBeDuplicate.height,
-        borderRadius : containerToBeDuplicate.borderRadius
+        borderRadius: containerToBeDuplicate.borderRadius
       };
       this.setState({ containers: containers.concat(newContainer) });
       this.setState({ containerCounter: counter });
@@ -497,10 +513,10 @@ class EditScreen extends Component {
         id: newId,
         textColor: labelToBeDuplicate.textColor,
         backgroundColor: labelToBeDuplicate.backgroundColor,
-        text : labelToBeDuplicate.text,
-        fontSize : labelToBeDuplicate.fontSize,
-        xCoordinate : labelToBeDuplicate.xCoordinate + 100,
-        yCoordinate : labelToBeDuplicate.yCoordinate + 100,
+        text: labelToBeDuplicate.text,
+        fontSize: labelToBeDuplicate.fontSize,
+        xCoordinate: labelToBeDuplicate.xCoordinate + 100,
+        yCoordinate: labelToBeDuplicate.yCoordinate + 100,
         width: labelToBeDuplicate.width,
         height: labelToBeDuplicate.height,
         borderRadius: labelToBeDuplicate.borderRadius
@@ -517,10 +533,10 @@ class EditScreen extends Component {
         id: newId,
         textColor: buttonToBeDuplicate.textColor,
         backgroundColor: buttonToBeDuplicate.backgroundColor,
-        text : buttonToBeDuplicate.text,
-        fontSize : buttonToBeDuplicate.fontSize,
-        xCoordinate : buttonToBeDuplicate.xCoordinate + 100,
-        yCoordinate : buttonToBeDuplicate.yCoordinate + 100,
+        text: buttonToBeDuplicate.text,
+        fontSize: buttonToBeDuplicate.fontSize,
+        xCoordinate: buttonToBeDuplicate.xCoordinate + 100,
+        yCoordinate: buttonToBeDuplicate.yCoordinate + 100,
         width: buttonToBeDuplicate.width,
         height: buttonToBeDuplicate.height,
         borderRadius: buttonToBeDuplicate.borderRadius
@@ -537,10 +553,10 @@ class EditScreen extends Component {
         id: newId,
         textColor: textfieldToBeDuplicate.textColor,
         backgroundColor: textfieldToBeDuplicate.backgroundColor,
-        text : textfieldToBeDuplicate.text,
-        fontSize : textfieldToBeDuplicate.fontSize,
-        xCoordinate : textfieldToBeDuplicate.xCoordinate + 100,
-        yCoordinate : textfieldToBeDuplicate.yCoordinate + 100,
+        text: textfieldToBeDuplicate.text,
+        fontSize: textfieldToBeDuplicate.fontSize,
+        xCoordinate: textfieldToBeDuplicate.xCoordinate + 100,
+        yCoordinate: textfieldToBeDuplicate.yCoordinate + 100,
         width: textfieldToBeDuplicate.width,
         height: textfieldToBeDuplicate.height,
         borderRadius: textfieldToBeDuplicate.borderRadius
@@ -548,6 +564,7 @@ class EditScreen extends Component {
       this.setState({ textfields: textfields.concat(newTextField) });
       this.setState({ textfieldCounter: counter });
     }
+    this.setState({loaded: true})
   };
 
   deleteAndCopyDetect = event => {
@@ -587,6 +604,7 @@ class EditScreen extends Component {
         }
       }
     }
+    this.setState({loaded: true})
   };
 
   componentDidMount = () => {
@@ -597,22 +615,30 @@ class EditScreen extends Component {
     const fireStore = getFirestore();
     if (this.props.todoList != null) {
       fireStore
-        .collection("todoLists")
+        .collection("WireFrames")
         .doc(this.props.todoList.id)
         .update({
           createdAt: new Date()
         });
     }
     document.removeEventListener("keydown", this.unDoAndRedoDetect, false);
-  }; 
+  };
 
-  static getDerivedStateFromProps (nextProps, prevState){
-    if (nextProps.containers !== prevState.containers){
-      return {buttons: nextProps.buttons, containers: nextProps.containers} 
-    }
-    
+  static getDerivedStateFromProps(nextProps, prevState) {      
+      if (prevState.loaded === false){        
+        return {
+          buttons: nextProps.buttons,
+          containers: nextProps.containers,
+          labels: nextProps.labels,
+          textfields: nextProps.textfields,
+          containerCounter: nextProps.containerCounter,
+          labelCounter: nextProps.labelCounter,
+          textfieldCounter: nextProps.textfieldCounter,
+          buttonCounter: nextProps.buttonCounter,          
+        };
+      }        
+     
   }
-
 
   render() {
     const auth = this.props.auth;
@@ -652,7 +678,7 @@ class EditScreen extends Component {
             defaultValue={WireFrame.owner}
           />
         </div>
-        <div className="row" style={{ display: "flex"}}>
+        <div className="row" style={{ display: "flex" }}>
           <ControllerAdder
             goHome={this.goHome.bind(this)}
             zoomIn={this.zoomIn.bind(this)}
@@ -670,7 +696,7 @@ class EditScreen extends Component {
               )
             )}
             scale={this.state.scale}
-            saveWork = {this.saveWork.bind(this)}
+            saveWork={this.saveWork.bind(this)}
           />
 
           <div
@@ -682,10 +708,10 @@ class EditScreen extends Component {
               height: this.state.wireFrameHeight,
               zoom: "200%",
               transform: "scale(" + this.state.scale + ")",
-              transformOrigin: "0 0",              
+              transformOrigin: "0 0",
               maxWidth: "5000px",
-              maxHeight: "5000px"
-
+              maxHeight: "5000px",
+              overflow : "scroll"
             }}
           >
             {this.state.containers.map(x => (
@@ -694,23 +720,25 @@ class EditScreen extends Component {
                 id={x.id}
                 containerCounter={this.state.containerCounter.toString()}
                 setFocusedElement={this.setFocusedElement.bind(this)}
-                updateXAndYCoordinatesFocusedElement = {this.updateXAndYCoordinatesFocusedElement.bind(this)}
-                updateWidthAndHeightFocusedElement = {this.updateWidthAndHeightFocusedElement.bind(this)}
-                myText={x.text}
+                updateXAndYCoordinatesFocusedElement={this.updateXAndYCoordinatesFocusedElement.bind(
+                  this
+                )}
+                updateWidthAndHeightFocusedElement={this.updateWidthAndHeightFocusedElement.bind(
+                  this
+                )}                
                 textColor={x.textColor}
                 backgroundColor={x.backgroundColor}
-                fontSize = {x.fontSize}
-                xCoordinate = {x.xCoordinate}
-                yCoordinate = {x.yCoordinate}
-                width = {x.width}
-                height = {x.height}
-                borderRadius = {x.borderRadius}
-                borderColor = {x.borderColor}
-                borderThickness = {x.borderThickness}
+                fontSize={x.fontSize}
+                xCoordinate={x.xCoordinate}
+                yCoordinate={x.yCoordinate}
+                width={x.width}
+                height={x.height}
+                borderRadius={x.borderRadius}
+                borderColor={x.borderColor}
+                borderThickness={x.borderThickness}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
-                
               />
             ))}
 
@@ -720,19 +748,23 @@ class EditScreen extends Component {
                 id={x.id}
                 labelCounter={this.state.labelCounter.toString()}
                 setFocusedElement={this.setFocusedElement.bind(this)}
-                updateXAndYCoordinatesFocusedElement = {this.updateXAndYCoordinatesFocusedElement.bind(this)}
-                updateWidthAndHeightFocusedElement = {this.updateWidthAndHeightFocusedElement.bind(this)}
+                updateXAndYCoordinatesFocusedElement={this.updateXAndYCoordinatesFocusedElement.bind(
+                  this
+                )}
+                updateWidthAndHeightFocusedElement={this.updateWidthAndHeightFocusedElement.bind(
+                  this
+                )}
                 myText={x.text}
                 textColor={x.textColor}
                 backgroundColor={x.backgroundColor}
-                fontSize = {x.fontSize}
-                xCoordinate = {x.xCoordinate}
-                yCoordinate = {x.yCoordinate}
-                width = {x.width}
-                height = {x.height}
-                borderRadius = {x.borderRadius}
-                borderColor = {x.borderColor}
-                borderThickness = {x.borderThickness}
+                fontSize={x.fontSize}
+                xCoordinate={x.xCoordinate}
+                yCoordinate={x.yCoordinate}
+                width={x.width}
+                height={x.height}
+                borderRadius={x.borderRadius}
+                borderColor={x.borderColor}
+                borderThickness={x.borderThickness}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
@@ -745,19 +777,23 @@ class EditScreen extends Component {
                 id={x.id}
                 buttonCounter={this.state.buttonCounter.toString()}
                 setFocusedElement={this.setFocusedElement.bind(this)}
-                updateXAndYCoordinatesFocusedElement = {this.updateXAndYCoordinatesFocusedElement.bind(this)}
-                updateWidthAndHeightFocusedElement = {this.updateWidthAndHeightFocusedElement.bind(this)}
+                updateXAndYCoordinatesFocusedElement={this.updateXAndYCoordinatesFocusedElement.bind(
+                  this
+                )}
+                updateWidthAndHeightFocusedElement={this.updateWidthAndHeightFocusedElement.bind(
+                  this
+                )}
                 myText={x.text}
                 textColor={x.textColor}
                 backgroundColor={x.backgroundColor}
-                fontSize = {x.fontSize}
-                xCoordinate = {x.xCoordinate}
-                yCoordinate = {x.yCoordinate}
-                width = {x.width}
-                height = {x.height}
-                borderRadius = {x.borderRadius}
-                borderColor = {x.borderColor}
-                borderThickness = {x.borderThickness}
+                fontSize={x.fontSize}
+                xCoordinate={x.xCoordinate}
+                yCoordinate={x.yCoordinate}
+                width={x.width}
+                height={x.height}
+                borderRadius={x.borderRadius}
+                borderColor={x.borderColor}
+                borderThickness={x.borderThickness}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
@@ -770,27 +806,28 @@ class EditScreen extends Component {
                 id={x.id}
                 textfieldCounter={this.state.textfieldCounter.toString()}
                 setFocusedElement={this.setFocusedElement.bind(this)}
-                updateXAndYCoordinatesFocusedElement = {this.updateXAndYCoordinatesFocusedElement.bind(this)}
-                updateWidthAndHeightFocusedElement = {this.updateWidthAndHeightFocusedElement.bind(this)}
+                updateXAndYCoordinatesFocusedElement={this.updateXAndYCoordinatesFocusedElement.bind(
+                  this
+                )}
+                updateWidthAndHeightFocusedElement={this.updateWidthAndHeightFocusedElement.bind(
+                  this
+                )}
                 myText={x.text}
                 textColor={x.textColor}
                 backgroundColor={x.backgroundColor}
-                fontSize = {x.fontSize}
-                xCoordinate = {x.xCoordinate}
-                yCoordinate = {x.yCoordinate}
-                width = {x.width}
-                height = {x.height}
-                borderRadius = {x.borderRadius}
-                borderColor = {x.borderColor}
-                borderThickness = {x.borderThickness}
+                fontSize={x.fontSize}
+                xCoordinate={x.xCoordinate}
+                yCoordinate={x.yCoordinate}
+                width={x.width}
+                height={x.height}
+                borderRadius={x.borderRadius}
+                borderColor={x.borderColor}
+                borderThickness={x.borderThickness}
                 focusedElement={this.state.focusedElement}
                 createResizers={this.createResizers.bind(this)}
                 scale={this.state.scale}
               />
             ))}
-
-              
-            
           </div>
           <ControllerModifier
             editText={this.editText.bind(this)}
@@ -807,9 +844,11 @@ class EditScreen extends Component {
               this
             )}
             handleTextColorChange={this.handleTextColorChange.bind(this)}
-            handleBorderRadiusChange = {this.handleBorderRadiusChange.bind(this)}
-            handleBorderThicknessChange = {this.handleBorderThicknessChange.bind(this)}
-            handleBorderColorChange = {this.handleBorderColorChange.bind(this)}
+            handleBorderRadiusChange={this.handleBorderRadiusChange.bind(this)}
+            handleBorderThicknessChange={this.handleBorderThicknessChange.bind(
+              this
+            )}
+            handleBorderColorChange={this.handleBorderColorChange.bind(this)}
             scale={this.state.scale}
           />
         </div>
@@ -823,19 +862,31 @@ const mapStateToProps = (state, ownProps) => {
   const { WireFrames } = state.firestore.data;
   const WireFrame = WireFrames ? WireFrames[id] : null;
 
-
   if (WireFrame) WireFrame.id = id;
   if (WireFrame) {
-    var containers = WireFrame.containers
-    var buttons = WireFrame.buttons
+    var containers = WireFrame.containers;
+    var buttons = WireFrame.buttons;
+    var labels = WireFrame.labels;
+    var textfields = WireFrame.textfields;
+    var containerCounter = WireFrame.containers.length
+    var buttonCounter = WireFrame.buttons.length
+    var labelCounter = WireFrame.labels.length
+    var textfieldCounter = WireFrame.textfields.length
+    
   }
-  
+
   return {
-    WireFrame, // Mark Elements Here in The TodoList to Map Onto Edit Area Later
+    WireFrame, 
     auth: state.firebase.auth,
     profile: state.firebase.profile,
     containers,
-    buttons
+    buttons,
+    labels,
+    textfields,
+    containerCounter,
+    buttonCounter,
+    labelCounter,
+    textfieldCounter,    
   };
 };
 
