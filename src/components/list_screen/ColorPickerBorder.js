@@ -15,11 +15,10 @@ class ColorPickerBorder extends Component {
 
   handleClick = e => {
     if (!this.node.contains(e.target)) {
-      var editing = document.getElementById("modifier_area");
-      if (!editing.contains(e.target)) {
+     
         // Out of Focus
-        this.props.toggleBackGroundColorDiv()
-      }
+        this.props.toggleBorderColorDiv()
+      
     }
   };
 
@@ -34,7 +33,7 @@ class ColorPickerBorder extends Component {
           color={
             this.props.focusedElement !== null
               ? document.getElementById(this.props.focusedElement).style
-                  .backgroundColor
+                  .borderColor
               : "#000000"
           }
           onChange={this.props.handleBorderColorChange}

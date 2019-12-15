@@ -20,17 +20,16 @@ class BorderRadiusSlider extends Component {
 
   handleClick = e => {
     if (!this.node.contains(e.target)) {
-      var editing = document.getElementById("modifier_area");
-      if (!editing.contains(e.target)) {
+     
         // Out of Focus
         this.props.toggleBorderRadiusSlider()
-      }
+      
     }
   };
 
   render() {
     // x = left , y = top value, width = widht, height = height
-    const {value} = this.state
+    
     return (
       <div
         ref={node => (this.node = node)}

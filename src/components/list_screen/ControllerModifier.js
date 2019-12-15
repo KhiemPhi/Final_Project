@@ -71,7 +71,8 @@ class ControllerModifier extends Component {
                 </div>
                 <div className = "col s8" style={{marginTop: "25px", fontSize: "12px" }}>Border Color:</div>
                 <div className = "col s1">
-                  <div className = "border_color" id = "border_color_input" ></div>
+                  {this.state.showColorPickerBorderColor && <Button className = "border_color" id = "border_color_input" onClick= {this.toggleBorderColorDiv} style={this.props.focusedElement !== null ? {backgroundColor: document.getElementById(this.props.focusedElement).style.borderColor} : {backgroundColor: "#000000"}} ></Button>}
+                  {!this.state.showColorPickerBorderColor  && <ColorPickerBorder focusedElement = {this.props.focusedElement} toggleBorderColorDiv = {this.toggleBorderColorDiv.bind(this)} handleBorderColorChange = {this.props.handleBorderColorChange}></ColorPickerBorder>}
                 </div>
                 <div className = "col s7" style={{marginTop: "25px", fontSize: "12px"}}>Border Thickness:</div>
                 <div className = "col s5">

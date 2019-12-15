@@ -120,7 +120,7 @@ class NewButton extends Component {
             color: this.props.textColor,
             backgroundColor: this.props.backgroundColor,
             fontSize: this.props.fontSize,
-            border: this.props.borderThickness + "solid " +  this.props.borderColor,
+            borderColor: this.props.borderColor,
             borderRadius: this.props.borderRadius,
             borderWidth: this.props.borderThickness
           }}

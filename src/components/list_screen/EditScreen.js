@@ -251,8 +251,7 @@ class EditScreen extends Component {
 
   handleBorderThicknessChange = value => {      
     var index = this.state.focusedElement.slice(-1) - 1;
-    var newArray = [];
-    
+    var newArray = [];    
     //perform Check To see what element is being focused
     if (this.state.focusedElement.includes("container")) {
       newArray = this.state.containers
@@ -270,6 +269,16 @@ class EditScreen extends Component {
       newArray = this.state.textfields
       newArray[index].borderThickness = value.toString() + "px"
       this.setState({ textfields: newArray });
+    }
+  };
+
+  handleBorderColorChange = (color, event) => {  
+    var index = this.state.focusedElement.slice(-1) - 1;
+    var newArray = []  
+    if (this.state.focusedElement.includes("container")){
+      var newArray = this.state.containers
+      newArray[index].borderColor = color.hex
+      this.setState({containers:newArray})
     }
   };
 
@@ -601,7 +610,7 @@ class EditScreen extends Component {
             defaultValue={todoList.owner}
           />
         </div>
-        <div className="row" style={{ display: "flex", overflow:"scroll" }}>
+        <div className="row" style={{ display: "flex"}}>
           <ControllerAdder
             goHome={this.goHome.bind(this)}
             zoomIn={this.zoomIn.bind(this)}
@@ -756,6 +765,7 @@ class EditScreen extends Component {
             handleTextColorChange={this.handleTextColorChange.bind(this)}
             handleBorderRadiusChange = {this.handleBorderRadiusChange.bind(this)}
             handleBorderThicknessChange = {this.handleBorderThicknessChange.bind(this)}
+            handleBorderColorChange = {this.handleBorderColorChange.bind(this)}
             scale={this.state.scale}
           />
         </div>

@@ -108,10 +108,10 @@ class NewTextField extends Component {
             transform: "scale(" + this.props.scale + ")",
             color: this.props.textColor,
             backgroundColor: this.props.backgroundColor,
-            fontSize: this.props.fontSize,
-            border: this.props.borderThickness + "solid " + this.props.borderColor,
+            fontSize: this.props.fontSize,            
             borderRadius: this.props.borderRadius,
-            borderWidth: this.props.borderThickness
+            borderWidth: this.props.borderThickness,
+            borderColor: this.props.borderColor,
           }}
         >
           {this.props.myText}

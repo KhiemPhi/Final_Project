@@ -81,6 +81,7 @@ class NewContainer extends Component {
         // Out of Focus
         this.setState({ hasFocus: false });
         this.setState({ myText: this.props.focusedElementText });
+        this.props.setFocusedElement(null)
         document.getElementById("text_input").value = "";
         document.getElementById("fontSize_input").value = "";
         document.getElementById("border_radius_input").value = "";
@@ -124,7 +125,7 @@ class NewContainer extends Component {
             backgroundColor: this.props.backgroundColor,
             fontSize: this.props.fontSize,
             borderRadius: this.props.borderRadius,
-            border: this.props.borderThickness + "solid " + this.props.borderColor,
+            borderColor: this.props.borderColor,
             borderWidth: this.props.borderThickness
           }} // color is text color, background Color is color
           bounds={".edit_area"}

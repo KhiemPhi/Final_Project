@@ -15,12 +15,9 @@ class BorderThicknessSlider extends Component {
 
   handleClick = e => {
     if (!this.node.contains(e.target)) {
-      var editing = document.getElementById("modifier_area");
-      if (!editing.contains(e.target)) {
-        // Out of Focus
-        console.log("fire");
+     
         this.props.toggleBorderThicknessSlider();
-      }
+      
     }
   };
 
