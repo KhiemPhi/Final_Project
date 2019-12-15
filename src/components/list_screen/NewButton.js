@@ -7,10 +7,16 @@ import { Rnd } from "react-rnd";
 class NewButton extends Component {
   state = {
     hasFocus: false,
-    disableDragging: false
+    disableDragging: false,
+    dragging: false
   };
 
+  startDragging = () => { 
+    this.setState({dragging: false})    
+  }
+
   updateXAndYCoordinates = data => {
+    this.setState({dragging:true})      
     var transform = document
       .getElementById(this.props.id)
       .style.transform.toString();
@@ -36,8 +42,7 @@ class NewButton extends Component {
     this.props.updateWidthAndHeightFocusedElement(width, height);
   };
 
-  setFocus = () => {
-    console.log(this.props.id);
+  setFocus = () => {    
     this.props.setFocusedElement(this.props.id);
     this.setState({ hasFocus: true });
     document.getElementById("text_input").value = document.getElementById(
@@ -78,6 +83,7 @@ class NewButton extends Component {
       if (!editing.contains(e.target)) {
         // Out of Focus
         this.setState({ hasFocus: false });
+        this.props.setFocusedElement("edit_area")
         document.getElementById("text_input").value = "";
         document.getElementById("fontSize_input").value = "";
         document.getElementById("border_radius_input").value = "";
@@ -112,6 +118,7 @@ class NewButton extends Component {
           id={this.props.id}
           onClick={this.setFocus}
           onDrag={this.updateXAndYCoordinates}
+          onDragStop={this.startDragging}
           onResize={this.updateWidthAndHeight}
           disableDragging={!this.state.hasFocus}
           bounds={".edit_area"}

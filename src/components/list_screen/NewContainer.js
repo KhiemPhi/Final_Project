@@ -11,12 +11,12 @@ class NewContainer extends Component {
     dragging: false
   };
 
-  stopDragging = () => {
-    this.setState({dragging: false})
+  startDragging = () => { 
+    this.setState({dragging: false})    
   }
 
-  updateXAndYCoordinates = data => {
-    this.setState({dragging: true})
+  updateXAndYCoordinates = data => {    
+    this.setState({dragging:true})       
     var transform = document
       .getElementById(this.props.id)
       .style.transform.toString();
@@ -27,8 +27,7 @@ class NewContainer extends Component {
     var newX = Number(xString.substring(0, xString.length - 2));
     var newY = Number(yString.substring(0, yString.length - 2));
     this.props.updateXAndYCoordinatesFocusedElement(newX, newY);
-    this.setFocus();
-    
+    this.setFocus();    
   };
 
   updateWidthAndHeight = data => {
@@ -43,8 +42,8 @@ class NewContainer extends Component {
     this.props.updateWidthAndHeightFocusedElement(width, height);
   };
 
-  setFocus = () => {
-    console.log(this.props.id);
+  setFocus = (event) => {   
+  
     this.props.setFocusedElement(this.props.id);
     this.setState({ hasFocus: true });
     document.getElementById("text_input").value = document.getElementById(
@@ -70,7 +69,7 @@ class NewContainer extends Component {
     document.getElementById("fontSize_input").value = fontSize;
     var div = this.props.createResizers();
     document.getElementById(this.props.id).appendChild(div);
-    this.setState({dragging:true})
+    
   };
 
   componentWillMount() {
@@ -83,17 +82,18 @@ class NewContainer extends Component {
 
   handleClick = e => {
     if (!this.node.contains(e.target)) {
+      
       var editing = document.getElementById("modifier_area");
-
-      if (!editing.contains(e.target) ) {
-        // Out of Focus
-        this.setState({ hasFocus: false });
-        this.setState({ myText: this.props.focusedElementText });
-        //this.props.setFocusedElement(null)
-        document.getElementById("text_input").value = "";
-        document.getElementById("fontSize_input").value = "";
-        document.getElementById("border_radius_input").value = "";
-        document.getElementById("border_thickness_input").value = ""
+      
+      if (!editing.contains(e.target) && this.state.dragging === false )   {       
+          this.setState({ hasFocus: false });
+          this.props.setFocusedElement("edit_area")
+          this.setState({ myText: this.props.focusedElementText });        
+          document.getElementById("text_input").value = "";
+          document.getElementById("fontSize_input").value = "";
+          document.getElementById("border_radius_input").value = "";
+          document.getElementById("border_thickness_input").value = ""    
+        
       }
       if (this.props.focusedElement !== null) {
         var div = this.props.createResizers();
@@ -108,7 +108,7 @@ class NewContainer extends Component {
       <div
         ref={node => (this.node = node)}
         id={this.props.id + "wrapper"}
-        style={{ zIndex: 4 }}
+        
       >
         <Rnd
           className={
@@ -123,10 +123,10 @@ class NewContainer extends Component {
             height: this.props.height
           }}
           id={this.props.id}
-          onClick={this.setFocus}
+          onClick={e => this.setFocus(e.target)}
           onResize={this.updateWidthAndHeight}
           onDrag={this.updateXAndYCoordinates}
-          onDragStop={this.stopDragging}
+          onDragStop={this.startDragging}
           disableDragging={!this.state.hasFocus}
           style={{
             transform: "scale(" + this.props.scale + ")",

@@ -39,7 +39,7 @@
                     "textColor": "#000000",
                     "backgroundColor": "#bdbdbd",
                     "text": "My Input",
-                    "fontsize": "16px",
+                    "fontSize": "16px",
                     "xCoordinate" : 0,
                     "yCoordinate": 0,
                     "width": 130,
@@ -56,7 +56,7 @@
                     "textColor": "green",
                     "backgroundColor": "white",
                     "text": "My Labels",
-                    "fontsize": "16px",
+                    "fontSize": "16px",
                     "xCoordinate" : 200,
                     "yCoordinate": 200,
                     "width": 130,
@@ -73,7 +73,7 @@
                 "textColor": "green",
                 "backgroundColor": "white",
                 "text": "My TextField",
-                "fontsize": "16px",
+                "fontSize": "16px",
                 "xCoordinate" : 200,
                 "yCoordinate": 200,
                 "width": 130,
@@ -87,147 +87,175 @@
         },
         {
             "key": 1,
-            "name": "House Repairs",
-            "owner": "Bob Vila",
+            "name": "My Beautiful WireFrame",
+            "owner": "Gillian Steger",
             "createdAt": "1",
             "currentSortingCriteria" : "1",
-            "items": [
-                {
-                    "key": 0,
-                    "description": "Repair Leaky Kitchen Sink",
-                    "due_date": "2019-07-11",
-                    "assigned_to": "Rick",
-                    "completed": true
+
+            "containers": [
+                {   
+                    "id" : "new_container1", 
+                    "textColor": "#000000",
+                    "backgroundColor": "blue",               
+                    "xCoordinate" : 0,
+                    "yCoordinate": 0,
+                    "width" : 120,
+                    "height": 80,
+                    "borderRadius" : "1px",
+                    "borderColor": "#000000",
+                    "borderThickness" : "2px"
                 },
+                
+                {   
+                    "id" : "new_container2", 
+                    "textColor": "#000000",
+                    "backgroundColor": "pink",                    
+                    "xCoordinate" : 100,
+                    "yCoordinate": 100,
+                    "width" : 120,
+                    "height": 80,
+                    "borderRadius" : "1px",
+                    "borderColor": "#000000",
+                    "borderThickness" : "2px"
+                } 
+            ],
+            "buttons" : [
                 {
-                    "key": 1,
-                    "description": "Fix Leak in Roof",
-                    "due_date": "2019-10-15",
-                    "assigned_to": "Jane",
-                    "completed": false
-                },
-                {
-                    "key": 2,
-                    "description": "Paint Interior",
-                    "due_date": "2019-11-11",
-                    "assigned_to": "Joe",
-                    "completed": false
-                },
-                {
-                    "key": 3,
-                    "description": "Plant Flowers",
-                    "due_date": "2019-08-17",
-                    "assigned_to": "Ryan",
-                    "completed": true
-                },
-                {
-                    "key": 4,
-                    "description": "Repair Front Door",
-                    "due_date": "2019-10-31",
-                    "assigned_to": "Glenda",
-                    "completed": false
+                    "id": "new_button1",
+                    "textColor": "#000000",
+                    "backgroundColor": "#bdbdbd",
+                    "text": "My Input For Assembly",
+                    "fontSize": "16px",
+                    "xCoordinate" : 0,
+                    "yCoordinate": 0,
+                    "width": 130,
+                    "height": 30,
+                    "borderRadius" : "1px",
+                    "borderColor": "#000000",
+                    "borderThickness" : "1px"
                 }
+            ],
+
+            "labels" : [
+                {
+                    "id": "new_label1",
+                    "textColor": "green",
+                    "backgroundColor": "white",
+                    "text": "My Labels",
+                    "fontSize": "16px",
+                    "xCoordinate" : 200,
+                    "yCoordinate": 200,
+                    "width": 130,
+                    "height": 30,
+                    "borderRadius" : "1px",
+                    "borderColor": "#000000",
+                    "borderThickness" : "0px"
+                }
+            ],
+
+            "textfields" : [
+               {
+                "id": "new_textfield1",
+                "textColor": "green",
+                "backgroundColor": "white",
+                "text": "My TextField",
+                "fontSize": "16px",
+                "xCoordinate" : 200,
+                "yCoordinate": 200,
+                "width": 130,
+                "height": 30,
+                "borderRadius" : "1px",
+                "borderColor": "#000000",
+                "borderThickness" : "1px"
+               }     
             ]
+            
         },
         {
             "key": 2,
-            "name": "Courses to Take",
-            "owner": "Joe Student",
+            "name": "Courses WireFrame",
+            "owner": "Khiem Phi",
             "createdAt": "1",
             "currentSortingCriteria" : "1",
-            "items": [
-                {
-                    "key": 0,
-                    "description": "CSE 114",
-                    "due_date": "2018-12-31",
-                    "assigned_to": "Joe",
-                    "completed": true
+
+            "containers": [
+                {   
+                    "id" : "new_container1", 
+                    "textColor": "#000000",
+                    "backgroundColor": "red",               
+                    "xCoordinate" : 0,
+                    "yCoordinate": 0,
+                    "width" : 120,
+                    "height": 80,
+                    "borderRadius" : "1px",
+                    "borderColor": "#000000",
+                    "borderThickness" : "2px"
                 },
+                
+                {   
+                    "id" : "new_container2", 
+                    "textColor": "#000000",
+                    "backgroundColor": "yellow",                    
+                    "xCoordinate" : 100,
+                    "yCoordinate": 100,
+                    "width" : 120,
+                    "height": 80,
+                    "borderRadius" : "1px",
+                    "borderColor": "#000000",
+                    "borderThickness" : "2px"
+                } 
+            ],
+            "buttons" : [
                 {
-                    "key": 1,
-                    "description": "CSE 215",
-                    "due_date": "2018-12-31",
-                    "assigned_to": "Joe",
-                    "completed": true
-                },
-                {
-                    "key": 2,
-                    "description": "AMS 301",
-                    "due_date": "2018-12-31",
-                    "assigned_to": "Joe",
-                    "completed": true
-                },
-                {
-                    "key": 3,
-                    "description": "CSE 214",
-                    "due_date": "2019-05-31",
-                    "assigned_to": "Joe",
-                    "completed": true
-                },
-                {
-                    "key": 4,
-                    "description": "AMS 310",
-                    "due_date": "2019-05-31",
-                    "assigned_to": "Joe",
-                    "completed": true
-                },
-                {
-                    "key": 5,
-                    "description": "CSE 216",
-                    "due_date": "2019-12-31",
-                    "assigned_to": "Joe",
-                    "completed": false
-                },
-                {
-                    "key": 6,
-                    "description": "CSE 220",
-                    "due_date": "2019-12-31",
-                    "assigned_to": "Joe",
-                    "completed": false
-                },
-                {
-                    "key": 7,
-                    "description": "CSE 316",
-                    "due_date": "2020-05-31",
-                    "assigned_to": "Joe",
-                    "completed": false
-                },
-                {
-                    "key": 8,
-                    "description": "CSE 303",
-                    "due_date": "2020-05-31",
-                    "assigned_to": "Joe",
-                    "completed": false
-                },
-                {
-                    "key": 9,
-                    "description": "CSE 380",
-                    "due_date": "2020-05-31",
-                    "assigned_to": "Joe",
-                    "completed": false
-                },
-                {
-                    "key": 10,
-                    "description": "CSE 373",
-                    "due_date": "2020-12-31",
-                    "assigned_to": "Joe",
-                    "completed": false
-                },
-                {
-                    "key": 11,
-                    "description": "CSE 381",
-                    "due_date": "2020-12-31",
-                    "assigned_to": "Joe",
-                    "completed": false
-                },
-                {
-                    "key": 12,
-                    "description": "CSE 416",
-                    "due_date": "2020-12-31",
-                    "assigned_to": "Joe",
-                    "completed": false
+                    "id": "new_button1",
+                    "textColor": "#000000",
+                    "backgroundColor": "#bdbdbd",
+                    "text": "My Input",
+                    "fontSize": "16px",
+                    "xCoordinate" : 0,
+                    "yCoordinate": 0,
+                    "width": 130,
+                    "height": 30,
+                    "borderRadius" : "1px",
+                    "borderColor": "#000000",
+                    "borderThickness" : "1px"
                 }
+            ],
+
+            "labels" : [
+                {
+                    "id": "new_label1",
+                    "textColor": "green",
+                    "backgroundColor": "white",
+                    "text": "My Labels",
+                    "fontSize": "16px",
+                    "xCoordinate" : 200,
+                    "yCoordinate": 200,
+                    "width": 130,
+                    "height": 30,
+                    "borderRadius" : "1px",
+                    "borderColor": "#000000",
+                    "borderThickness" : "0px"
+                }
+            ],
+
+            "textfields" : [
+               {
+                "id": "new_textfield1",
+                "textColor": "green",
+                "backgroundColor": "white",
+                "text": "My TextField",
+                "fontSize": "16px",
+                "xCoordinate" : 200,
+                "yCoordinate": 200,
+                "width": 130,
+                "height": 30,
+                "borderRadius" : "1px",
+                "borderColor": "#000000",
+                "borderThickness" : "1px"
+               }     
             ]
+            
         }
     ]
 }

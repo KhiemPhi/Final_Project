@@ -457,6 +457,10 @@ body {
   position: absolute;
   border : 0px solid white;
   z-index:  2;
+  display: "flex",
+  
+
+            
 }
 
 .new_label .resizers{

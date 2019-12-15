@@ -11,8 +11,7 @@ class DatabaseTester extends React.Component {
     handleClear = () => {
         const fireStore = getFirestore();
         fireStore.collection('WireFrames').get().then(function(querySnapshot){
-            querySnapshot.forEach(function(doc) {
-                console.log("deleting " + doc.id);
+            querySnapshot.forEach(function(doc) {            
                 fireStore.collection('WireFrames').doc(doc.id).delete();
             })
         });
@@ -25,8 +24,7 @@ class DatabaseTester extends React.Component {
         });
         
         fireStore.collection('WireFrames').get().then(function(querySnapshot){
-            querySnapshot.forEach(function(doc) {
-                console.log("deleting " + doc.id);
+            querySnapshot.forEach(function(doc) {                
                 fireStore.collection('WireFrames').doc(doc.id).update({                    
                     createdAt : new Date(),                     
                 });

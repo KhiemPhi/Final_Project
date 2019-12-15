@@ -49,7 +49,7 @@ class ControllerModifier extends Component {
 
   render() {   
     return (            
-        <div className= {this.props.wireFrameWidth > 1000 ? this.props.wireFrameWidth >= 3000 ? "control_container col s12" : "control_container col s5" : "control_container col s3"} id = "modifier_area">
+        <div className= {this.props.wireFrameWidth > 1000 ? this.props.wireFrameWidth >= 3000 ? "control_container col s12" : "control_container col s5" : "control_container col s3"} id = "modifier_area"  style = {{transform: "scale(" + this.props.scale + ")"}}>
             <div style ={{paddingTop: "15%", marginLeft: "20%"}} > Properties </div>
               
               <TextInput id = "text_input" onChange = {e => this.props.editText(e.target.value)}   />                     
@@ -61,17 +61,17 @@ class ControllerModifier extends Component {
                 </div>
                 <div className = "col s8" style={{marginTop: "25px", fontSize: "12px"}}>Background:</div>
                 <div className = "col s1">
-                  {this.state.showColorPickerBackgroundColor && <Button className = "background_color" id = "background_color_input" onClick= {this.toggleBackGroundColorDiv} style={this.props.focusedElement !== null ? {backgroundColor: document.getElementById(this.props.focusedElement).style.backgroundColor} : {backgroundColor: "#000000"}} ></Button>}
+                  {this.state.showColorPickerBackgroundColor && <Button className = "background_color" id = "background_color_input" onClick= {this.toggleBackGroundColorDiv} style={this.props.focusedElement !== "edit_area" ? {backgroundColor: document.getElementById(this.props.focusedElement).style.backgroundColor} : {backgroundColor: "#000000"}} ></Button>}
                   {!this.state.showColorPickerBackgroundColor && <ColorPickerBackground focusedElement = {this.props.focusedElement} toggleBackGroundColorDiv = {this.toggleBackGroundColorDiv.bind(this)} handleBackGroundColorChange = {this.props.handleBackGroundColorChange} ></ColorPickerBackground>}
                 </div>
                 <div className = "col s8" style={{marginTop: "25px", fontSize: "12px"}}>Text Color:</div>
                 <div className = "col s1">
-                  {this.state.showColorPickerTextColor && <Button className = "text_color" id = "text_color_input" onClick= {this.toggleTextColorDiv} style={this.props.focusedElement !== null ? {backgroundColor: document.getElementById(this.props.focusedElement).style.color} : {backgroundColor: "#000000"}} ></Button>}
+                  {this.state.showColorPickerTextColor && <Button className = "text_color" id = "text_color_input" onClick= {this.toggleTextColorDiv} style={this.props.focusedElement !== "edit_area" ? {backgroundColor: document.getElementById(this.props.focusedElement).style.color} : {backgroundColor: "#000000"}} ></Button>}
                   {!this.state.showColorPickerTextColor && <ColorPickerText focusedElement = {this.props.focusedElement} toggleTextColorDiv = {this.toggleTextColorDiv.bind(this)} handleTextColorChange = {this.props.handleTextColorChange}></ColorPickerText>}
                 </div>
                 <div className = "col s8" style={{marginTop: "25px", fontSize: "12px" }}>Border Color:</div>
                 <div className = "col s1">
-                  {this.state.showColorPickerBorderColor && <Button className = "border_color" id = "border_color_input" onClick= {this.toggleBorderColorDiv} style={this.props.focusedElement !== null ? {backgroundColor: document.getElementById(this.props.focusedElement).style.borderColor} : {backgroundColor: "#000000"}} ></Button>}
+                  {this.state.showColorPickerBorderColor && <Button className = "border_color" id = "border_color_input" onClick= {this.toggleBorderColorDiv} style={this.props.focusedElement !== "edit_area" ? {backgroundColor: document.getElementById(this.props.focusedElement).style.borderColor} : {backgroundColor: "#000000"}} ></Button>}
                   {!this.state.showColorPickerBorderColor  && <ColorPickerBorder focusedElement = {this.props.focusedElement} toggleBorderColorDiv = {this.toggleBorderColorDiv.bind(this)} handleBorderColorChange = {this.props.handleBorderColorChange}></ColorPickerBorder>}
                 </div>
                 <div className = "col s7" style={{marginTop: "25px", fontSize: "12px"}}>Border Thickness:</div>

@@ -7,10 +7,16 @@ import { Rnd } from "react-rnd";
 class NewTextField extends Component {
   state = {
     hasFocus: false,
-    disableDragging: false
+    disableDragging: false,
+    dragging: false
   };
+  
+  startDragging = () => { 
+    this.setState({dragging: false})    
+  }
 
   updateXAndYCoordinates = data => {
+    this.setState({dragging:true}) 
     var transform = document
       .getElementById(this.props.id)
       .style.transform.toString();
@@ -24,8 +30,7 @@ class NewTextField extends Component {
     this.setFocus();
   };
 
-  setFocus = () => {
-    console.log(this.props.id);
+  setFocus = () => {    
     this.props.setFocusedElement(this.props.id);
     this.setState({ hasFocus: true });
     document.getElementById("text_input").value = document.getElementById(
@@ -103,6 +108,7 @@ class NewTextField extends Component {
           onClick={this.setFocus}
           disableDragging={!this.state.hasFocus}
           onDrag={this.updateXAndYCoordinates}
+          onDragStop={this.startDragging}
           bounds={".edit_area"}
           style={{
             transform: "scale(" + this.props.scale + ")",

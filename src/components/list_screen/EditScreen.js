@@ -21,7 +21,7 @@ class EditScreen extends Component {
     buttonCounter: 0,
     textfieldCounter: 0,
     defaultZoom: 1,
-    focusedElement: null,
+    focusedElement: "edit_area",
     containers: [],
     labels: [],
     buttons: [],
@@ -57,15 +57,10 @@ class EditScreen extends Component {
       .doc(this.props.WireFrame.id)
       .get()
       .then(doc => {
-        let newContainers = doc.data().containers;
-        newContainers = this.state.containers;
-        let newButtons = doc.data().buttons;
-        newButtons = this.state.buttons;
-        let newLabels = doc.data().labels
-        newLabels = this.state.labels
-        let newTextFields = doc.data().textfields
-        newTextFields = this.state.textfields
-
+        let newContainers = this.state.containers.filter( container => container !== undefined)
+        let newButtons = this.state.buttons.filter( button => button !== undefined)
+        let newLabels = this.state.labels.filter( label => label !== undefined)
+        let newTextFields = this.state.textfields.filter(textfield => textfield !== undefined)
         fireStore
           .collection("WireFrames")
           .doc(this.props.WireFrame.id)
@@ -166,7 +161,7 @@ class EditScreen extends Component {
       textColor: "#000000",
       backgroundColor: "#bdbdbd",
       text: defaultText,
-      fontsize: "16px",
+      fontSize: "16px",
       xCoordinate: 0,
       yCoordinate: 0,
       width: 130,
@@ -180,6 +175,8 @@ class EditScreen extends Component {
     this.setState({ buttonCounter: counter });
     this.setState({loaded: true})
   };
+
+  
 
   setFocusedElement = id => {
     this.setState({ focusedElement: id });
@@ -251,11 +248,9 @@ class EditScreen extends Component {
     this.setState({loaded: true})
   };
 
-  handleBorderRadiusChange = value => {
-    console.log("here");
+  handleBorderRadiusChange = value => {    
     var index = this.state.focusedElement.slice(-1) - 1;
     var newArray = [];
-
     //perform Check To see what element is being focused
     if (this.state.focusedElement.includes("container")) {
       newArray = this.state.containers;
@@ -636,7 +631,9 @@ class EditScreen extends Component {
           textfieldCounter: nextProps.textfieldCounter,
           buttonCounter: nextProps.buttonCounter,          
         };
-      }        
+      }else{
+        return null
+      }   
      
   }
 
@@ -713,6 +710,7 @@ class EditScreen extends Component {
               maxHeight: "5000px",
               overflow : "scroll"
             }}
+            
           >
             {this.state.containers.map(x => (
               <NewContainer
