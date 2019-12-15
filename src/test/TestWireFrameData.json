@@ -1,5 +1,5 @@
 {
-    "todoLists": [
+    "WireFrames": [
         {
             "key": 0,
             "name": "Things I am Never Gonna Do",
@@ -20,9 +20,40 @@
                     "borderRadius" : "1px",
                     "borderColor": "#000000",
                     "borderThickness" : "2px"
+                },
+                
+                {   
+                    "id" : "new_container2", 
+                    "textColor": "#000000",
+                    "backgroundColor": "yellow",
+                    "text": "Hello World Now",
+                    "fontSize" : "16px",
+                    "xCoordinate" : 100,
+                    "yCoordinate": 100,
+                    "width" : 120,
+                    "height": 80,
+                    "borderRadius" : "1px",
+                    "borderColor": "#000000",
+                    "borderThickness" : "2px"
+                } 
+            ],
+            "buttons" : [
+                {
+                    "id": "new_button1",
+                    "textColor": "#000000",
+                    "backgroundColor": "#bdbdbd",
+                    "text": "My Input",
+                    "fontsize": "16px",
+                    "xCoordinate" : 0,
+                    "yCoordinate": 0,
+                    "width": 130,
+                    "height": 30,
+                    "borderRadius" : "1px",
+                    "borderColor": "#000000",
+                    "borderThickness" : "1px"
                 }
-               
             ]
+            
         },
         {
             "key": 1,

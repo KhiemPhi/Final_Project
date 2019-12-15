@@ -28,7 +28,7 @@ class Toolbar extends Component {
           flat
           className=" col s4 transparent"
           large
-          onClick={this.props.goHome}
+          onClick={this.props.saveWork}
         >
           Save
         </Button>

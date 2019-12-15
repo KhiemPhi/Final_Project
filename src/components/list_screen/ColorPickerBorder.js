@@ -44,6 +44,6 @@ class ColorPickerBorder extends Component {
   }
 }
 
-export default compose(firestoreConnect([{ collection: "todoLists" }]))(
+export default compose(firestoreConnect([{ collection: "WireFrames" }]))(
   ColorPickerBorder
 );

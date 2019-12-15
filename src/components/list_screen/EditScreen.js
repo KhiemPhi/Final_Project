@@ -43,12 +43,33 @@ class EditScreen extends Component {
     const fireStore = getFirestore();
 
     fireStore
-      .collection("todoLists")
-      .doc(this.props.todoList.id)
+      .collection("WireFrames")
+      .doc(this.props.WireFrame.id)
       .update({
         [target.id]: target.value
       });
   };
+
+  saveWork = () => {
+    const fireStore = getFirestore()
+    fireStore
+        .collection("WireFrames")
+        .doc(this.props.WireFrame.id).get()
+        .then(doc => {
+          let newContainers = doc.data().containers
+          newContainers = this.state.containers
+          let newButtons = doc.data().buttons
+          newButtons = this.state.buttons
+
+          fireStore
+            .collection("WireFrames")
+            .doc(this.props.WireFrame.id)
+            .update({
+              containers: newContainers,
+              buttons: newButtons
+            });
+        });
+  }
 
   goHome = () => {
     this.props.history.push("/");
@@ -587,8 +608,9 @@ class EditScreen extends Component {
 
   static getDerivedStateFromProps (nextProps, prevState){
     if (nextProps.containers !== prevState.containers){
-      return {containers: nextProps.containers}
+      return {buttons: nextProps.buttons, containers: nextProps.containers} 
     }
+    
   }
 
 
@@ -648,6 +670,7 @@ class EditScreen extends Component {
               )
             )}
             scale={this.state.scale}
+            saveWork = {this.saveWork.bind(this)}
           />
 
           <div
@@ -802,12 +825,17 @@ const mapStateToProps = (state, ownProps) => {
 
 
   if (WireFrame) WireFrame.id = id;
-  if (WireFrame) var containers = WireFrame.containers
+  if (WireFrame) {
+    var containers = WireFrame.containers
+    var buttons = WireFrame.buttons
+  }
+  
   return {
     WireFrame, // Mark Elements Here in The TodoList to Map Onto Edit Area Later
     auth: state.firebase.auth,
     profile: state.firebase.profile,
-    containers
+    containers,
+    buttons
   };
 };
 

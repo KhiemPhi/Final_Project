@@ -34,6 +34,6 @@ class BorderThicknessSlider extends Component {
   }
 }
 
-export default compose(firestoreConnect([{ collection: "todoLists" }]))(
+export default compose(firestoreConnect([{ collection: "WireFrames" }]))(
   BorderThicknessSlider
 );

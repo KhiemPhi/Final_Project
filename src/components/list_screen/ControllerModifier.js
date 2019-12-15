@@ -92,5 +92,5 @@ class ControllerModifier extends Component {
 }
 
 export default compose(  
-  firestoreConnect([{ collection: "todoLists" }])
+  firestoreConnect([{ collection: "WireFrames" }])
 )(ControllerModifier);

@@ -23,6 +23,7 @@ class ControllerAdder extends Component {
           goHome={this.props.goHome}
           zoomIn={this.props.zoomIn}
           zoomOut={this.props.zoomOut}
+          saveWork = {this.props.saveWork}
         />
         <Button
           flat
@@ -97,6 +98,6 @@ class ControllerAdder extends Component {
   }
 }
 
-export default compose(firestoreConnect([{ collection: "todoLists" }]))(
+export default compose(firestoreConnect([{ collection: "WireFrames" }]))(
   ControllerAdder
 );

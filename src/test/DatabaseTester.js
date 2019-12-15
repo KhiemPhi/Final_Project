@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import todoJson from './TestTodoListData.json'
+import WireFrameJson from './TestWireFrameData.json'
 import { getFirestore } from 'redux-firestore';
 
 class DatabaseTester extends React.Component {
@@ -19,26 +19,16 @@ class DatabaseTester extends React.Component {
     }
 
     handleReset = () => {
-        const fireStore = getFirestore();
-        todoJson.todoLists.forEach(todoListJson => {
-            fireStore.collection('WireFrames').add({
-                    name: todoListJson.name,
-                    owner: todoListJson.owner,
-                    containers: todoListJson.containers,
-                    createdAt: todoListJson.createdAt,                            
-                }).then(() => {
-                    console.log("DATABASE RESET");
-                }).catch((err) => {
-                    console.log(err);
-                });
+        const fireStore = getFirestore();     
+        WireFrameJson.WireFrames.forEach(WireFrame => {
+            fireStore.collection('WireFrames').add(WireFrame)
         });
         
         fireStore.collection('WireFrames').get().then(function(querySnapshot){
             querySnapshot.forEach(function(doc) {
                 console.log("deleting " + doc.id);
                 fireStore.collection('WireFrames').doc(doc.id).update({                    
-                    createdAt : new Date(),
-                     
+                    createdAt : new Date(),                     
                 });
             })
         });
