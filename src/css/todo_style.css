@@ -455,6 +455,7 @@ body {
 .new_label_out_focus{
   background-color: white;  
   position: absolute;
+  border : 0px solid white;
   z-index:  2;
 }
 

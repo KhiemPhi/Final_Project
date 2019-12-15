@@ -16,7 +16,7 @@ class HomeScreen extends Component {
     const fireStore = getFirestore();   
 
     fireStore
-      .collection("todoLists")
+      .collection("WireFrames")
       .add({
         name: "New List",
         owner: this.props.profile.firstName + " " + this.props.profile.lastName ,
@@ -25,7 +25,7 @@ class HomeScreen extends Component {
       })
       .then(docRef => {       
         this.setState({ mostRecentList: docRef.id });
-        let a = "/todoList/" + docRef.id;
+        let a = "/WireFrame/" + docRef.id;
         this.props.history.push(a);
       })
       .catch(err => {
@@ -74,6 +74,6 @@ const mapStateToProps = state => {
 export default compose(
   connect(mapStateToProps),
   firestoreConnect([
-    { collection: "todoLists", orderBy: ["createdAt", "desc"] }
+    { collection: "WireFrames", orderBy: ["createdAt", "desc"] }
   ])
 )(HomeScreen);

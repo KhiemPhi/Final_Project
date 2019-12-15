@@ -10,10 +10,10 @@ class DatabaseTester extends React.Component {
     // TO LOG IN
     handleClear = () => {
         const fireStore = getFirestore();
-        fireStore.collection('todoLists').get().then(function(querySnapshot){
+        fireStore.collection('WireFrames').get().then(function(querySnapshot){
             querySnapshot.forEach(function(doc) {
                 console.log("deleting " + doc.id);
-                fireStore.collection('todoLists').doc(doc.id).delete();
+                fireStore.collection('WireFrames').doc(doc.id).delete();
             })
         });
     }
@@ -21,10 +21,10 @@ class DatabaseTester extends React.Component {
     handleReset = () => {
         const fireStore = getFirestore();
         todoJson.todoLists.forEach(todoListJson => {
-            fireStore.collection('todoLists').add({
+            fireStore.collection('WireFrames').add({
                     name: todoListJson.name,
                     owner: todoListJson.owner,
-                    items: todoListJson.items,
+                    containers: todoListJson.containers,
                     createdAt: todoListJson.createdAt,                            
                 }).then(() => {
                     console.log("DATABASE RESET");
@@ -33,10 +33,10 @@ class DatabaseTester extends React.Component {
                 });
         });
         
-        fireStore.collection('todoLists').get().then(function(querySnapshot){
+        fireStore.collection('WireFrames').get().then(function(querySnapshot){
             querySnapshot.forEach(function(doc) {
                 console.log("deleting " + doc.id);
-                fireStore.collection('todoLists').doc(doc.id).update({                    
+                fireStore.collection('WireFrames').doc(doc.id).update({                    
                     createdAt : new Date(),
                      
                 });

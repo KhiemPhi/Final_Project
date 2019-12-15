@@ -7,10 +7,16 @@ import { Rnd } from "react-rnd";
 class NewContainer extends Component {
   state = {
     hasFocus: false,
-    disableDragging: false
+    disableDragging: false,
+    dragging: false
   };
 
+  stopDragging = () => {
+    this.setState({dragging: false})
+  }
+
   updateXAndYCoordinates = data => {
+    this.setState({dragging: true})
     var transform = document
       .getElementById(this.props.id)
       .style.transform.toString();
@@ -22,6 +28,7 @@ class NewContainer extends Component {
     var newY = Number(yString.substring(0, yString.length - 2));
     this.props.updateXAndYCoordinatesFocusedElement(newX, newY);
     this.setFocus();
+    
   };
 
   updateWidthAndHeight = data => {
@@ -63,6 +70,7 @@ class NewContainer extends Component {
     document.getElementById("fontSize_input").value = fontSize;
     var div = this.props.createResizers();
     document.getElementById(this.props.id).appendChild(div);
+    this.setState({dragging:true})
   };
 
   componentWillMount() {
@@ -77,11 +85,11 @@ class NewContainer extends Component {
     if (!this.node.contains(e.target)) {
       var editing = document.getElementById("modifier_area");
 
-      if (!editing.contains(e.target)) {
+      if (!editing.contains(e.target) ) {
         // Out of Focus
         this.setState({ hasFocus: false });
         this.setState({ myText: this.props.focusedElementText });
-        this.props.setFocusedElement(null)
+        //this.props.setFocusedElement(null)
         document.getElementById("text_input").value = "";
         document.getElementById("fontSize_input").value = "";
         document.getElementById("border_radius_input").value = "";
@@ -118,6 +126,7 @@ class NewContainer extends Component {
           onClick={this.setFocus}
           onResize={this.updateWidthAndHeight}
           onDrag={this.updateXAndYCoordinates}
+          onDragStop={this.stopDragging}
           disableDragging={!this.state.hasFocus}
           style={{
             transform: "scale(" + this.props.scale + ")",

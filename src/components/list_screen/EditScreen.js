@@ -13,6 +13,7 @@ import NewButton from "./NewButton.js";
 import NewTextField from "./NewTextField.js";
 
 class EditScreen extends Component {
+  
   state = {
     name: "",
     owner: "",
@@ -149,7 +150,7 @@ class EditScreen extends Component {
   };
 
   setFocusedElement = id => {
-    this.setState({ focusedElement: id });
+    this.setState({ focusedElement: id });  
   };
 
   changeWireFrameHeight = value => {
@@ -276,9 +277,21 @@ class EditScreen extends Component {
     var index = this.state.focusedElement.slice(-1) - 1;
     var newArray = []  
     if (this.state.focusedElement.includes("container")){
-      var newArray = this.state.containers
+      newArray = this.state.containers
       newArray[index].borderColor = color.hex
       this.setState({containers:newArray})
+    } else if (this.state.focusedElement.includes("label")){
+      newArray = this.state.labels
+      newArray[index].borderColor = color.hex
+      this.setState({labels:newArray})
+    } else if (this.state.focusedElement.includes("button")){
+      newArray = this.state.buttons
+      newArray[index].borderColor = color.hex
+      this.setState({buttons:newArray})
+    } else if (this.state.focusedElement.includes("textfield")){
+      newArray = this.state.textfields
+      newArray[index].borderColor = color.hex
+      this.setState({textfields:newArray})
     }
   };
 
@@ -323,7 +336,7 @@ class EditScreen extends Component {
   };
 
   handleTextColorChange = (color, event) => {
-    if (this.state.focusedElement.includes("container")) {
+    if (this.state.focusedElement.includes("container") && this.state.containers) {
       var containers = this.state.containers;
       var containerToBeEdit = containers.filter(
         container => container.id === this.state.focusedElement
@@ -367,7 +380,7 @@ class EditScreen extends Component {
     var newArray = [];
     //perform Check To see what element is being focused
     if (this.state.focusedElement.includes("container")) {
-      newArray = this.state.containers
+      newArray = this.state.containers      
       newArray[index].xCoordinate = x
       newArray[index].yCoordinate = y
       this.setState({ containers: newArray });
@@ -570,17 +583,24 @@ class EditScreen extends Component {
         });
     }
     document.removeEventListener("keydown", this.unDoAndRedoDetect, false);
-  };
+  }; 
+
+  static getDerivedStateFromProps (nextProps, prevState){
+    if (nextProps.containers !== prevState.containers){
+      return {containers: nextProps.containers}
+    }
+  }
+
 
   render() {
     const auth = this.props.auth;
-    const todoList = this.props.todoList;
+    const WireFrame = this.props.WireFrame;
 
     if (!auth.uid) {
       return <Redirect to="/" />;
     }
 
-    if (!todoList) return <React.Fragment />;
+    if (!WireFrame) return <React.Fragment />;
 
     return (
       <div>
@@ -594,7 +614,7 @@ class EditScreen extends Component {
             name="name"
             id="name"
             onChange={this.handleChange}
-            defaultValue={todoList.name}
+            defaultValue={WireFrame.name}
           />
         </div>
         <div className="input-field">
@@ -607,7 +627,7 @@ class EditScreen extends Component {
             name="owner"
             id="owner"
             onChange={this.handleChange}
-            defaultValue={todoList.owner}
+            defaultValue={WireFrame.owner}
           />
         </div>
         <div className="row" style={{ display: "flex"}}>
@@ -746,7 +766,8 @@ class EditScreen extends Component {
               />
             ))}
 
-            {/* Add Map Components from Database here   */}
+              
+            
           </div>
           <ControllerModifier
             editText={this.editText.bind(this)}
@@ -776,18 +797,21 @@ class EditScreen extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const { id } = ownProps.match.params;
-  const { todoLists } = state.firestore.data;
-  const todoList = todoLists ? todoLists[id] : null;
+  const { WireFrames } = state.firestore.data;
+  const WireFrame = WireFrames ? WireFrames[id] : null;
 
-  if (todoList) todoList.id = id;
+
+  if (WireFrame) WireFrame.id = id;
+  if (WireFrame) var containers = WireFrame.containers
   return {
-    todoList, // Mark Elements Here in The TodoList to Map Onto Edit Area Later
+    WireFrame, // Mark Elements Here in The TodoList to Map Onto Edit Area Later
     auth: state.firebase.auth,
-    profile: state.firebase.profile
+    profile: state.firebase.profile,
+    containers
   };
 };
 
 export default compose(
   connect(mapStateToProps),
-  firestoreConnect([{ collection: "todoLists" }])
+  firestoreConnect([{ collection: "WireFrames" }])
 )(EditScreen);

@@ -10,12 +10,12 @@ class WireFrameLinks extends React.Component {
   
 
   render() {
-    const todoLists = this.props.todoLists;
+    const WireFrames = this.props.WireFrames;
     const owner = this.props.profile.firstName + " " + this.props.profile.lastName
     return (
       <div className="row todo-lists section">
-        {todoLists &&
-          todoLists.filter(element => element.owner === owner).map(WireFrame => (
+        {WireFrames &&
+          WireFrames.filter(element => element.owner === owner).map(WireFrame => (
             <div className = "row" >
               <Link to={"/WireFrame/" + WireFrame.id} key={WireFrame.id}>
                 <WireFrameCard
@@ -34,7 +34,7 @@ class WireFrameLinks extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    todoLists: state.firestore.ordered.todoLists,
+    WireFrames: state.firestore.ordered.WireFrames,
     auth: state.firebase.auth,
     profile: state.firebase.profile
   };

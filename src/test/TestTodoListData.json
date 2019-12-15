@@ -6,28 +6,22 @@
             "owner": "Denis Rozhnov",
             "createdAt": "1",
             "currentSortingCriteria" : "1",
-            "items": [
-                {
-                    "key": 0,
-                    "description": "Give You Up",
-                    "due_date": "2019-09-30",
-                    "assigned_to": "Rick",
-                    "completed": true
-                },
-                {
-                    "key": 1,
-                    "description": "Say Goodbye",
-                    "due_date": "2019-10-15",
-                    "assigned_to": "Rick",
-                    "completed": false
-                },
-                {
-                    "key": 2,
-                    "description": "Make You Cry",
-                    "due_date": "2019-12-30",
-                    "assigned_to": "Bob",
-                    "completed": false
+            "containers": [
+                {   
+                    "id" : "new_container1", 
+                    "textColor": "#000000",
+                    "backgroundColor": "red",
+                    "text": "Hello World",
+                    "fontSize" : "16px",
+                    "xCoordinate" : 0,
+                    "yCoordinate": 0,
+                    "width" : 120,
+                    "height": 80,
+                    "borderRadius" : "1px",
+                    "borderColor": "#000000",
+                    "borderThickness" : "2px"
                 }
+               
             ]
         },
         {

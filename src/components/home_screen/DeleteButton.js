@@ -6,7 +6,7 @@ export class DeleteButton extends Component {
     handleDelete = () => {
         const fireStore = getFirestore();
         fireStore
-          .collection("todoLists")
+          .collection("WireFrames")
           .doc(this.props.WireFrame.id)
           .delete();
         this.props.history.push("/");

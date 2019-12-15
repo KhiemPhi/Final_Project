@@ -15,7 +15,6 @@ var firebaseConfig = {
   measurementId: "G-M22HXTXT97"
 };
 
-
 firebase.initializeApp(firebaseConfig);
 
 // NOW THE firebase OBJECT CAN BE CONNECTED TO THE STORE
