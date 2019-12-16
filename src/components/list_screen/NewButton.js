@@ -30,7 +30,7 @@ class NewButton extends Component {
     this.setFocus();
   };
 
-  updateWidthAndHeight = data => {
+  updateWidthAndHeight = data => {  
     var widthString = document
       .getElementById(this.props.id)
       .style.width.toString();
@@ -40,6 +40,7 @@ class NewButton extends Component {
       .style.height.toString();
     var height = Number(heightString.substring(0, heightString.length - 2));
     this.props.updateWidthAndHeightFocusedElement(width, height);
+    this.setFocus()
   };
 
   setFocus = () => {    

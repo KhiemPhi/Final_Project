@@ -30,6 +30,20 @@ class NewTextField extends Component {
     this.setFocus();
   };
 
+  updateWidthAndHeight = data => {
+    var widthString = document
+      .getElementById(this.props.id)
+      .style.width.toString();
+    var width = Number(widthString.substring(0, widthString.length - 2));
+    var heightString = document
+      .getElementById(this.props.id)
+      .style.height.toString();
+    var height = Number(heightString.substring(0, heightString.length - 2));
+    this.props.updateWidthAndHeightFocusedElement(width, height);
+    this.setFocus()
+  };
+
+
   setFocus = () => {    
     this.props.setFocusedElement(this.props.id);
     this.setState({ hasFocus: true });
@@ -109,6 +123,7 @@ class NewTextField extends Component {
           disableDragging={!this.state.hasFocus}
           onDrag={this.updateXAndYCoordinates}
           onDragStop={this.startDragging}
+          onResize={this.updateWidthAndHeight}
           bounds={".edit_area"}
           style={{
             

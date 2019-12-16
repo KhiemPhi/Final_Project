@@ -10,7 +10,7 @@ import LoginScreen from './components/login_screen/LoginScreen.js';
 import HomeScreen from './components/home_screen/HomeScreen.js';
 import EditScreen from './components/list_screen/EditScreen.js';
 import DatabaseTester from './test/DatabaseTester'
-import ItemScreen from './components/item_screen/ItemScreen.js';
+
 
 class App extends Component {
   render() {
@@ -29,8 +29,7 @@ class App extends Component {
               <Route exact path="/" component={HomeScreen} />
               <Route path="/databaseTester" component={DatabaseTester} />
               <Route path="/register" component={RegisterScreen} />
-              <Route path="/login" component={LoginScreen} />
-              <Route path="/edit/:id/:index" component = {ItemScreen} />
+              <Route path="/login" component={LoginScreen} />              
               <Route path="/WireFrame/:id" component={EditScreen} />
               <Route path="/:any" component={HomeScreen} />
             </Switch>
