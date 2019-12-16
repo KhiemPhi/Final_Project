@@ -16,6 +16,7 @@ import {editText, editFontSize} from "./EditTextMethods.js"
 import {handleBorderRadiusChange, handleBorderThicknessChange, handleBorderColorChange} from "./BorderMethods.js"
 import {handleTextColorChange, handleBackGroundColorChange} from "./ColorChangeMethods.js"
 import {updateWidthAndHeightFocusedElement, updateXAndYCoordinatesFocusedElement} from "./DynamicUpdateMethods.js"
+import {duplicateElement, deleteElement} from "./DuplicateAndDeleteMethods"
 
 class EditScreen extends Component {
   state = {
@@ -179,91 +180,7 @@ class EditScreen extends Component {
   };
 
   duplicateElement = id => {
-    var index = Number(id.slice(-1)) - 1;
-    var counter = 0;
-    var newId = "";
-    if (id.includes("container")) {
-      const { containers } = this.state;
-      var containerToBeDuplicate = containers[index];
-      counter = this.state.containerCounter;
-      counter = counter + 1;
-      newId = "new_container" + counter.toString();
-      var newContainer = {
-        id: newId,
-        textColor: containerToBeDuplicate.textColor,
-        backgroundColor: containerToBeDuplicate.backgroundColor,
-        text: containerToBeDuplicate.text,
-        fontSize: containerToBeDuplicate.fontSize,
-        xCoordinate: containerToBeDuplicate.xCoordinate + 100,
-        yCoordinate: containerToBeDuplicate.yCoordinate + 100,
-        width: containerToBeDuplicate.width,
-        height: containerToBeDuplicate.height,
-        borderRadius: containerToBeDuplicate.borderRadius
-      };
-      this.setState({ containers: containers.concat(newContainer) });
-      this.setState({ containerCounter: counter });
-    } else if (id.includes("label")) {
-      const { labels } = this.state;
-      var labelToBeDuplicate = labels[index];
-      counter = this.state.labelCounter;
-      counter = counter + 1;
-      newId = "new_label" + counter.toString();
-      var newLabel = {
-        id: newId,
-        textColor: labelToBeDuplicate.textColor,
-        backgroundColor: labelToBeDuplicate.backgroundColor,
-        text: labelToBeDuplicate.text,
-        fontSize: labelToBeDuplicate.fontSize,
-        xCoordinate: labelToBeDuplicate.xCoordinate + 100,
-        yCoordinate: labelToBeDuplicate.yCoordinate + 100,
-        width: labelToBeDuplicate.width,
-        height: labelToBeDuplicate.height,
-        borderRadius: labelToBeDuplicate.borderRadius
-      };
-      this.setState({ labels: labels.concat(newLabel) });
-      this.setState({ labelCounter: counter });
-    } else if (id.includes("button")) {
-      const { buttons } = this.state;
-      var buttonToBeDuplicate = buttons[index];
-      counter = this.state.buttonCounter;
-      counter = counter + 1;
-      newId = "new_button" + counter.toString();
-      var newButton = {
-        id: newId,
-        textColor: buttonToBeDuplicate.textColor,
-        backgroundColor: buttonToBeDuplicate.backgroundColor,
-        text: buttonToBeDuplicate.text,
-        fontSize: buttonToBeDuplicate.fontSize,
-        xCoordinate: buttonToBeDuplicate.xCoordinate + 100,
-        yCoordinate: buttonToBeDuplicate.yCoordinate + 100,
-        width: buttonToBeDuplicate.width,
-        height: buttonToBeDuplicate.height,
-        borderRadius: buttonToBeDuplicate.borderRadius
-      };
-      this.setState({ buttons: buttons.concat(newButton) });
-      this.setState({ buttonCounter: counter });
-    } else if (id.includes("textfield")) {
-      const { textfields } = this.state;
-      var textfieldToBeDuplicate = textfields[index];
-      counter = this.state.textfieldCounter;
-      counter = counter + 1;
-      newId = "new_textfield" + counter.toString();
-      var newTextField = {
-        id: newId,
-        textColor: textfieldToBeDuplicate.textColor,
-        backgroundColor: textfieldToBeDuplicate.backgroundColor,
-        text: textfieldToBeDuplicate.text,
-        fontSize: textfieldToBeDuplicate.fontSize,
-        xCoordinate: textfieldToBeDuplicate.xCoordinate + 100,
-        yCoordinate: textfieldToBeDuplicate.yCoordinate + 100,
-        width: textfieldToBeDuplicate.width,
-        height: textfieldToBeDuplicate.height,
-        borderRadius: textfieldToBeDuplicate.borderRadius
-      };
-      this.setState({ textfields: textfields.concat(newTextField) });
-      this.setState({ textfieldCounter: counter });
-    }
-    this.setState({loaded: true})
+    duplicateElement(id, this)
   };
 
   deleteAndCopyDetect = event => {
@@ -276,39 +193,7 @@ class EditScreen extends Component {
     } else if (event.key === "Delete") {
       var counter = 0
       if (this.state.focusedElement !== null) {        
-        if (this.state.focusedElement.includes("container")) {          
-          const { containers } = this.state;
-          var tempContainer = containers.filter(container => container.id !== this.state.focusedElement)  
-          counter = this.state.containerCounter 
-          counter = counter - 1
-          this.setState({containerCounter: counter})       
-          this.setState({ containers: tempContainer });
-          this.setState({ focusedElement: "edit_area" });
-        } else if (this.state.focusedElement.includes("label")) {
-          const { labels } = this.state;
-          var tempLabels = labels.filter(label => label.id !== this.state.focusedElement);  
-          counter = this.state.labelCounter 
-          counter = counter - 1
-          this.setState({labelCounter: counter})        
-          this.setState({ labels: tempLabels });
-          this.setState({ focusedElement: "edit_area" });
-        } else if (this.state.focusedElement.includes("button")) {
-          const { buttons } = this.state;
-          var tempButtons = buttons.filter(button => button.id !== this.state.focusedElement)
-          counter = this.state.buttonCounter 
-          counter = counter - 1
-          this.setState({buttonCounter: counter})           
-          this.setState({ buttons: tempButtons });
-          this.setState({ focusedElement: "edit_area" });
-        } else if (this.state.focusedElement.includes("textfield")) {
-          const { textfields } = this.state;
-          var tempTextFields = textfields.filter(textfield => textfield.id !== this.state.focusedElement)
-          counter = counter - 1
-          this.setState( {textfieldCounter: counter})           
-          this.setState({ textfields: tempTextFields});                   
-          this.setState({ textfields: tempTextFields });
-          this.setState({ focusedElement: "edit_area" });
-        }
+        deleteElement(counter, this)
       }
     }
     this.setState({loaded: true})
@@ -345,8 +230,7 @@ class EditScreen extends Component {
         };
       }else{
         return null
-      }   
-     
+      }     
   }
 
   render() {
