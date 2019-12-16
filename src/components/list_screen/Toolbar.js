@@ -1,11 +1,21 @@
 import React, { Component } from "react";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { Button, Icon } from "react-materialize";
+import { Button, Icon, Modal } from "react-materialize";
 import "materialize-css/dist/css/materialize.min.css";
 
 class Toolbar extends Component {
+  state = {
+    saved : false
+  }
+
+  goSave = () => {
+    this.setState({saved: true})
+    this.props.saveWork()
+  }
+
   render() {
+    
     return (
       <div className="row control_container_only_bottom">
         <Button
@@ -33,14 +43,35 @@ class Toolbar extends Component {
           Save
         </Button>
 
-        <Button
-          flat
-          className="col s4 transparent"
-          onClick={this.props.goHome}
-          large
-        >
-          Close
-        </Button>
+        {this.state.saved &&  <Button
+            flat
+            className=" col s4 transparent"
+            large
+            onClick = {this.props.goHome}
+          >
+            Close
+          </Button>}
+
+        {!this.state.saved && <Modal actions=
+          {[
+            <Button flat modal = "close" node="button" waves="green" onClick= {this.goSave}>Yes</Button>,
+            <Button flat modal="close" node="button" waves="green" onClick = {this.props.goHome}>
+              No
+            </Button>
+           
+          ]}
+          trigger={ <Button
+            flat
+            className=" col s4 transparent"
+            large
+            
+          >
+            Close
+          </Button>}>
+          <p>
+            Would you Like To Save This WireFrame?
+          </p>
+        </Modal>}
       </div>
     );
   }

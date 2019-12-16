@@ -9,11 +9,8 @@ export const duplicateElement = (id, parent) => {
       counter = counter + 1;
       newId = "new_container" + counter.toString();
       var newContainer = {
-        id: newId,
-        textColor: containerToBeDuplicate.textColor,
-        backgroundColor: containerToBeDuplicate.backgroundColor,
-        text: containerToBeDuplicate.text,
-        fontSize: containerToBeDuplicate.fontSize,
+        id: newId,        
+        backgroundColor: containerToBeDuplicate.backgroundColor,      
         xCoordinate: containerToBeDuplicate.xCoordinate + 100,
         yCoordinate: containerToBeDuplicate.yCoordinate + 100,
         width: containerToBeDuplicate.width,
@@ -95,10 +92,12 @@ export const duplicateElement = (id, parent) => {
     parent.setState({loaded: true})
   };
 
-  export const deleteElement = (counter, parent) => {
+  export const deleteElement = (counter, parent, focusedElement) => {
+      
     if (parent.state.focusedElement.includes("container")) {          
-        const { containers } = parent.state;
+        const { containers } = parent.state;      
         var tempContainer = containers.filter(container => container.id !== parent.state.focusedElement)  
+        console.log(tempContainer)
         counter = parent.state.containerCounter 
         counter = counter - 1
         parent.setState({containerCounter: counter})       
@@ -125,8 +124,7 @@ export const duplicateElement = (id, parent) => {
         var tempTextFields = textfields.filter(textfield => textfield.id !== parent.state.focusedElement)
         counter = counter - 1
         parent.setState( {textfieldCounter: counter})           
-        parent.setState({ textfields: tempTextFields});                   
-        parent.setState({ textfields: tempTextFields });
+        parent.setState({ textfields: tempTextFields});  
         parent.setState({ focusedElement: "edit_area" });
       }
   }

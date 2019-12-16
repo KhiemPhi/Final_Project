@@ -35,7 +35,8 @@ class EditScreen extends Component {
     wireFrameWidth: "700px",
     wireFrameHeight: "900px",
     scale: "1",
-    loaded: false
+    loaded: false,
+    saved: false
   };
 
   handleChange = e => {
@@ -77,6 +78,7 @@ class EditScreen extends Component {
             textfields: newTextFields
           });
       });
+    this.setState({saved: true})  
   };
 
   goHome = () => {
@@ -192,8 +194,8 @@ class EditScreen extends Component {
       }
     } else if (event.key === "Delete") {
       var counter = 0
-      if (this.state.focusedElement !== null) {        
-        deleteElement(counter, this)
+      if (this.state.focusedElement !== "edit_area") {        
+        deleteElement(counter, this, this.state.focusedElement)
       }
     }
     this.setState({loaded: true})
@@ -230,7 +232,8 @@ class EditScreen extends Component {
         };
       }else{
         return null
-      }     
+      }
+     
   }
 
   render() {
@@ -290,6 +293,7 @@ class EditScreen extends Component {
             )}
             scale={this.state.scale}
             saveWork={this.saveWork.bind(this)}
+            saved = {this.state.saved}
           />
 
           <div

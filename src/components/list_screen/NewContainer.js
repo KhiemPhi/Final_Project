@@ -121,12 +121,12 @@ class NewContainer extends Component {
           default={{
             x: this.props.xCoordinate,
             y: this.props.yCoordinate,
-            width: this.props.width,
-            height: this.props.height
+            width: this.props.width * this.props.scale,
+            height: this.props.height * this.props.scale
           }}
           id={this.props.id}
           onClick={e => this.setFocus(e.target)}
-          onResize={this.updateWidthAndHeight}
+          onResize={this.updateWidthAndHeight}                                    
           onDrag={this.updateXAndYCoordinates}
           onDragStop={this.startDragging}
           disableDragging={!this.state.hasFocus}
