@@ -101,7 +101,7 @@ class NewButton extends Component {
     return (
       <div
         ref={node => (this.node = node)}
-        style={{ transform: "scale(" + this.props.scale + ")" }}
+        
       >
         <Rnd
           className={
@@ -123,7 +123,7 @@ class NewButton extends Component {
           disableDragging={!this.state.hasFocus}
           bounds={".edit_area"}
           style={{
-            transform: "scale(" + this.props.scale + ")",
+           
             color: this.props.textColor,
             backgroundColor: this.props.backgroundColor,
             fontSize: this.props.fontSize,

@@ -28,7 +28,7 @@ class ColorPickerBackground extends Component {
     return (
       <div
         ref={node => (this.node = node)}
-        style={{ transform: "scale(" + this.props.scale + ")", color: "red" }}
+        
       >
         <ChromePicker
           color={

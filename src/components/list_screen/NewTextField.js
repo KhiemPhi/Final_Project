@@ -90,7 +90,7 @@ class NewTextField extends Component {
     return (
       <div
         ref={node => (this.node = node)}
-        style={{ transform: "scale(" + this.props.scale + ")", color: "red" }}
+      
       >
         <Rnd
           className={
@@ -111,7 +111,7 @@ class NewTextField extends Component {
           onDragStop={this.startDragging}
           bounds={".edit_area"}
           style={{
-            transform: "scale(" + this.props.scale + ")",
+            
             color: this.props.textColor,
             backgroundColor: this.props.backgroundColor,
             fontSize: this.props.fontSize,            

@@ -102,13 +102,14 @@ class NewContainer extends Component {
     }
   };
 
+  
+
   render() {
     // x = left , y = top value, width = width, height = height
     return (
       <div
         ref={node => (this.node = node)}
-        id={this.props.id + "wrapper"}
-        
+        id={this.props.id + "wrapper"}        
       >
         <Rnd
           className={
@@ -116,6 +117,7 @@ class NewContainer extends Component {
               ? this.props.class
               : this.props.class + "_out_focus"
           }
+          
           default={{
             x: this.props.xCoordinate,
             y: this.props.yCoordinate,
@@ -129,13 +131,15 @@ class NewContainer extends Component {
           onDragStop={this.startDragging}
           disableDragging={!this.state.hasFocus}
           style={{
-            transform: "scale(" + this.props.scale + ")",
+            
             color: this.props.textColor,
             backgroundColor: this.props.backgroundColor,
             fontSize: this.props.fontSize,
             borderRadius: this.props.borderRadius,
             borderColor: this.props.borderColor,
-            borderWidth: this.props.borderThickness
+            borderWidth: this.props.borderThickness,
+            
+            
           }} // color is text color, background Color is color
           bounds={".edit_area"}
         >

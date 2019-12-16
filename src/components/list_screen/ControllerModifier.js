@@ -49,7 +49,7 @@ class ControllerModifier extends Component {
 
   render() {   
     return (            
-        <div className= {this.props.wireFrameWidth > 1000 ? this.props.wireFrameWidth >= 3000 ? "control_container col s12" : "control_container col s5" : "control_container col s3"} id = "modifier_area"  style = {{transform: "scale(" + this.props.scale + ")"}}>
+        <div className= {this.props.wireFrameWidth > 1000 ? this.props.wireFrameWidth >= 3000 ? "control_container col s12" : "control_container col s5" : "control_container col s3"} id = "modifier_area"  >
             <div style ={{paddingTop: "15%", marginLeft: "20%"}} > Properties </div>
               
               <TextInput id = "text_input" onChange = {e => this.props.editText(e.target.value)}   />                     
