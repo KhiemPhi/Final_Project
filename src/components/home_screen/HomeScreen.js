@@ -18,7 +18,7 @@ class HomeScreen extends Component {
     fireStore
       .collection("WireFrames")
       .add({
-        name: "New List",
+        name: "New WireFrame",
         owner: this.props.profile.firstName + " " + this.props.profile.lastName ,
         containers: [],
         labels: [],
