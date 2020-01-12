@@ -63,7 +63,7 @@ class EditScreen extends Component {
       .collection("WireFrames")
       .doc(this.props.WireFrame.id)
       .get()
-      .then(doc => {
+      .then(doc => { //
         let newContainers = this.state.containers.filter( container => container !== undefined)
         let newButtons = this.state.buttons.filter( button => button !== undefined)
         let newLabels = this.state.labels.filter( label => label !== undefined)
